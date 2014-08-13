@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+  <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/statistics_icon"
+        android:title="@string/statistics"
+  		yourapp:showAsAction="ifRoom|withText" />
+   <item
+        android:id="@+id/change_number_users"
+        android:orderInCategory="100"
+        android:icon="@drawable/users_icon"
+        android:title="@string/change_users"
+        yourapp:showAsAction="ifRoom|withText" />
+
+</menu>

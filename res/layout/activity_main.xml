@@ -1,0 +1,255 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="left"
+    android:orientation="vertical"
+    tools:context="com.example.poker_randomizer.MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/centralpanel"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp" >
+
+        <TextView
+            android:id="@+id/number_hands_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white" >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/centralpanel"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/image_card1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/image_card2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/image_card3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/image_card4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/image_card5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_player1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/image_card1_player1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="2dp"
+			android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/image_card2_player1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <RadioButton
+            android:id="@+id/radio_player1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:gravity="center_vertical"
+            android:text="@string/player1"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_player2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/image_card1_player2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/image_card2_player2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <RadioButton
+            android:id="@+id/radio_player2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:gravity="center_vertical"
+            android:text="@string/player2"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/panel_button1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_flop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/chip_button_selector"
+                android:text="@string/flop"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_turn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/chip_button_selector"
+                android:text="@string/turn"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_river"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/chip_button_selector"
+                android:text="@string/river"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+         <LinearLayout
+            android:id="@+id/panel_winner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <Button
+                android:id="@+id/btn_winner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/green"
+                android:drawableStart="@drawable/winner"
+                android:text=""
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/panel_button2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_next_hand"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/chip_button_selector"
+                android:text="@string/nexthand"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
