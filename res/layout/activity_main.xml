@@ -104,7 +104,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="2dp"
-			android:contentDescription="@string/desc"
+            android:contentDescription="@string/desc"
             android:src="@drawable/back" />
 
         <ImageView
@@ -173,24 +173,23 @@
         android:id="@+id/panel_buttons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
         android:layout_weight="1"
         android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/panel_button1"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
             android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/btn_flop"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/chip_button_selector"
                 android:text="@string/flop"
@@ -214,14 +213,15 @@
                 android:text="@string/river"
                 android:textColor="@android:color/white" />
         </LinearLayout>
-         <LinearLayout
+
+        <LinearLayout
             android:id="@+id/panel_winner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
             android:orientation="horizontal"
-            android:visibility="invisible">
+            android:visibility="gone" >
 
             <Button
                 android:id="@+id/btn_winner"
@@ -229,6 +229,8 @@
                 android:layout_height="match_parent"
                 android:background="@color/green"
                 android:drawableStart="@drawable/winner"
+                android:paddingLeft="50dp"
+                android:paddingRight="20dp"
                 android:text=""
                 android:textColor="@color/black" />
         </LinearLayout>
@@ -236,10 +238,9 @@
         <LinearLayout
             android:id="@+id/panel_button2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
             android:orientation="horizontal" >
 
             <Button

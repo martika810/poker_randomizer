@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.poker_randomizer.NumberPlayerActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,8 @@
         </activity>
          <activity
             android:name="com.example.poker_randomizer.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN2" />
 
@@ -33,7 +35,8 @@
         </activity>
          <activity
             android:name="com.example.poker_randomizer.ThreePlayersActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN3" />
 
@@ -42,7 +45,8 @@
         </activity>
          <activity
             android:name="com.example.poker_randomizer.FourPlayersActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN4" />
 
@@ -51,7 +55,8 @@
         </activity>
           <activity
             android:name="com.example.poker_randomizer.StatisticResultActivity"
-            android:label="@string/app_name" 
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" 
             >
             
             <intent-filter>

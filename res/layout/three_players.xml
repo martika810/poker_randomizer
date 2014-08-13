@@ -9,259 +9,288 @@
     tools:context="com.example.poker_randomizer.MainActivity" >
 
     <LinearLayout
-	        android:id="@+id/centralpanel"
-	        android:layout_width="fill_parent"
-	        android:layout_height="0dp"
-	        android:layout_weight="0.3"
-	        android:orientation="horizontal"
-	        android:paddingBottom="2dp"
-	        android:paddingLeft="5dp"
-	        android:paddingRight="5dp"
-	        android:paddingTop="2dp" >
-	        <TextView
-	            android:id="@+id/board3_number_hands_txt"
-	            android:layout_height="wrap_content"
-	            android:layout_width="wrap_content"
-	            android:textColor="@android:color/white">
-	            
-	        </TextView>
-	 </LinearLayout>
-   		<LinearLayout
-	        android:id="@+id/board3_centralpanel"
-	        android:layout_width="fill_parent"
-	        android:layout_height="0dp"
-	        android:layout_weight="1"
-	        android:orientation="horizontal"
-	        android:paddingBottom="5dp"
-	        android:paddingLeft="5dp"
-	        android:paddingRight="5dp"
-	        android:paddingTop="5dp" >
-	        <ImageView
-	            android:id="@+id/board3_image_card1"
-	            android:layout_width="0dp"
-	            android:layout_height="match_parent"
-	            android:layout_weight="1"
-	            android:layout_marginLeft="2dp"
-	            android:layout_marginRight="2dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	        <ImageView
-	            android:id="@+id/board3_image_card2"
-	            android:layout_width="0dp"
-	            android:layout_height="match_parent"
-	            android:layout_weight="1"
-	            android:layout_marginLeft="2dp"
-	            android:layout_marginRight="2dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	        <ImageView
-	            android:id="@+id/board3_image_card3"
-	            android:layout_width="0dp"
-	            android:layout_height="match_parent"
-	            android:layout_weight="1"
-	            android:layout_marginLeft="2dp"
-	            android:layout_marginRight="2dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	        <ImageView
-	            android:id="@+id/board3_image_card4"
-	            android:layout_width="0dp"
-	            android:layout_height="match_parent"
-	            android:layout_weight="1"
-	            android:layout_marginLeft="2dp"
-	            android:layout_marginRight="2dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	        <ImageView
-	            android:id="@+id/board3_image_card5"
-	            android:layout_width="0dp"
-	            android:layout_height="match_parent"
-	            android:layout_weight="1"
-	            android:layout_marginLeft="2dp"
-	            android:layout_marginRight="2dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	            
-	        
-       
-      	 </LinearLayout>
-      	 <LinearLayout 
-      	     android:id="@+id/panel_player1"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1"
-			android:paddingTop="5dp"
-			android:layout_gravity="left"
-			android:paddingBottom="5dp">
-				<ImageView
-	            android:id="@+id/board3_image_card1_player1"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:layout_marginLeft="40dp"
-	            android:layout_marginRight="2dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	        <ImageView
-	            android:id="@+id/board3_image_card2_player1"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            
-	            android:layout_marginLeft="2dp"
-	            android:layout_marginRight="5dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-			
-	        <RadioButton
-	            android:id="@+id/board3_radio_player1"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:layout_gravity="left"
-	            android:layout_marginRight="2dp"
-	            android:contentDescription="@string/desc"
-	            android:gravity="center"
-	            android:text="@string/player1"
-	           
-	            android:textColor="@android:color/white" />
-	       
-			</LinearLayout>
-			 <LinearLayout 
-      	     android:id="@+id/panel_player2"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1"
-			android:paddingTop="5dp"
-			android:paddingBottom="5dp">
-				<ImageView
-	            android:id="@+id/board3_image_card1_player2"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:layout_marginLeft="40dp"
-	            android:layout_marginRight="2dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	        <ImageView
-	            android:id="@+id/board3_image_card2_player2"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:layout_marginLeft="2dp"
-	            android:layout_marginRight="5dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
+        android:id="@+id/centralpanel"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp" >
 
-	     	<RadioButton
-	     	    android:id="@+id/board3_radio_player2"
-	     	    android:layout_width="wrap_content"
-	     	    android:layout_height="match_parent"
-	     	    android:layout_gravity="left|top"
-	     	    android:layout_marginRight="2dp"
-	     	    android:contentDescription="@string/desc"
-	     	    android:gravity="center"
-	     	    android:text="@string/player2"
-	     	    android:textAlignment="textStart"
-	     	    android:textColor="@android:color/white" />
-	       
-			</LinearLayout>
-			 <LinearLayout 
-      	     android:id="@+id/panel_player3"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1"
-			android:paddingTop="5dp"
-			android:paddingBottom="5dp">
-				<ImageView
-	            android:id="@+id/board3_image_card1_player3"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:layout_marginLeft="40dp"
-	            android:layout_marginRight="2dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	        <ImageView
-	            android:id="@+id/board3_image_card2_player3"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:layout_marginLeft="2dp"
-	            android:layout_marginRight="5dp"
-	            android:src="@drawable/back" 
-	            android:contentDescription="@string/desc"/>
-	     	<RadioButton
-	            android:id="@+id/board3_radio_player3"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:layout_gravity="left"
-	            android:layout_marginRight="2dp"
-	            android:contentDescription="@string/desc"
-	            android:gravity="center"
-	            android:text="@string/player3"
-	            android:textAlignment="textStart"
-	            android:textColor="@android:color/white" />
-	       
-			</LinearLayout>
-      	 <LinearLayout 
-      	     android:id="@+id/panel_buttons"
-			android:orientation="vertical"
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1"
-			android:layout_marginTop="5dp"
-			android:layout_marginBottom="5dp">
-	        <LinearLayout 
-	            android:id="@+id/panel_button1"
-	            android:orientation="horizontal"
-	            android:layout_width="match_parent"
-	            android:layout_height="0dp"
-	            android:layout_marginTop="5dp"
-	            android:layout_marginBottom="5dp"
-	            android:layout_weight="1">
-	            	<Button 
-	                android:id="@+id/board3_btn_flop"
-	                android:layout_width="0dp"
-	                android:layout_height="match_parent"
-	                android:layout_weight="1"
-	                android:textColor="@android:color/white"
-	                android:text="@string/flop"
-	                android:background="@drawable/chip_button_selector"/>
-	            
-	            	<Button 
-	                android:id="@+id/board3_btn_turn"
-	                android:layout_width="0dp"
-	                android:layout_height="match_parent"
-	                android:textColor="@android:color/white"
-	                android:layout_weight="1"
-	                android:text="@string/turn"
-	                 android:background="@drawable/chip_button_selector"/>
-	            
-	            	<Button 
-	                android:id="@+id/board3_btn_river"
-	                android:layout_width="0dp"
-	                android:layout_height="match_parent"
-	                android:textColor="@android:color/white"
-	                android:layout_weight="1"
-	                android:text="@string/river"
-	                 android:background="@drawable/chip_button_selector"/>
-	            
-	        </LinearLayout>
-	        <LinearLayout 
-	            android:id="@+id/panel_button2"
-	            android:orientation="horizontal"
-	            android:layout_width="match_parent"
-	            android:layout_height="0dp"
-	            android:layout_marginTop="5dp"
-	            android:layout_marginBottom="5dp"
-	            android:layout_weight="1">
-	            <Button 
-	                android:id="@+id/board3_btn_next_hand"
-	                android:layout_width="match_parent"
-	                android:layout_height="match_parent"
-	                android:textColor="@android:color/white"
-	                android:text="@string/nexthand"
-	                android:background="@drawable/chip_button_selector"/>
-	            
-	        </LinearLayout>
-			
-			</LinearLayout>
+        <TextView
+            android:id="@+id/board3_number_hands_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white" >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/board3_centralpanel"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/board3_image_card1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/board3_image_card2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/board3_image_card3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/board3_image_card4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/board3_image_card5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_player1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/board3_image_card1_player1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/board3_image_card2_player1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <RadioButton
+            android:id="@+id/board3_radio_player1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:gravity="center"
+            android:text="@string/player1"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_player2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/board3_image_card1_player2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/board3_image_card2_player2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <RadioButton
+            android:id="@+id/board3_radio_player2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|top"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:gravity="center"
+            android:text="@string/player2"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_player3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/board3_image_card1_player3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/board3_image_card2_player3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/back" />
+
+        <RadioButton
+            android:id="@+id/board3_radio_player3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/desc"
+            android:gravity="center"
+            android:text="@string/player3"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/panel_button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/board3_btn_flop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/chip_button_selector"
+                android:text="@string/flop"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/board3_btn_turn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/chip_button_selector"
+                android:text="@string/turn"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/board3_btn_river"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/chip_button_selector"
+                android:text="@string/river"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/panel_winner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/btn_winner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/green"
+                android:drawableStart="@drawable/winner"
+                android:paddingLeft="50dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/panel_button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/board3_btn_next_hand"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/chip_button_selector"
+                android:text="@string/nexthand"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
-

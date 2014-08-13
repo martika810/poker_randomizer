@@ -266,14 +266,14 @@ public class MainActivity extends ActionBarActivity {
 				if (totalScore1 > totalScore2) {
 					hand_recorder.setPlayer1_won(true);
 					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
-					panelPlayer1.setBackgroundColor(Color.GREEN);
+					panelPlayer1.setBackgroundColor(Color.parseColor("#00FF00"));
 					strWhoWon = getString(R.string.player1) + " won with "
 							+ resultplayer1.getNameResult();
 
 				} else if (totalScore1 > totalScore2) {
 					hand_recorder.setPlayer1_won(false);
 					LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
-					panelPlayer2.setBackgroundColor(Color.GREEN);
+					panelPlayer2.setBackgroundColor(Color.parseColor("#00FF00"));
 					strWhoWon = getString(R.string.player2) + " won with "
 							+ resultplayer2.getNameResult();
 				} else {
@@ -281,7 +281,7 @@ public class MainActivity extends ActionBarActivity {
 					// which is the highest
 					hand_recorder.setPlayer1_won(true);
 					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
-					panelPlayer1.setBackgroundColor(Color.GREEN);
+					panelPlayer1.setBackgroundColor(Color.parseColor("#00FF00"));
 					strWhoWon = getString(R.string.player1) + " won with "
 							+ resultplayer1.getNameResult();
 				}
