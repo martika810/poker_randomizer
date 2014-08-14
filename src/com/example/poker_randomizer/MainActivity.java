@@ -239,18 +239,19 @@ public class MainActivity extends ActionBarActivity {
 				cards.remove(position_card_pick);
 				image_card5_river.setImageResource(identifier);
 
-				 v.setVisibility(View.GONE);
-				 LinearLayout layout_winner=(LinearLayout)findViewById(R.id.panel_winner);
-				 layout_winner.setVisibility(View.VISIBLE);
-				//v.setBackgroundColor(Color.GREEN);
-				//((Button) v).setTextColor(Color.BLACK);
-				//((Button) v).setEnabled(false);
+				 //v.setVisibility(View.GONE);
+				// LinearLayout layout_winner=(LinearLayout)findViewById(R.id.panel_winner);
+				 
+				// layout_winner.setVisibility(View.VISIBLE);
+				v.setBackgroundColor(Color.GREEN);
+				((Button) v).setTextColor(Color.BLACK);
+				((Button) v).setEnabled(false);
 
-				// int drwWinnerIcon=R.drawable.winner;
+				 int drwWinnerIcon=R.drawable.winner;
 
-				//((Button) v).setCompoundDrawablesWithIntrinsicBounds(
-				//		R.drawable.winner, 0, 0, 0);
-				//((Button)v).setPadding(60, 0, 10, 0);
+				((Button) v).setCompoundDrawablesWithIntrinsicBounds(
+						R.drawable.winner, 0, 0, 0);
+				((Button)v).setPadding(60, 0, 20, 0);
 				ResultHand resultplayer1 = hand_resulter.getResult("1");
 				ResultHand resultplayer2 = hand_resulter.getResult("2");
 				List<Integer> valueResultPlayer1 = resultplayer1.getValue();
@@ -291,9 +292,9 @@ public class MainActivity extends ActionBarActivity {
 				//		R.drawable.winner, ImageSpan.ALIGN_BOTTOM), 0, 1,
 				//		Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 				
-				//((Button)v).setText(strWhoWon);
-				Button btnWinner=(Button)findViewById(R.id.btn_winner);
-				btnWinner.setText(strWhoWon);
+				((Button)v).setText(strWhoWon);
+				//Button btnWinner=(Button)findViewById(R.id.btn_winner);
+				//btnWinner.setText(strWhoWon);
 				// Save save player1's hand for the statistic
 				hand_recorder.saveResult(resultplayer1.getTypeHand());
 
