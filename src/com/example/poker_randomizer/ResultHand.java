@@ -62,7 +62,14 @@ public class ResultHand {
 //	private static final String FULL="6";
 //	private static final String POKER="7";
 //	
-	
+	public int getSumValues(){
+		int totalSumValues=0;
+		for(int v:value){
+			totalSumValues+=v;
+		}
+		return totalSumValues;
+		
+	}
 	//return the full name of the hand passing in the code in String
 	//example numHand="1" returns--> Pair
 	public String getNameResult(){

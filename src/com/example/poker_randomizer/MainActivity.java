@@ -77,49 +77,44 @@ public class MainActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main2);
 		TextView number_handTxt = (TextView) findViewById(R.id.number_hands_txt);
 		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
+
 		// pick card 1
-		ImageView image_card1_player1 = (ImageView) findViewById(R.id.image_card1_player1);
 		int position_card_pick = r.nextInt(cards.size());
-		// String strImage="R.drawable"+cards.get(number_card_pick);
 		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer1(card_picked);
-		int identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
+		hand_resulter.addCardPlayer(1,card_picked);
 		cards.remove(position_card_pick);
-		image_card1_player1.setImageResource(identifier);
 
 		// pick card 2
-		ImageView image_card2_player1 = (ImageView) findViewById(R.id.image_card2_player1);
 		position_card_pick = r.nextInt(cards.size());
-		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer1(card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
+		String card_picked2 = cards.get(position_card_pick);
+		hand_resulter.addCardPlayer(1,card_picked2);
 		cards.remove(position_card_pick);
-		image_card2_player1.setImageResource(identifier);
+
+		// Load the cards in the view
+		CardPairView cardpair = (CardPairView) findViewById(R.id.pair_player1);
+		cardpair.init(card_picked, card_picked2);
+		cardpair.invalidate();
+		int identifier;
 
 		// pick card 3
-		ImageView image_card1_player2 = (ImageView) findViewById(R.id.image_card1_player2);
 		position_card_pick = r.nextInt(cards.size());
 		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardplayer2(card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
+		hand_resulter.addCardPlayer(2,card_picked);
 		cards.remove(position_card_pick);
-		image_card1_player2.setImageResource(identifier);
 
-		// pick card 2
-		ImageView image_card2_player2 = (ImageView) findViewById(R.id.image_card2_player2);
+		// pick card 4
 		position_card_pick = r.nextInt(cards.size());
-		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardplayer2(card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
+		card_picked2 = cards.get(position_card_pick);
+		hand_resulter.addCardPlayer(2,card_picked2);
 		cards.remove(position_card_pick);
-		image_card2_player2.setImageResource(identifier);
+
+		// Load the cards in the view
+		CardPairView cardpairPlayer2 = (CardPairView) findViewById(R.id.pair_player2);
+		cardpairPlayer2.init(card_picked, card_picked2);
+		cardpairPlayer2.invalidate();
 
 		addButtonListener();
 
@@ -239,25 +234,26 @@ public class MainActivity extends ActionBarActivity {
 				cards.remove(position_card_pick);
 				image_card5_river.setImageResource(identifier);
 
-				 //v.setVisibility(View.GONE);
-				// LinearLayout layout_winner=(LinearLayout)findViewById(R.id.panel_winner);
-				 
+				// v.setVisibility(View.GONE);
+				// LinearLayout
+				// layout_winner=(LinearLayout)findViewById(R.id.panel_winner);
+
 				// layout_winner.setVisibility(View.VISIBLE);
 				v.setBackgroundColor(Color.GREEN);
 				((Button) v).setTextColor(Color.BLACK);
 				((Button) v).setEnabled(false);
 
-				 int drwWinnerIcon=R.drawable.winner;
+				int drwWinnerIcon = R.drawable.winner;
 
 				((Button) v).setCompoundDrawablesWithIntrinsicBounds(
 						R.drawable.winner, 0, 0, 0);
-				((Button)v).setPadding(60, 0, 20, 0);
+				((Button) v).setPadding(60, 0, 20, 0);
 				ResultHand resultplayer1 = hand_resulter.getResult("1");
 				ResultHand resultplayer2 = hand_resulter.getResult("2");
-				List<Integer> valueResultPlayer1 = resultplayer1.getValue();
-				List<Integer> valueResultPlayer2 = resultplayer2.getValue();
-				int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
-				int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
+				int valueResultPlayer1 = resultplayer1.getSumValues();
+				int valueResultPlayer2 = resultplayer2.getSumValues();
+				int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand())+valueResultPlayer1;
+				int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand())+valueResultPlayer2;
 				//
 
 				String strWhoWon = "";
@@ -286,15 +282,16 @@ public class MainActivity extends ActionBarActivity {
 					strWhoWon = getString(R.string.player1) + " won with "
 							+ resultplayer1.getNameResult();
 				}
-				//Modify the button to display who won and winner icon on the left 
-				//Spannable btnWinnerLbl = new SpannableString(strWhoWon);
-				//btnWinnerLbl.setSpan(new ImageSpan(getApplicationContext(),
-				//		R.drawable.winner, ImageSpan.ALIGN_BOTTOM), 0, 1,
-				//		Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-				
-				((Button)v).setText(strWhoWon);
-				//Button btnWinner=(Button)findViewById(R.id.btn_winner);
-				//btnWinner.setText(strWhoWon);
+				// Modify the button to display who won and winner icon on the
+				// left
+				// Spannable btnWinnerLbl = new SpannableString(strWhoWon);
+				// btnWinnerLbl.setSpan(new ImageSpan(getApplicationContext(),
+				// R.drawable.winner, ImageSpan.ALIGN_BOTTOM), 0, 1,
+				// Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+				((Button) v).setText(strWhoWon);
+				// Button btnWinner=(Button)findViewById(R.id.btn_winner);
+				// btnWinner.setText(strWhoWon);
 				// Save save player1's hand for the statistic
 				hand_recorder.saveResult(resultplayer1.getTypeHand());
 

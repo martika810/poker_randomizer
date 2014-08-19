@@ -75,86 +75,75 @@ public class FourPlayersActivity extends ActionBarActivity {
 
 		TextView number_handTxt = (TextView) findViewById(R.id.number_hands_txt);
 		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
-		// pick card 1
-		ImageView image_card1_player1 = (ImageView) findViewById(R.id.board3_image_card1_player1);
+
+		
+
 		int position_card_pick = r.nextInt(cards.size());
 		// String strImage="R.drawable"+cards.get(number_card_pick);
 		card_picked = cards.get(position_card_pick);
 		hand_resulter.addCardPlayer(1, card_picked);
-		int identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
 		cards.remove(position_card_pick);
-		image_card1_player1.setImageResource(identifier);
 
 		// pick card 2 for player 1
-		ImageView image_card2_player1 = (ImageView) findViewById(R.id.board3_image_card2_player1);
+
 		position_card_pick = r.nextInt(cards.size());
-		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer(1, card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
+		String card_picked2 = cards.get(position_card_pick);
+		hand_resulter.addCardPlayer(1, card_picked2);
 		cards.remove(position_card_pick);
-		image_card2_player1.setImageResource(identifier);
+
+		CardPairView cardpairPlayer1 = (CardPairView) findViewById(R.id.pair_player1);
+		cardpairPlayer1.init(card_picked, card_picked2);
+		cardpairPlayer1.invalidate();
 
 		// pick card 1 for player 2
-		ImageView image_card1_player2 = (ImageView) findViewById(R.id.board3_image_card1_player2);
+
 		position_card_pick = r.nextInt(cards.size());
 		card_picked = cards.get(position_card_pick);
 		hand_resulter.addCardPlayer(2, card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
 		cards.remove(position_card_pick);
-		image_card1_player2.setImageResource(identifier);
 
 		// pick card 2 for player 2
-		ImageView image_card2_player2 = (ImageView) findViewById(R.id.board3_image_card2_player2);
+
 		position_card_pick = r.nextInt(cards.size());
-		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer(2, card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
+		card_picked2 = cards.get(position_card_pick);
+		hand_resulter.addCardPlayer(2, card_picked2);
 		cards.remove(position_card_pick);
-		image_card2_player2.setImageResource(identifier);
+
+		CardPairView cardpairPlayer2 = (CardPairView) findViewById(R.id.pair_player2);
+		cardpairPlayer2.init(card_picked, card_picked2);
+		cardpairPlayer2.invalidate();
 
 		// pick card 1 for player3
-		ImageView image_card1_player3 = (ImageView) findViewById(R.id.board3_image_card1_player3);
 		position_card_pick = r.nextInt(cards.size());
 		card_picked = cards.get(position_card_pick);
 		hand_resulter.addCardPlayer(3, card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
 		cards.remove(position_card_pick);
-		image_card1_player3.setImageResource(identifier);
 
 		// pick card 1 for player 3
-		ImageView image_card2_player3 = (ImageView) findViewById(R.id.board3_image_card2_player3);
 		position_card_pick = r.nextInt(cards.size());
-		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer(3, card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
+		card_picked2 = cards.get(position_card_pick);
+		hand_resulter.addCardPlayer(3, card_picked2);
 		cards.remove(position_card_pick);
-		image_card2_player3.setImageResource(identifier);
+
+		CardPairView cardpairPlayer3 = (CardPairView) findViewById(R.id.pair_player3);
+		cardpairPlayer3.init(card_picked, card_picked2);
+		cardpairPlayer3.invalidate();
 
 		// pick card 1 for player 4
-		ImageView image_card1_player4 = (ImageView) findViewById(R.id.board3_image_card1_player4);
 		position_card_pick = r.nextInt(cards.size());
 		card_picked = cards.get(position_card_pick);
 		hand_resulter.addCardPlayer(4, card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
 		cards.remove(position_card_pick);
-		image_card1_player4.setImageResource(identifier);
 
 		// pick card 1 for player 4
-		ImageView image_card2_player4 = (ImageView) findViewById(R.id.board3_image_card2_player4);
 		position_card_pick = r.nextInt(cards.size());
-		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer(4, card_picked);
-		identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
+		card_picked2 = cards.get(position_card_pick);
+		hand_resulter.addCardPlayer(4, card_picked2);
 		cards.remove(position_card_pick);
-		image_card2_player4.setImageResource(identifier);
+
+		CardPairView cardpairPlayer4 = (CardPairView) findViewById(R.id.pair_player4);
+		cardpairPlayer4.init(card_picked, card_picked2);
+		cardpairPlayer4.invalidate();
 
 		addButtonListener();
 
@@ -275,10 +264,16 @@ public class FourPlayersActivity extends ActionBarActivity {
 				cards.remove(position_card_pick);
 				image_card5_river.setImageResource(identifier);
 
-				//v.setVisibility(View.GONE);
+				// v.setVisibility(View.GONE);
 				v.setBackgroundColor(Color.GREEN);
-				((Button)v).setTextColor(Color.BLACK);
-				((Button)v).setEnabled(false);
+				((Button) v).setTextColor(Color.BLACK);
+				((Button) v).setEnabled(false);
+
+				int drwWinnerIcon = R.drawable.winner;
+
+				((Button) v).setCompoundDrawablesWithIntrinsicBounds(
+						R.drawable.winner, 0, 0, 0);
+				((Button) v).setPadding(60, 0, 20, 0);
 				// RESOLVE THE HAND
 				ResultHand resultplayer1 = hand_resulter.getResult("1");
 				ResultHand resultplayer2 = hand_resulter.getResult("2");
@@ -294,6 +289,7 @@ public class FourPlayersActivity extends ActionBarActivity {
 				int totalScore4 = Integer.valueOf(resultplayer4.getTypeHand());
 
 				boolean player1_won;
+				String strWhoWon = "";
 				// Check if player1 has won, to store the result in the
 				// hand_recorder
 				int maxTotalScore = Math.max(Math.max(
@@ -301,29 +297,34 @@ public class FourPlayersActivity extends ActionBarActivity {
 						totalScore4);
 				if (maxTotalScore == totalScore1) {
 					hand_recorder.setPlayer1_won(true);
-					LinearLayout panelPlayer1=(LinearLayout)findViewById(R.id.panel_player1);
+					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
 					panelPlayer1.setBackgroundColor(Color.GREEN);
-					((Button)v).setText(getString(R.string.player1)+" won with "+resultplayer1.getNameResult());
-				} else if (maxTotalScore == totalScore2){
+					strWhoWon = getString(R.string.player1) + " won with "
+							+ resultplayer1.getNameResult();
+				} else if (maxTotalScore == totalScore2) {
 					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer2=(LinearLayout)findViewById(R.id.panel_player2);
+					LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
 					panelPlayer2.setBackgroundColor(Color.GREEN);
-					((Button)v).setText(getString(R.string.player2)+" won with "+resultplayer2.getNameResult());
-				}else if(maxTotalScore == totalScore3){
+					strWhoWon = getString(R.string.player2) + " won with "
+							+ resultplayer2.getNameResult();
+				} else if (maxTotalScore == totalScore3) {
 					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer3=(LinearLayout)findViewById(R.id.panel_player3);
+					LinearLayout panelPlayer3 = (LinearLayout) findViewById(R.id.panel_player3);
 					panelPlayer3.setBackgroundColor(Color.GREEN);
-					((Button)v).setText(getString(R.string.player3)+" won with "+resultplayer3.getNameResult());
-				}else if(maxTotalScore == totalScore4){
+					strWhoWon = getString(R.string.player3) + " won with "
+							+ resultplayer3.getNameResult();
+				} else if (maxTotalScore == totalScore4) {
 					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer4=(LinearLayout)findViewById(R.id.panel_player4);
+					LinearLayout panelPlayer4 = (LinearLayout) findViewById(R.id.panel_player4);
 					panelPlayer4.setBackgroundColor(Color.GREEN);
-					((Button)v).setText(getString(R.string.player4)+" won with "+resultplayer4.getNameResult());
-				}else {
+					strWhoWon = getString(R.string.player4) + " won with "
+							+ resultplayer4.getNameResult();
+				} else {
 					// if the type of hand is the same for both player, check
 					// which is the highest
 					hand_recorder.setPlayer1_won(true);
 				}
+				((Button) v).setText(strWhoWon);
 				// Save save player1's hand for the statistic
 				hand_recorder.saveResult(resultplayer1.getTypeHand());
 

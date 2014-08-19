@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.example.poker_randomizer"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -107,39 +108,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
                 android:orientation="vertical"
+                android:paddingBottom="2dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp" >
+                android:paddingRight="5dp"
+                android:paddingTop="2dp" >
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingBottom="3dp" >
+               
 
-                    <ImageView
-                        android:id="@+id/board3_image_card1_player1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="2dp"
+                    <com.example.poker_randomizer.CardPairView
+                        android:id="@+id/pair_player1"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="40dp"
                         android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/desc"
-                        android:src="@drawable/back" />
-
-                    <ImageView
-                        android:id="@+id/board3_image_card2_player1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/desc"
-                        android:src="@drawable/back" />
-                </LinearLayout>
+                        android:contentDescription="@string/desc" />
+              
 
                 <RadioButton
                     android:id="@+id/board3_radio_player1"
@@ -159,39 +143,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
                 android:orientation="vertical"
+                android:paddingBottom="2dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp" >
+                android:paddingRight="5dp"
+                android:paddingTop="2dp" >
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingBottom="3dp" >
+              
 
-                    <ImageView
-                        android:id="@+id/board3_image_card1_player2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="2dp"
+                    <com.example.poker_randomizer.CardPairView
+                        android:id="@+id/pair_player2"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="40dp"
                         android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/desc"
-                        android:src="@drawable/back" />
-
-                    <ImageView
-                        android:id="@+id/board3_image_card2_player2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/desc"
-                        android:src="@drawable/back" />
-                </LinearLayout>
+                        android:contentDescription="@string/desc" />
+             
 
                 <RadioButton
                     android:id="@+id/board3_radio_player2"
@@ -219,172 +186,133 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
                 android:orientation="vertical"
+                android:paddingBottom="2dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp" >
+                android:paddingRight="5dp"
+                android:paddingTop="2dp" >
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingBottom="3dp" >
+               
 
-                    <ImageView
-                        android:id="@+id/board3_image_card1_player3"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="2dp"
+                    <com.example.poker_randomizer.CardPairView
+                        android:id="@+id/pair_player3"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="40dp"
                         android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/desc"
-                        android:src="@drawable/back" />
+                        android:contentDescription="@string/desc" />
 
-                    <ImageView
-                        android:id="@+id/board3_image_card2_player3"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
+                    <RadioButton
+                        android:id="@+id/board3_radio_player3"
+                        android:layout_width="match_parent"
+                        android:layout_height="17dp"
+                        android:layout_gravity="left"
+                        android:layout_marginRight="2dp"
                         android:contentDescription="@string/desc"
-                        android:src="@drawable/back" />
+                        android:gravity="center_vertical"
+                        android:text="@string/player3"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/board3_radio_player3"
-                    android:layout_width="match_parent"
-                    android:layout_height="17dp"
-                    android:layout_gravity="left"
-                    android:layout_marginRight="2dp"
-                    android:contentDescription="@string/desc"
-                    android:gravity="center_vertical"
-                    android:text="@string/player3"
-                    android:textAlignment="textStart"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp" />
+                <LinearLayout
+                    android:id="@+id/panel_player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="2dp" >
+
+                    <com.example.poker_randomizer.CardPairView
+                        android:id="@+id/pair_player4"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="2dp"
+                        android:contentDescription="@string/desc" />
+
+                    <RadioButton
+                        android:id="@+id/board3_radio_player4"
+                        android:layout_width="match_parent"
+                        android:layout_height="17dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="2dp"
+                        android:contentDescription="@string/desc"
+                        android:gravity="center_vertical"
+                        android:text="@string/player4"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/panel_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/panel_button1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/board3_btn_flop"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/chip_button_selector"
+                    android:text="@string/flop"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/board3_btn_turn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/chip_button_selector"
+                    android:text="@string/turn"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/board3_btn_river"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/chip_button_selector"
+                    android:text="@string/river"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/panel_player4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/panel_button2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp" >
+                android:orientation="horizontal" >
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingBottom="3dp" >
-
-                    <ImageView
-                        android:id="@+id/board3_image_card1_player4"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/desc"
-                        android:src="@drawable/back" />
-
-                    <ImageView
-                        android:id="@+id/board3_image_card2_player4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/desc"
-                        android:src="@drawable/back" />
-                </LinearLayout>
-
-                <RadioButton
-                    android:id="@+id/board3_radio_player4"
+                <Button
+                    android:id="@+id/board3_btn_next_hand"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="2dp"
-                    android:contentDescription="@string/desc"
-                    android:gravity="center_vertical"
-                    android:text="@string/player4"
-                    android:textAlignment="textStart"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/chip_button_selector"
+                    android:text="@string/nexthand"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/panel_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <LinearLayout
-            android:id="@+id/panel_button1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/board3_btn_flop"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/chip_button_selector"
-                android:text="@string/flop"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/board3_btn_turn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/chip_button_selector"
-                android:text="@string/turn"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/board3_btn_river"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/chip_button_selector"
-                android:text="@string/river"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/panel_button2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/board3_btn_next_hand"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/chip_button_selector"
-                android:text="@string/nexthand"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-    </LinearLayout>
-
-</LinearLayout>

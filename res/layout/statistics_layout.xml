@@ -19,58 +19,58 @@
                 android:id="@+id/statistics_txt"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:text="@string/statistic_title" 
-                android:textColor="@android:color/white"
                 android:background="@drawable/custom_title"
-                android:gravity="center_horizontal"/>
+                android:gravity="center_horizontal"
+                android:text="@string/statistic_title"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/statistics_txt"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@drawable/custom_title"
+                android:gravity="center_horizontal"
                 android:text="@string/highlowcards"
-                android:textColor="@android:color/white" 
-                android:gravity="center_horizontal"/>
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/lh_txt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
                 android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/ll_txt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
                 android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/hh_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"  />
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/lp_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"  />
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/hp_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"  />
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/titleUserStatist"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@drawable/custom_title"
-                android:text="@string/yourhands" 
-                android:textColor="@android:color/white"
-                android:gravity="center_horizontal"/>
+                android:gravity="center_horizontal"
+                android:text="@string/yourhands"
+                android:textColor="@android:color/white" />
 
             <LinearLayout
                 android:id="@+id/panel_highcard"

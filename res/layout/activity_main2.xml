@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.example.poker_randomizer"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -96,25 +97,19 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
+        android:paddingTop="5dp" 
+        >
 
-        <ImageView
-            android:id="@+id/image_card1_player1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <com.example.poker_randomizer.CardPairView
+            android:id="@+id/pair_player1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="2dp"
             android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
+            />
 
-        <ImageView
-            android:id="@+id/image_card2_player1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
+       
 
         <RadioButton
             android:id="@+id/radio_player1"
@@ -138,23 +133,15 @@
         android:paddingBottom="5dp"
         android:paddingTop="5dp" >
 
-        <ImageView
-            android:id="@+id/image_card1_player2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <com.example.poker_randomizer.CardPairView
+            android:id="@+id/pair_player2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="2dp"
             android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
+            />
 
-        <ImageView
-            android:id="@+id/image_card2_player2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
 
         <RadioButton
             android:id="@+id/radio_player2"
