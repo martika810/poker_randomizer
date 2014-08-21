@@ -51,11 +51,6 @@ public class StatisticResultActivity extends ActionBarActivity {
 
 	private void displayHandRecorder() {
 
-		TextView lh_txt = (TextView) findViewById(R.id.lh_txt);
-		TextView ll_txt = (TextView) findViewById(R.id.ll_txt);
-		TextView hh_txt = (TextView) findViewById(R.id.hh_txt);
-		TextView lp_txt = (TextView) findViewById(R.id.lp_txt);
-		TextView hp_txt = (TextView) findViewById(R.id.hp_txt);
 		TextView high_card_txt = (TextView) findViewById(R.id.total_highcard_txt);
 		TextView pair_txt = (TextView) findViewById(R.id.total_pair_txt);
 		TextView double_pair_txt = (TextView) findViewById(R.id.total_double_pair_txt);
@@ -64,41 +59,42 @@ public class StatisticResultActivity extends ActionBarActivity {
 		TextView full_txt = (TextView) findViewById(R.id.total_full_txt);
 		TextView poker_txt = (TextView) findViewById(R.id.total_poker_txt);
 
+		populateStatisticTable();
 		float percent_win_lh = ((float)hand_recorder.getHands().get("lh").getWon()
 				/ hand_recorder.getNumber_hands()) * 100;
 		float percent_lose_lh = ((float)hand_recorder.getHands().get("lh").getLose()
 				/ hand_recorder.getNumber_hands()) * 100;
-		lh_txt.setText("LOW & HIGH: WON " + percent_win_lh + "% LOSE: "
-				+ percent_lose_lh + "%");
+		//lh_txt.setText("LOW & HIGH: WON " + percent_win_lh + "% LOSE: "
+			//	+ percent_lose_lh + "%");
 
 		float percent_win_ll = ((float)hand_recorder.getHands().get("ll").getWon()
 				/ hand_recorder.getNumber_hands()) * 100;
 		float percent_lose_ll = ((float)hand_recorder.getHands().get("ll").getLose()
 				/ hand_recorder.getNumber_hands()) * 100;
-		ll_txt.setText("LOW & LOW: WON " + percent_win_ll + "% LOSE: "
-				+ percent_lose_ll + "%");
+	//	ll_txt.setText("LOW & LOW: WON " + percent_win_ll + "% LOSE: "
+		//		+ percent_lose_ll + "%");
 
 		float percent_win_hh = ((float)hand_recorder.getHands().get("hh").getWon()
 				/ hand_recorder.getNumber_hands()) * 100;
 		float percent_lose_hh = ((float)hand_recorder.getHands().get("hh").getLose()
 				/ hand_recorder.getNumber_hands()) * 100;
-		hh_txt.setText("HIGH & HIGH: WON " + percent_win_hh + "% LOSE: "
-				+ percent_lose_hh + "%");
+		//hh_txt.setText("HIGH & HIGH: WON " + percent_win_hh + "% LOSE: "
+			//	+ percent_lose_hh + "%");
 
 		float percent_win_lp = ((float)hand_recorder.getHands().get("lp").getWon()
 				/ hand_recorder.getNumber_hands()) * 100;
 		float percent_lose_lp = ((float)hand_recorder.getHands().get("lp").getLose()
 				/ hand_recorder.getNumber_hands()) * 100;
-		lp_txt.setText("LOW PAIR: WON " + percent_win_lp + "% LOSE: "
-				+ percent_lose_lp + "%");
+		//lp_txt.setText("LOW PAIR: WON " + percent_win_lp + "% LOSE: "
+			//	+ percent_lose_lp + "%");
 
 		float percent_win_hp = ((float)hand_recorder.getHands().get("hp").getWon()
 				/ hand_recorder.getNumber_hands()) * 100;
 		float percent_lose_hp = ((float)hand_recorder.getHands().get("hp").getLose()
 				/ hand_recorder.getNumber_hands()) * 100;
 		
-		hp_txt.setText("HIGH PAIR: WON " + percent_win_hp + "% LOSE: "
-				+ percent_lose_hp + "%");
+		//hp_txt.setText("HIGH PAIR: WON " + percent_win_hp + "% LOSE: "
+			//	+ percent_lose_hp + "%");
 
 		high_card_txt.setText("" + hand_recorder.getNumber_high_card() + "/"
 				+ hand_recorder.getNumber_hands());
@@ -133,7 +129,60 @@ public class StatisticResultActivity extends ActionBarActivity {
 
 	}
 
-
+	private void populateStatisticTable(){
+		TextView txt_lh_win = (TextView) findViewById(R.id.txt_lh_win);
+		TextView txt_lh_lose = (TextView) findViewById(R.id.txt_lh_lose);
+		TextView txt_ll_win = (TextView) findViewById(R.id.txt_ll_win);
+		TextView txt_ll_lose = (TextView) findViewById(R.id.txt_ll_lose);
+		TextView txt_hh_win = (TextView) findViewById(R.id.txt_hh_win);
+		TextView txt_hh_lose = (TextView) findViewById(R.id.txt_hh_lose);
+		TextView txt_lp_win = (TextView) findViewById(R.id.txt_lp_win);
+		TextView txt_lp_lose = (TextView) findViewById(R.id.txt_lp_lose);
+		TextView txt_hp_win = (TextView) findViewById(R.id.txt_hp_win);
+		TextView txt_hp_lose = (TextView) findViewById(R.id.txt_hp_lose);
+		int number_hands_won=hand_recorder.getHands().get("lh").getWon();
+		int number_hands_lose=hand_recorder.getHands().get("lh").getLose();
+		int totalHands=number_hands_lose+number_hands_won;
+		
+		txt_lh_win.setText(number_hands_won+"/"+totalHands);
+		colorStatisticNumbers(txt_lh_win, number_hands_won, totalHands);
+		txt_lh_lose.setText(number_hands_lose+"/"+totalHands);
+		colorStatisticNumbers(txt_lh_lose, number_hands_lose, totalHands);
+		
+		number_hands_won=hand_recorder.getHands().get("ll").getWon();
+		number_hands_lose=hand_recorder.getHands().get("ll").getLose();
+		totalHands=number_hands_lose+number_hands_won;
+		txt_ll_win.setText(number_hands_won+"/"+totalHands);
+		txt_ll_lose.setText(number_hands_lose+"/"+totalHands);
+		colorStatisticNumbers(txt_ll_win, number_hands_won, totalHands);
+		colorStatisticNumbers(txt_ll_lose, number_hands_lose, totalHands);
+		
+		number_hands_won=hand_recorder.getHands().get("hh").getWon();
+		number_hands_lose=hand_recorder.getHands().get("hh").getLose();
+		totalHands=number_hands_lose+number_hands_won;
+		txt_hh_win.setText(number_hands_won+"/"+totalHands);
+		txt_hh_lose.setText(number_hands_lose+"/"+totalHands);
+		colorStatisticNumbers(txt_hh_win, number_hands_won, totalHands);
+		colorStatisticNumbers(txt_hh_lose, number_hands_lose, totalHands);
+		
+		number_hands_won=hand_recorder.getHands().get("lp").getWon();
+		number_hands_lose=hand_recorder.getHands().get("lp").getLose();
+		totalHands=number_hands_lose+number_hands_won;
+		txt_lp_win.setText(number_hands_won+"/"+totalHands);
+		txt_lp_lose.setText(number_hands_lose+"/"+totalHands);
+		colorStatisticNumbers(txt_lp_win, number_hands_won, totalHands);
+		colorStatisticNumbers(txt_lp_lose, number_hands_lose, totalHands);
+		
+		number_hands_won=hand_recorder.getHands().get("hp").getWon();
+		number_hands_lose=hand_recorder.getHands().get("hp").getLose();
+		totalHands=number_hands_lose+number_hands_won;
+		txt_hp_win.setText(number_hands_won+"/"+totalHands);
+		txt_hp_lose.setText(number_hands_lose+"/"+totalHands);
+		colorStatisticNumbers(txt_hp_win, number_hands_won, totalHands);
+		colorStatisticNumbers(txt_hp_lose, number_hands_lose, totalHands);
+		
+						
+	}
 	private void colorStatisticNumbers(TextView txt, int number,int totalHands) {
 		if (number > 0) {
 			if ((float)number / totalHands >= 0.3) {

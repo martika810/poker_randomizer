@@ -84,13 +84,13 @@ public class MainActivity extends ActionBarActivity {
 		// pick card 1
 		int position_card_pick = r.nextInt(cards.size());
 		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer(1,card_picked);
+		hand_resulter.addCardPlayer(1, card_picked);
 		cards.remove(position_card_pick);
 
 		// pick card 2
 		position_card_pick = r.nextInt(cards.size());
 		String card_picked2 = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer(1,card_picked2);
+		hand_resulter.addCardPlayer(1, card_picked2);
 		cards.remove(position_card_pick);
 
 		// Load the cards in the view
@@ -102,13 +102,13 @@ public class MainActivity extends ActionBarActivity {
 		// pick card 3
 		position_card_pick = r.nextInt(cards.size());
 		card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer(2,card_picked);
+		hand_resulter.addCardPlayer(2, card_picked);
 		cards.remove(position_card_pick);
 
 		// pick card 4
 		position_card_pick = r.nextInt(cards.size());
 		card_picked2 = cards.get(position_card_pick);
-		hand_resulter.addCardPlayer(2,card_picked2);
+		hand_resulter.addCardPlayer(2, card_picked2);
 		cards.remove(position_card_pick);
 
 		// Load the cards in the view
@@ -252,8 +252,16 @@ public class MainActivity extends ActionBarActivity {
 				ResultHand resultplayer2 = hand_resulter.getResult("2");
 				int valueResultPlayer1 = resultplayer1.getSumValues();
 				int valueResultPlayer2 = resultplayer2.getSumValues();
-				int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand())+valueResultPlayer1;
-				int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand())+valueResultPlayer2;
+				int totalScore1;int totalScore2;
+				if(resultplayer1.getTypeHand()!=resultplayer2.getTypeHand()){
+					totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
+					totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
+				}else{
+					totalScore1 = Integer.valueOf(resultplayer1.getTypeHand())
+							+ valueResultPlayer1;
+					totalScore2 = Integer.valueOf(resultplayer2.getTypeHand())
+							+ valueResultPlayer2;
+				}
 				//
 
 				String strWhoWon = "";
@@ -267,20 +275,37 @@ public class MainActivity extends ActionBarActivity {
 					strWhoWon = getString(R.string.player1) + " won with "
 							+ resultplayer1.getNameResult();
 
-				} else if (totalScore1 > totalScore2) {
+				} else if (totalScore1 < totalScore2) {
 					hand_recorder.setPlayer1_won(false);
 					LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
 					panelPlayer2.setBackgroundColor(Color.parseColor("#00FF00"));
 					strWhoWon = getString(R.string.player2) + " won with "
 							+ resultplayer2.getNameResult();
-				} else {
+				} else {//in case equals
 					// if the type of hand is the same for both player, check
 					// which is the highest
-					hand_recorder.setPlayer1_won(true);
-					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
-					panelPlayer1.setBackgroundColor(Color.parseColor("#00FF00"));
-					strWhoWon = getString(R.string.player1) + " won with "
-							+ resultplayer1.getNameResult();
+					int highestPlayer1=Integer.parseInt(hand_resulter.maxCard("1").getCardNumber());
+					int highestPlayer2=Integer.parseInt(hand_resulter.maxCard("2").getCardNumber());
+					if(highestPlayer1>highestPlayer2){
+						hand_recorder.setPlayer1_won(true);
+						LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
+						panelPlayer1.setBackgroundColor(Color.parseColor("#00FF00"));
+						strWhoWon = getString(R.string.player1) + " won with "
+								+ resultplayer1.getNameResult();
+					}else if(highestPlayer2>highestPlayer1){
+						hand_recorder.setPlayer1_won(false);
+						
+						LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
+						panelPlayer2.setBackgroundColor(Color.parseColor("#00FF00"));
+						strWhoWon = getString(R.string.player1) + " won with "
+								+ resultplayer1.getNameResult();
+					}else{
+						System.out.println("Forever!!!!!!");
+					}
+					
+					
+					
+					
 				}
 				// Modify the button to display who won and winner icon on the
 				// left

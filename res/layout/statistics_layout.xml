@@ -15,53 +15,222 @@
             android:background="@drawable/background"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/statistics_txt"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:background="@drawable/custom_title"
-                android:gravity="center_horizontal"
-                android:text="@string/statistic_title"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/statistics_txt"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:background="@drawable/custom_title"
-                android:gravity="center_horizontal"
-                android:text="@string/highlowcards"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/lh_txt"
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white" />
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*" >
 
-            <TextView
-                android:id="@+id/ll_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/hh_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white" />
+                    <TextView
+                        android:id="@+id/statistics_txt"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_title"
+                        android:gravity="center_horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/statistic_title"
+                        android:textColor="@android:color/white" />
+                </TableRow>
 
-            <TextView
-                android:id="@+id/lp_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white" />
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/hp_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_title"
+                        android:gravity="center_horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/win"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_title"
+                        android:gravity="center_horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/lose"
+                        android:textColor="@android:color/white" />
+                </TableRow>
+                <!-- First row after the headings -->
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:id="@+id/lh_txt"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="LOW &amp; HIGH"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/txt_lh_win"
+                        android:layout_weight="1"
+                        android:background="@color/green"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="14/50" />
+
+                    <TextView
+                        android:id="@+id/txt_lh_lose"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="2/50" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:id="@+id/ll_txt"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="LOW and LOW"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/txt_ll_win"
+                        android:layout_weight="1"
+                        android:background="@color/green"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="14/50" />
+
+                    <TextView
+                        android:id="@+id/txt_ll_lose"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="2/50" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:id="@+id/hh_txt"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="HIGH &amp; HIGH"/>
+
+                    <TextView
+                        android:id="@+id/txt_hh_win"
+                        android:layout_weight="1"
+                        android:background="@color/green"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp" />
+
+                    <TextView
+                        android:id="@+id/txt_hh_lose"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:id="@+id/lp_txt"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="LOW PAIR" />
+
+                    <TextView
+                        android:id="@+id/txt_lp_win"
+                        android:layout_weight="1"
+                        android:background="@color/green"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp" />
+
+                    <TextView
+                        android:id="@+id/txt_lp_lose"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" >
+
+                    <TextView
+                        android:id="@+id/hp_txt"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="HIGH PAIR"/>
+
+                    <TextView
+                        android:id="@+id/txt_hp_win"
+                        android:layout_weight="1"
+                        android:background="@color/green"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"/>
+
+                    <TextView
+                        android:id="@+id/txt_hp_lose"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"/>
+                </TableRow>
+            </TableLayout>
 
             <TextView
                 android:id="@+id/titleUserStatist"
@@ -69,6 +238,8 @@
                 android:layout_height="25dp"
                 android:background="@drawable/custom_title"
                 android:gravity="center_horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
                 android:text="@string/yourhands"
                 android:textColor="@android:color/white" />
 
@@ -124,8 +295,10 @@
                 <TextView
                     android:id="@+id/total_highcard_txt"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
             </LinearLayout>
 
             <LinearLayout
@@ -180,9 +353,11 @@
                 <TextView
                     android:id="@+id/total_pair_txt"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
             </LinearLayout>
 
             <LinearLayout
@@ -237,9 +412,11 @@
                 <TextView
                     android:id="@+id/total_double_pair_txt"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
             </LinearLayout>
 
             <LinearLayout
@@ -294,9 +471,11 @@
                 <TextView
                     android:id="@+id/total_triple_txt"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
             </LinearLayout>
 
             <LinearLayout
@@ -351,9 +530,11 @@
                 <TextView
                     android:id="@+id/total_straight_txt"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
             </LinearLayout>
 
             <LinearLayout
@@ -408,9 +589,11 @@
                 <TextView
                     android:id="@+id/total_full_txt"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
             </LinearLayout>
 
             <LinearLayout
@@ -467,7 +650,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

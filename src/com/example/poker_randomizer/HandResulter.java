@@ -269,7 +269,7 @@ public class HandResulter {
 		}
 		//loop throught them and find the max
 		Collections.sort(listallCards);
-		Card maxCard=listallCards.get(0);
+		Card maxCard=listallCards.get(listallCards.size()-1);
 		return maxCard;
 		
 		

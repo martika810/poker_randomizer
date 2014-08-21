@@ -11,8 +11,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -265,9 +268,9 @@ public class ThreePlayersActivity extends ActionBarActivity {
 				ResultHand resultplayer1 = hand_resulter.getResult("1");
 				ResultHand resultplayer2 = hand_resulter.getResult("2");
 				ResultHand resultplayer3 = hand_resulter.getResult("3");
-				List<Integer> valueResultPlayer1 = resultplayer1.getValue();
-				List<Integer> valueResultPlayer2 = resultplayer2.getValue();
-				List<Integer> valueResultPlayer3 = resultplayer3.getValue();
+				int valueResultPlayer1 = resultplayer1.getSumValues();
+				int valueResultPlayer2 = resultplayer2.getSumValues();
+				int valueResultPlayer3 = resultplayer3.getSumValues();
 				int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
 				int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
 				int totalScore3 = Integer.valueOf(resultplayer3.getTypeHand());
@@ -277,31 +280,51 @@ public class ThreePlayersActivity extends ActionBarActivity {
 				// hand_recorder
 				int maxTotalScore = Math.max(
 						Math.max(totalScore1, totalScore2), totalScore3);
-				if (maxTotalScore == totalScore1) {
-					hand_recorder.setPlayer1_won(true);
-					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
-					panelPlayer1.setBackgroundColor(Color.parseColor("#00FF00"));
-					strWhoWon = getString(R.string.player1) + " won with "
-							+ resultplayer1.getNameResult();
-				} else if (maxTotalScore == totalScore2) {
-					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
-					panelPlayer2.setBackgroundColor(Color.parseColor("#00FF00"));
-					strWhoWon = getString(R.string.player2) + " won with "
-							+ resultplayer2.getNameResult();
-				} else if (maxTotalScore == totalScore3) {
-					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer3 = (LinearLayout) findViewById(R.id.panel_player3);
-					panelPlayer3.setBackgroundColor(Color.parseColor("#00FF00"));
-					strWhoWon = getString(R.string.player3) + " won with "
-							+ resultplayer3.getNameResult();
+				// save the totalScore in a vector to check
+				List<Integer> lTotalScore = new ArrayList<Integer>();
+				lTotalScore.add(totalScore1);
+				lTotalScore.add(totalScore2);
+				lTotalScore.add(totalScore3);
+				// Once u know the highest hand, check who it belongs to
+				int times = Collections.frequency(lTotalScore, maxTotalScore);
+				if (times == 1) {
+					if (maxTotalScore == totalScore1) {
+						hand_recorder.setPlayer1_won(true);
+						LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
+						panelPlayer1.setBackgroundColor(Color
+								.parseColor("#00FF00"));
+						strWhoWon = getString(R.string.player1) + " won with "
+								+ resultplayer1.getNameResult();
+					} else if (maxTotalScore == totalScore2) {
+						hand_recorder.setPlayer1_won(false);
+						LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
+						panelPlayer2.setBackgroundColor(Color
+								.parseColor("#00FF00"));
+						strWhoWon = getString(R.string.player2) + " won with "
+								+ resultplayer2.getNameResult();
+					} else if (maxTotalScore == totalScore3) {
+						hand_recorder.setPlayer1_won(false);
+						LinearLayout panelPlayer3 = (LinearLayout) findViewById(R.id.panel_player3);
+						panelPlayer3.setBackgroundColor(Color
+								.parseColor("#00FF00"));
+						strWhoWon = getString(R.string.player3) + " won with "
+								+ resultplayer3.getNameResult();
 
-				} else {
-					// if the type of hand is the same for both player, check
-					// which is the highest
-					hand_recorder.setPlayer1_won(true);
+					} else {
+						// if the type of hand is the same for both player,
+						// check
+						// which is the highest
+						hand_recorder.setPlayer1_won(true);
+					}
+				}else if(times>1){
+					//Two players with the same hand
+					
+					totalScore1 = Integer.valueOf(resultplayer1.getTypeHand())+valueResultPlayer1;
+					totalScore2 = Integer.valueOf(resultplayer2.getTypeHand())+valueResultPlayer2;
+					totalScore3 = Integer.valueOf(resultplayer3.getTypeHand())+valueResultPlayer3;
+					
 				}
-				//Button btnWinner = (Button) findViewById(R.id.btn_winner);
+				// Button btnWinner = (Button) findViewById(R.id.btn_winner);
 				((Button) v).setText(strWhoWon);
 				// Save save player1's hand for the statistic
 				hand_recorder.saveResult(resultplayer1.getTypeHand());

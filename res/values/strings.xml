@@ -30,4 +30,6 @@
 	<string name="yourhands">Your hands</string>
 	<string name="highlowcards">Low and High Cards</string>
 	<string name="change_users">Number players</string>
+	<string name="win">Win</string>
+	<string name="lose">Lose</string>
 </resources>
