@@ -18,6 +18,10 @@ public class HandResulter {
 	List<Card> cards_player3;
 	List<Card> cards_player4;
 
+	public static final int FIRST_STAGE=0;
+	public static final int SECOND_STAGE=1;
+	public static final int THIRD_STAGE=2;
+	public static final int FOURTH_STAGE=3;
 	private static final String HIGH_CARD = "0";
 	private static final String PAIR = "1";
 	private static final String TRIPLE = "3";
@@ -159,8 +163,9 @@ public class HandResulter {
 					mapCounting.put(numOccurrencies, value);
 				} else {
 					List<Integer> list = new ArrayList<Integer>();
-					mapCounting.put(numOccurrencies, list);
 					list.add(Card.valuesCards.get(typeCard));
+					mapCounting.put(numOccurrencies, list);
+					
 				}
 			}
 
@@ -239,6 +244,38 @@ public class HandResulter {
 		}
 	}
 	
+	public Card maxCard_from_playerHand(String player){
+		List<Card> listallCards = new ArrayList<Card>();
+		//place the cards of player and the board cards in a list
+		if (player == "1") {
+			for (Card c : cards_player1) {
+				listallCards.add(c);
+			}
+		} else if ((player == "2")) {
+			for (Card c : cards_player2) {
+				
+				listallCards.add(c);
+			}
+		} else if ((player == "3")) {
+			for (Card c : cards_player3) {
+				
+				listallCards.add(c);
+			}
+		} else {
+			for (Card c : cards_player4) {
+				
+				listallCards.add(c);
+			}
+
+		}
+		//loop throught them and find the max
+		Collections.sort(listallCards);
+		Card maxCard=listallCards.get(listallCards.size()-1);
+		return maxCard;
+		
+		
+	}
+	
 	public Card maxCard(String player){
 		List<Card> listallCards = new ArrayList<Card>();
 		//place the cards of player and the board cards in a list
@@ -274,6 +311,7 @@ public class HandResulter {
 		
 		
 	}
+
 
 	private ResultHand isPair(Map<Integer, List<Integer>> mapCounting) {
 		ResultHand result = new ResultHand(context);

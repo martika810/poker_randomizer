@@ -63,11 +63,12 @@ public class ResultHand {
 //	private static final String POKER="7";
 //	
 	public int getSumValues(){
-		int totalSumValues=0;
-		for(int v:value){
-			totalSumValues+=v;
-		}
-		return totalSumValues;
+//		int totalSumValues=0;
+//		for(int v:value){
+//			totalSumValues+=v;
+//		}
+//		return totalSumValues;
+		return Util.getMax(value);
 		
 	}
 	//return the full name of the hand passing in the code in String

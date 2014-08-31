@@ -239,4 +239,12 @@ public class HandRecorder {
 		this.number_high_card = number_high_card;
 	}
 
+	public Map<String, Integer> getMapCardValue() {
+		return mapCardValue;
+	}
+
+	public void setMapCardValue(Map<String, Integer> mapCardValue) {
+		this.mapCardValue = mapCardValue;
+	}
+
 }

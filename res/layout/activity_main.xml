@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:gravity="left"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
     android:orientation="vertical"
     tools:context="com.example.poker_randomizer.MainActivity" >
 

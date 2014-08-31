@@ -270,33 +270,35 @@ public class MainActivity extends ActionBarActivity {
 				// hand_recorder
 				if (totalScore1 > totalScore2) {
 					hand_recorder.setPlayer1_won(true);
-					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
-					panelPlayer1.setBackgroundColor(Color.parseColor("#00FF00"));
+					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.inner_player_panel1);
+					panelPlayer1.setBackgroundResource(R.drawable.button_winner);
 					strWhoWon = getString(R.string.player1) + " won with "
 							+ resultplayer1.getNameResult();
 
 				} else if (totalScore1 < totalScore2) {
 					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
-					panelPlayer2.setBackgroundColor(Color.parseColor("#00FF00"));
+					LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.inner_player_panel2);
+					panelPlayer2.setBackgroundResource(R.drawable.button_winner);
 					strWhoWon = getString(R.string.player2) + " won with "
 							+ resultplayer2.getNameResult();
 				} else {//in case equals
 					// if the type of hand is the same for both player, check
 					// which is the highest
-					int highestPlayer1=Integer.parseInt(hand_resulter.maxCard("1").getCardNumber());
-					int highestPlayer2=Integer.parseInt(hand_resulter.maxCard("2").getCardNumber());
+					String highCardPlayer1=hand_resulter.maxCard("1").getCardNumber();
+					String highCardPlayer2=hand_resulter.maxCard("2").getCardNumber();
+					int highestPlayer1=Card.valuesCards.get(highCardPlayer1);
+					int highestPlayer2=Card.valuesCards.get(highCardPlayer2);
 					if(highestPlayer1>highestPlayer2){
 						hand_recorder.setPlayer1_won(true);
-						LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
-						panelPlayer1.setBackgroundColor(Color.parseColor("#00FF00"));
+						LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.inner_player_panel1);
+						panelPlayer1.setBackgroundResource(R.drawable.button_winner);
 						strWhoWon = getString(R.string.player1) + " won with "
 								+ resultplayer1.getNameResult();
 					}else if(highestPlayer2>highestPlayer1){
 						hand_recorder.setPlayer1_won(false);
 						
-						LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
-						panelPlayer2.setBackgroundColor(Color.parseColor("#00FF00"));
+						LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.inner_player_panel2);
+						panelPlayer2.setBackgroundResource(R.drawable.button_winner);
 						strWhoWon = getString(R.string.player1) + " won with "
 								+ resultplayer1.getNameResult();
 					}else{

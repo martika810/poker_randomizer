@@ -44,6 +44,8 @@ public class CardPairView extends ImageView {
 		//calculate the dimension of the cards
 		int heightCard=this.getHeight()-20;
 		int widthCards=(int)(heightCard*0.719);
+		int spaceBetweenCards=(int)(heightCard*0.3);
+		
 		//if (imgCard2.equals("")|| imgCard2.equals("")) {
 		//	return;
 		//}
@@ -65,48 +67,50 @@ public class CardPairView extends ImageView {
 		scaledBitmapCard1=Bitmap.createScaledBitmap(bitmapCard1, widthCards,heightCard, false);
 		
 		//canvas.rotate(20,0,heightCard);
-		canvas.drawBitmap(scaledBitmapCard1,30,10, null);
+		canvas.drawBitmap(scaledBitmapCard1,spaceBetweenCards,10, null);
 	}
 
-//	@Override
-//	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//		    int desiredWidth = 100;
-//		    int desiredHeight = 100;
-//
-//		    int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-//		    int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-//		    int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-//		    int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-//
-//		    int width;
-//		    int height;
-//
-//		    //Measure Width
-//		    if (widthMode == MeasureSpec.EXACTLY) {
-//		        //Must be this size
-//		        width = widthSize;
-//		    } else if (widthMode == MeasureSpec.AT_MOST) {
-//		        //Can't be bigger than...
-//		        width = Math.min(desiredWidth, widthSize);
-//		    } else {
-//		        //Be whatever you want
-//		        width = desiredWidth;
-//		    }
-//
-//		    //Measure Height
-//		    if (heightMode == MeasureSpec.EXACTLY) {
-//		        //Must be this size
-//		        height = heightSize;
-//		    } else if (heightMode == MeasureSpec.AT_MOST) {
-//		        //Can't be bigger than...
-//		        height = Math.min(desiredHeight, heightSize);
-//		    } else {
-//		        //Be whatever you want
-//		        height = desiredHeight;
-//		    }
-//
-//		    //MUST CALL THIS
-//		    setMeasuredDimension(width, height);
-//	}
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		    int desiredWidth = 100;
+		    int desiredHeight = 100;
+
+		    int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+		    int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+		    int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+		    int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+		    int width;
+		    int height;
+
+		    //Measure Width
+		    if (widthMode == MeasureSpec.EXACTLY) {
+		        //Must be this size
+		        width = widthSize;
+		    } else if (widthMode == MeasureSpec.AT_MOST) {
+		        //Can't be bigger than...
+		       // width = Math.min(desiredWidth, widthSize);
+		    	width = desiredWidth;
+		    } else {
+		        //Be whatever you want
+		        width = desiredWidth;
+		    }
+
+		    //Measure Height
+		    if (heightMode == MeasureSpec.EXACTLY) {
+		        //Must be this size
+		        height = heightSize;
+		    } else if (heightMode == MeasureSpec.AT_MOST) {
+		        //Can't be bigger than...
+		       // height = Math.min(desiredHeight, heightSize);
+		    	 height =desiredHeight;
+		    } else {
+		        //Be whatever you want
+		        height = desiredHeight;
+		    }
+
+		    //MUST CALL THIS
+		    setMeasuredDimension(width, height);
+	}
 
 }

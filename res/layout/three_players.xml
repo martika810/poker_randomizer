@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:gravity="left"
+ 
     android:orientation="vertical"
     tools:context="com.example.poker_randomizer.MainActivity" >
 
@@ -90,98 +91,124 @@
             android:src="@drawable/back" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/panel_player1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_gravity="left"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_weight="1" >
 
         <com.example.poker_randomizer.CardPairView
             android:id="@+id/pair_player1"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="2dp"
             android:contentDescription="@string/desc" />
 
-        <RadioButton
-            android:id="@+id/board3_radio_player1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginRight="2dp"
-            android:contentDescription="@string/desc"
-            android:gravity="center"
-            android:text="@string/player1"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/inner_player_panel1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_normal"
+            android:gravity="left" >
 
-    <LinearLayout
+            <RadioButton
+                android:id="@+id/board3_radio_player1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:contentDescription="@string/desc"
+                android:gravity="left|center_vertical"
+                android:text="@string/player1"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/panel_player2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_weight="1" >
 
-         <com.example.poker_randomizer.CardPairView
+        <com.example.poker_randomizer.CardPairView
             android:id="@+id/pair_player2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="2dp"
-            android:contentDescription="@string/desc"
-            />
+            android:contentDescription="@string/desc" />
 
+        <LinearLayout
+            android:id="@+id/inner_player_panel2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_normal"
+            android:gravity="left" >
 
-        <RadioButton
-            android:id="@+id/board3_radio_player2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left|top"
-            android:layout_marginRight="2dp"
-            android:contentDescription="@string/desc"
-            android:gravity="center"
-            android:text="@string/player2"
-            android:textAlignment="textStart"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/board3_radio_player2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:contentDescription="@string/desc"
+                android:gravity="left|center_vertical"
+                android:text="@string/player2"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/panel_player3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_weight="1" >
 
-         <com.example.poker_randomizer.CardPairView
+        <com.example.poker_randomizer.CardPairView
             android:id="@+id/pair_player3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="2dp"
-            android:contentDescription="@string/desc"
-            />
+            android:contentDescription="@string/desc" />
 
-        <RadioButton
-            android:id="@+id/board3_radio_player3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginRight="2dp"
-            android:contentDescription="@string/desc"
-            android:gravity="center"
-            android:text="@string/player3"
-            android:textAlignment="textStart"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/inner_player_panel3"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_normal"
+            android:gravity="left" >
+
+            <RadioButton
+                android:id="@+id/board3_radio_player3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:contentDescription="@string/desc"
+                android:gravity="left|center_vertical"
+                android:text="@string/player3"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/panel_buttons"
@@ -203,7 +230,9 @@
             <Button
                 android:id="@+id/board3_btn_flop"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/chip_button_selector"
                 android:text="@string/flop"
@@ -212,7 +241,9 @@
             <Button
                 android:id="@+id/board3_btn_turn"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/chip_button_selector"
                 android:text="@string/turn"
@@ -221,14 +252,14 @@
             <Button
                 android:id="@+id/board3_btn_river"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/chip_button_selector"
                 android:text="@string/river"
                 android:textColor="@android:color/white" />
         </LinearLayout>
-
-       
 
         <LinearLayout
             android:id="@+id/panel_button2"
@@ -241,7 +272,9 @@
             <Button
                 android:id="@+id/board3_btn_next_hand"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:background="@drawable/chip_button_selector"
                 android:text="@string/nexthand"
                 android:textColor="@android:color/white" />
