@@ -14,22 +14,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -38,7 +42,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements
+		FragmentManager.OnBackStackChangedListener {
 	String[] typeCard = { "s", "h", "d", "c" };
 	private static final String[] typeNumbers = { "2", "3", "4", "5", "6", "7",
 			"8", "9", "x", "j", "q", "k", "a" };
@@ -50,10 +55,30 @@ public class MainActivity extends ActionBarActivity {
 	private HandResulter hand_resulter;
 	Gson gson = new GsonBuilder().create();
 	private static final String STATISTICACTIVITYNAME = "StatisticResultActivity";
+	private boolean mShowingBack = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		String card_picked;
+
 		super.onCreate(savedInstanceState);
+
+		// Populate the board cards
+		if (savedInstanceState == null) {
+			getFragmentManager().beginTransaction()
+					.add(R.id.image_card1, new CardBackFragment()).commit();
+			getFragmentManager().beginTransaction()
+					.add(R.id.image_card2, new CardBackFragment()).commit();
+			getFragmentManager().beginTransaction()
+					.add(R.id.image_card3, new CardBackFragment()).commit();
+			getFragmentManager().beginTransaction()
+					.add(R.id.image_card4, new CardBackFragment()).commit();
+			getFragmentManager().beginTransaction()
+					.add(R.id.image_card5, new CardBackFragment()).commit();
+		} else {
+			mShowingBack = (getFragmentManager().getBackStackEntryCount() > 0);
+		}
+		getFragmentManager().addOnBackStackChangedListener(this);
+
 		populateCards();
 		hand_resulter = new HandResulter(getApplicationContext());
 		// check if the file exist, if so load the json data in HandRecorder
@@ -70,10 +95,8 @@ public class MainActivity extends ActionBarActivity {
 
 			}
 		} catch (FileNotFoundException e) {
-
 			e.printStackTrace();
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 
@@ -167,14 +190,15 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// Set image for the flop cards
-				ImageView image_card1_flop = (ImageView) findViewById(R.id.image_card1);
+				// ImageView image_card1_flop = (ImageView)
+				// findViewById(R.id.image_card1);
 				int position_card_pick = r.nextInt(cards.size());
 				String card_picked = cards.get(position_card_pick);
 				hand_resulter.addCardBoard(card_picked);
 				int identifier = getResources().getIdentifier(card_picked,
 						"drawable", "com.example.poker_randomizer");
-				cards.remove(position_card_pick);
-				image_card1_flop.setImageResource(identifier);
+				// cards.remove(position_card_pick);
+				// image_card1_flop.setImageResource(identifier);
 
 				// second car flop
 				ImageView image_card2_flop = (ImageView) findViewById(R.id.image_card2);
@@ -225,6 +249,7 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// card flop
+
 				ImageView image_card5_river = (ImageView) findViewById(R.id.image_card5);
 				int position_card_pick = r.nextInt(cards.size());
 				String card_picked = cards.get(position_card_pick);
@@ -252,11 +277,12 @@ public class MainActivity extends ActionBarActivity {
 				ResultHand resultplayer2 = hand_resulter.getResult("2");
 				int valueResultPlayer1 = resultplayer1.getSumValues();
 				int valueResultPlayer2 = resultplayer2.getSumValues();
-				int totalScore1;int totalScore2;
-				if(resultplayer1.getTypeHand()!=resultplayer2.getTypeHand()){
+				int totalScore1;
+				int totalScore2;
+				if (resultplayer1.getTypeHand() != resultplayer2.getTypeHand()) {
 					totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
 					totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
-				}else{
+				} else {
 					totalScore1 = Integer.valueOf(resultplayer1.getTypeHand())
 							+ valueResultPlayer1;
 					totalScore2 = Integer.valueOf(resultplayer2.getTypeHand())
@@ -271,43 +297,46 @@ public class MainActivity extends ActionBarActivity {
 				if (totalScore1 > totalScore2) {
 					hand_recorder.setPlayer1_won(true);
 					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.inner_player_panel1);
-					panelPlayer1.setBackgroundResource(R.drawable.button_winner);
+					panelPlayer1
+							.setBackgroundResource(R.drawable.button_winner);
 					strWhoWon = getString(R.string.player1) + " won with "
 							+ resultplayer1.getNameResult();
 
 				} else if (totalScore1 < totalScore2) {
 					hand_recorder.setPlayer1_won(false);
 					LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.inner_player_panel2);
-					panelPlayer2.setBackgroundResource(R.drawable.button_winner);
+					panelPlayer2
+							.setBackgroundResource(R.drawable.button_winner);
 					strWhoWon = getString(R.string.player2) + " won with "
 							+ resultplayer2.getNameResult();
-				} else {//in case equals
+				} else {// in case equals
 					// if the type of hand is the same for both player, check
 					// which is the highest
-					String highCardPlayer1=hand_resulter.maxCard("1").getCardNumber();
-					String highCardPlayer2=hand_resulter.maxCard("2").getCardNumber();
-					int highestPlayer1=Card.valuesCards.get(highCardPlayer1);
-					int highestPlayer2=Card.valuesCards.get(highCardPlayer2);
-					if(highestPlayer1>highestPlayer2){
+					String highCardPlayer1 = hand_resulter.maxCard("1")
+							.getCardNumber();
+					String highCardPlayer2 = hand_resulter.maxCard("2")
+							.getCardNumber();
+					int highestPlayer1 = Card.valuesCards.get(highCardPlayer1);
+					int highestPlayer2 = Card.valuesCards.get(highCardPlayer2);
+					if (highestPlayer1 > highestPlayer2) {
 						hand_recorder.setPlayer1_won(true);
 						LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.inner_player_panel1);
-						panelPlayer1.setBackgroundResource(R.drawable.button_winner);
+						panelPlayer1
+								.setBackgroundResource(R.drawable.button_winner);
 						strWhoWon = getString(R.string.player1) + " won with "
 								+ resultplayer1.getNameResult();
-					}else if(highestPlayer2>highestPlayer1){
+					} else if (highestPlayer2 > highestPlayer1) {
 						hand_recorder.setPlayer1_won(false);
-						
+
 						LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.inner_player_panel2);
-						panelPlayer2.setBackgroundResource(R.drawable.button_winner);
+						panelPlayer2
+								.setBackgroundResource(R.drawable.button_winner);
 						strWhoWon = getString(R.string.player1) + " won with "
 								+ resultplayer1.getNameResult();
-					}else{
+					} else {
 						System.out.println("Forever!!!!!!");
 					}
-					
-					
-					
-					
+
 				}
 				// Modify the button to display who won and winner icon on the
 				// left
@@ -328,6 +357,19 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 
+		FrameLayout first_card = (FrameLayout) findViewById(R.id.image_card1);
+		first_card.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+					flipCard();
+				}
+				return true;
+
+			}
+
+		});
 		Button btnNextHand = (Button) findViewById(R.id.btn_next_hand);
 		btnNextHand.setOnClickListener(new OnClickListener() {
 
@@ -414,6 +456,60 @@ public class MainActivity extends ActionBarActivity {
 
 	}
 
+	public static class CardFrontFragment extends Fragment {
+		public CardFrontFragment() {
+			
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View img=inflater.inflate(R.layout.fragment_card_front, container,false);
+			((ImageView)img).setImageResource(R.drawable.s10);
+			return img;
+		}
+	}
+
+	/**
+	 * A fragment representing the back of the card.
+	 */
+	public class CardBackFragment extends Fragment {
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			return inflater.inflate(R.layout.fragment_card_back, container,
+					false);
+		}
+	}
+
+	private void flipCard() {
+		if (mShowingBack) {
+			getFragmentManager().popBackStack();
+			return;
+
+		}
+		mShowingBack = true;
+
+		getFragmentManager()
+				.beginTransaction()
+				.setCustomAnimations(R.animator.card_flip_right_in,
+						R.animator.card_flip_right_out,
+						R.animator.card_flip_left_in,
+						R.animator.card_flip_left_out)
+
+				.replace(R.id.image_card1, new CardFrontFragment())
+				.addToBackStack(null).commit();
+
+	}
+
+	@Override
+	public void onBackStackChanged() {
+		mShowingBack = (getFragmentManager().getBackStackEntryCount() > 0);
+
+		// When the back stack changes, invalidate the options menu (action
+		// bar).
+		invalidateOptionsMenu();
+	}
 	// @Override
 	// public boolean onOptionsItemSelected(MenuItem item) {
 	// // Handle presses on the action bar items

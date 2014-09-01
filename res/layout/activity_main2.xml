@@ -7,7 +7,6 @@
     android:background="@drawable/background"
     android:gravity="left"
     android:orientation="vertical"
-   
     tools:context="com.example.poker_randomizer.MainActivity" >
 
     <LinearLayout
@@ -39,55 +38,49 @@
         android:paddingRight="5dp"
         android:paddingTop="5dp" >
 
-        <ImageView
-            android:id="@+id/image_card1"
+        <FrameLayout
+   			android:id="@+id/image_card1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
+            android:layout_weight="1"></FrameLayout>
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/image_card2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
+            />
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/image_card3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
+            />
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/image_card4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
+            />
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/image_card5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:contentDescription="@string/desc"
-            android:src="@drawable/back" />
+             />
     </LinearLayout>
 
     <RelativeLayout
