@@ -6,9 +6,7 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Marta/adt-bundle-windows-x86_64-20130219/eclipse/external_libraries/google-gson-2.2.4/gson-2.2.4.jar"/>
 	<classpathentry kind="lib" path="libs/commons-lang3-3.3.2.jar"/>
 	<classpathentry kind="lib" path="libs/commons-lang3-3.3.2-javadoc.jar"/>
-	<classpathentry kind="src" path="/appcompat_v7_2"/>
-	<classpathentry kind="src" path="/appcompat_v7"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK/appcompat_v7_2"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK/appcompat_v7_2"/>
 	<classpathentry kind="lib" path="C:/Users/Marta/adt-bundle-windows-x86_64-20130219/sdk/platforms/android-19/android.jar" sourcepath="C:/Users/Marta/adt-bundle-windows-x86_64-20130219/sdk/sources/android-19">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/C:/Users/Marta/adt-bundle-windows-x86_64-20130219/sdk/docs/reference"/>
@@ -17,7 +15,8 @@
 			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry exported="true" kind="src" path="/android-support-v7-appcompat"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

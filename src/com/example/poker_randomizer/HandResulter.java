@@ -247,16 +247,16 @@ public class HandResulter {
 	public Card maxCard_from_playerHand(String player){
 		List<Card> listallCards = new ArrayList<Card>();
 		//place the cards of player and the board cards in a list
-		if (player == "1") {
+		if (player.equals("1")) {
 			for (Card c : cards_player1) {
 				listallCards.add(c);
 			}
-		} else if ((player == "2")) {
+		} else if (player.equals("2")) {
 			for (Card c : cards_player2) {
 				
 				listallCards.add(c);
 			}
-		} else if ((player == "3")) {
+		} else if (player.equals("3")){
 			for (Card c : cards_player3) {
 				
 				listallCards.add(c);

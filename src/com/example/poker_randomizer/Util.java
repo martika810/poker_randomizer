@@ -8,11 +8,19 @@ import java.util.List;
 class Util {
 	
 	public static int getMax(List<Integer> nums){
+		List<Integer> clonedList=clone(nums);
 		if (!nums.isEmpty()){
-			Collections.sort(nums);
-			return nums.get(nums.size()-1);
+			Collections.sort(clonedList);
+			return clonedList.get(clonedList.size()-1);
 		}
 			return 0;
+	}
+	public static List<Integer> clone(List<Integer> nums){
+		List<Integer> clonedList=new ArrayList<Integer>();
+		for(int num:nums){
+			clonedList.add(num);
+		}
+		return clonedList;
 	}
 	
 	public static List<Integer> buildIntegerArrays(int...nums){

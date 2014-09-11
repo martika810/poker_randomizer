@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,28 +25,24 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class FourPlayersActivity extends ActionBarActivity {
-	String[] typeCard = { "s", "h", "d", "c" };
-	private static final String[] typeNumbers = { "2", "3", "4", "5", "6", "7",
-			"8", "9", "x", "j", "q", "k", "a" };
-	List<String> cards = new ArrayList<String>();
-	Random r = new Random();
-	private static final String ACTION_NEW_HAND = "android.intent.action.MAIN3";
-	private final static String data_file = "four_hands_results.txt";
-	private HandRecorder hand_recorder;
-	private HandResulter hand_resulter;
-	Gson gson = new GsonBuilder().create();
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+public class FourPlayersActivity extends PokerActivity {
+
+	static String ACTION_NEW_HAND = "android.intent.action.MAIN3";
+	
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		String card_picked;
-		populateCards();
+		data_file = "four_hands_results.txt";
+		super.onCreate(savedInstanceState);
+		
 		hand_resulter = new HandResulter(getApplicationContext());
 		// check if the file exist, if so load the json data in HandRecorder
 		// if create and initialize the HandRecorder
@@ -72,8 +65,7 @@ public class FourPlayersActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 		setContentView(R.layout.four_players);
-
-		TextView number_handTxt = (TextView) findViewById(R.id.number_hands_txt);
+		TextView number_handTxt = (TextView) findViewById(R.id.txt_number_hands);
 		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
 
 		
@@ -149,189 +141,13 @@ public class FourPlayersActivity extends ActionBarActivity {
 
 	}
 
-	private void populateCards() {
-		for (String type : typeCard) {
-			for (String num : typeNumbers) {
-				cards.add(type + num);
+	
 
-			}
-		}
-	}
+	
+	public void addButtonListener() {
+		super.addButtonListener();
 
-	// those two methods needs to be refactor
-	private HandRecorder readHandRecorderFromFile() throws IOException {
-
-		FileInputStream fis = openFileInput(data_file);
-		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-		String strJson = br.readLine();
-
-		HandRecorder handRecorder = loadJsonToHandRecorder(strJson);
-
-		br.close();
-		return handRecorder;
-	}
-
-	private void writeHandRecorderToFile(HandRecorder handRecorder)
-			throws FileNotFoundException {
-		File file = new File(data_file);
-		FileOutputStream fos = openFileOutput(data_file, MODE_PRIVATE);
-		PrintWriter pw = new PrintWriter(new BufferedWriter(
-				new OutputStreamWriter(fos)));
-		String strDataHandRecorder = gson.toJson(handRecorder);
-		pw.print(strDataHandRecorder);
-		pw.close();
-
-	}
-
-	private HandRecorder loadJsonToHandRecorder(String strJson) {
-
-		HandRecorder handRecorder = gson.fromJson(strJson, HandRecorder.class);
-		return handRecorder;
-
-	}
-
-	private void addButtonListener() {
-		Button btnFlop = (Button) findViewById(R.id.board3_btn_flop);
-		btnFlop.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Set image for the flop cards
-				ImageView image_card1_flop = (ImageView) findViewById(R.id.image_card1);
-				int position_card_pick = r.nextInt(cards.size());
-				String card_picked = cards.get(position_card_pick);
-				hand_resulter.addCardBoard(card_picked);
-				int identifier = getResources().getIdentifier(card_picked,
-						"drawable", "com.example.poker_randomizer");
-				cards.remove(position_card_pick);
-				image_card1_flop.setImageResource(identifier);
-
-				// second car flop
-				ImageView image_card2_flop = (ImageView) findViewById(R.id.image_card2);
-				position_card_pick = r.nextInt(cards.size());
-				card_picked = cards.get(position_card_pick);
-				hand_resulter.addCardBoard(card_picked);
-				identifier = getResources().getIdentifier(card_picked,
-						"drawable", "com.example.poker_randomizer");
-				cards.remove(position_card_pick);
-				image_card2_flop.setImageResource(identifier);
-
-				// third card flop
-				ImageView image_card3_flop = (ImageView) findViewById(R.id.image_card3);
-				position_card_pick = r.nextInt(cards.size());
-				card_picked = cards.get(position_card_pick);
-				hand_resulter.addCardBoard(card_picked);
-				identifier = getResources().getIdentifier(card_picked,
-						"drawable", "com.example.poker_randomizer");
-				cards.remove(position_card_pick);
-				image_card3_flop.setImageResource(identifier);
-
-				v.setVisibility(View.GONE);
-
-			}
-		});
-		Button btnTurn = (Button) findViewById(R.id.board3_btn_turn);
-		btnTurn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// card flop
-				ImageView image_card4_turn = (ImageView) findViewById(R.id.image_card4);
-				int position_card_pick = r.nextInt(cards.size());
-				String card_picked = cards.get(position_card_pick);
-				hand_resulter.addCardBoard(card_picked);
-				int identifier = getResources().getIdentifier(card_picked,
-						"drawable", "com.example.poker_randomizer");
-				cards.remove(position_card_pick);
-				image_card4_turn.setImageResource(identifier);
-
-				v.setVisibility(View.GONE);
-
-			}
-		});
-		Button btnRiver = (Button) findViewById(R.id.board3_btn_river);
-		btnRiver.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// card flop
-				ImageView image_card5_river = (ImageView) findViewById(R.id.image_card5);
-				int position_card_pick = r.nextInt(cards.size());
-				String card_picked = cards.get(position_card_pick);
-				hand_resulter.addCardBoard(card_picked);
-				int identifier = getResources().getIdentifier(card_picked,
-						"drawable", "com.example.poker_randomizer");
-				cards.remove(position_card_pick);
-				image_card5_river.setImageResource(identifier);
-
-				// v.setVisibility(View.GONE);
-				v.setBackgroundColor(Color.GREEN);
-				((Button) v).setTextColor(Color.BLACK);
-				((Button) v).setEnabled(false);
-
-				int drwWinnerIcon = R.drawable.winner;
-
-				((Button) v).setCompoundDrawablesWithIntrinsicBounds(
-						R.drawable.winner, 0, 0, 0);
-				((Button) v).setPadding(60, 0, 20, 0);
-				// RESOLVE THE HAND
-				ResultHand resultplayer1 = hand_resulter.getResult("1");
-				ResultHand resultplayer2 = hand_resulter.getResult("2");
-				ResultHand resultplayer3 = hand_resulter.getResult("3");
-				ResultHand resultplayer4 = hand_resulter.getResult("4");
-				List<Integer> valueResultPlayer1 = resultplayer1.getValue();
-				List<Integer> valueResultPlayer2 = resultplayer2.getValue();
-				List<Integer> valueResultPlayer3 = resultplayer3.getValue();
-				List<Integer> valueResultPlayer4 = resultplayer4.getValue();
-				int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
-				int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
-				int totalScore3 = Integer.valueOf(resultplayer3.getTypeHand());
-				int totalScore4 = Integer.valueOf(resultplayer4.getTypeHand());
-
-				boolean player1_won;
-				String strWhoWon = "";
-				// Check if player1 has won, to store the result in the
-				// hand_recorder
-				int maxTotalScore = Math.max(Math.max(
-						Math.max(totalScore1, totalScore2), totalScore3),
-						totalScore4);
-				if (maxTotalScore == totalScore1) {
-					hand_recorder.setPlayer1_won(true);
-					LinearLayout panelPlayer1 = (LinearLayout) findViewById(R.id.panel_player1);
-					panelPlayer1.setBackgroundColor(Color.GREEN);
-					strWhoWon = getString(R.string.player1) + " won with "
-							+ resultplayer1.getNameResult();
-				} else if (maxTotalScore == totalScore2) {
-					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer2 = (LinearLayout) findViewById(R.id.panel_player2);
-					panelPlayer2.setBackgroundColor(Color.GREEN);
-					strWhoWon = getString(R.string.player2) + " won with "
-							+ resultplayer2.getNameResult();
-				} else if (maxTotalScore == totalScore3) {
-					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer3 = (LinearLayout) findViewById(R.id.panel_player3);
-					panelPlayer3.setBackgroundColor(Color.GREEN);
-					strWhoWon = getString(R.string.player3) + " won with "
-							+ resultplayer3.getNameResult();
-				} else if (maxTotalScore == totalScore4) {
-					hand_recorder.setPlayer1_won(false);
-					LinearLayout panelPlayer4 = (LinearLayout) findViewById(R.id.panel_player4);
-					panelPlayer4.setBackgroundColor(Color.GREEN);
-					strWhoWon = getString(R.string.player4) + " won with "
-							+ resultplayer4.getNameResult();
-				} else {
-					// if the type of hand is the same for both player, check
-					// which is the highest
-					hand_recorder.setPlayer1_won(true);
-				}
-				((Button) v).setText(strWhoWon);
-				// Save save player1's hand for the statistic
-				hand_recorder.saveResult(resultplayer1.getTypeHand());
-
-			}
-		});
-
-		Button btnNextHand = (Button) findViewById(R.id.board3_btn_next_hand);
+		TextView btnNextHand = (TextView) findViewById(R.id.txt_next_hand);
 		btnNextHand.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -393,9 +209,101 @@ public class FourPlayersActivity extends ActionBarActivity {
 
 			}
 		});
+		
+		ImageView btn_statistics=(ImageView)findViewById(R.id.btn_statistics);
+		btn_statistics.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// start statistics activity
+				Intent statisticsIntent = new Intent();
+				statisticsIntent.putExtra("ParentClassName", "FourPlayersActivity");
+				startActivity(statisticsIntent.setClass(FourPlayersActivity.this,
+						StatisticResultActivity.class));
+				
+				
+			}
+		});
+		
+		ImageView btn_players=(ImageView)findViewById(R.id.btn_players);
+		btn_players.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// start statistics activity
+				startActivity(new Intent(FourPlayersActivity.this,
+						NumberPlayerActivity.class));
+				
+				
+			}
+		});
 
 	}
+	public void resulting() throws Exception {
+		
+		// ((Button) v).setCompoundDrawablesWithIntrinsicBounds(
+		// R.drawable.winner, 0, 0, 0);
+		// ((Button) v).setPadding(60, 0, 20, 0);
+		// // RESOLVE THE HAND
+		ResultHand resultplayer1 = hand_resulter.getResult("1");
+		ResultHand resultplayer2 = hand_resulter.getResult("2");
+		ResultHand resultplayer3 = hand_resulter.getResult("3");
+		ResultHand resultplayer4 = hand_resulter.getResult("4");
+		// int valueResultPlayer1 = resultplayer1.getSumValues();
+		// int valueResultPlayer2 = resultplayer2.getSumValues();
+		// int valueResultPlayer3 = resultplayer3.getSumValues();
+		int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
+		int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
+		int totalScore3 = Integer.valueOf(resultplayer3.getTypeHand());
+		int totalScore4 = Integer.valueOf(resultplayer4.getTypeHand());
 
+		List<Integer> playerLayouts = new ArrayList<Integer>();
+		playerLayouts.add(R.id.inner_player_panel1);
+		playerLayouts.add(R.id.inner_player_panel2);
+		playerLayouts.add(R.id.inner_player_panel3);
+		playerLayouts.add(R.id.inner_player_panel4);
+
+		List<Integer> lTotalScore;
+		List<ResultHand> lResultHand;
+		List<Integer> winner_player_num;
+
+		boolean player1_won;
+		String strWhoWon = "";
+		// Check if player1 has won, to store the result in the
+		// hand_recorder
+		//
+		// // save the totalScore in a vector to check
+		lTotalScore = Util.buildIntegerArrays(totalScore1, totalScore2,
+				totalScore3,totalScore4);
+		lResultHand = Util.buildIntegerArrays(resultplayer1, resultplayer2,
+				resultplayer3,resultplayer4);
+		// Once u know the highest hand, check who it belongs to
+		int winner=getAndHighLightWinner(playerLayouts, lTotalScore, lResultHand,
+				HandResulter.FIRST_STAGE);
+		//
+		//
+		//
+		// // Save save player1's hand for the statistic
+		switch(winner){
+		case 0:
+			hand_recorder.saveResult(resultplayer1.getTypeHand());
+			break;
+		case 1:
+			hand_recorder.saveResult(resultplayer2.getTypeHand());
+			break;
+		case 2:
+			hand_recorder.saveResult(resultplayer3.getTypeHand());
+			break;
+		case 3:
+			hand_recorder.saveResult(resultplayer4.getTypeHand());
+			break;
+		default:
+			throw new Exception("Error Unknown player");
+			
+	}
+		//
+
+	}
 	private void cleanRadioSelection() {
 		RadioButton radioPlayer1 = (RadioButton) findViewById(R.id.board3_radio_player1);
 		RadioButton radioPlayer2 = (RadioButton) findViewById(R.id.board3_radio_player2);

@@ -156,9 +156,12 @@ public class HandRecorder {
 			number_straight++;
 			break;
 		case 5:
-			number_full++;
+			number_flush++;
 			break;
 		case 6:
+			number_full++;
+			break;
+		case 7:
 			number_poker++;
 			break;
 		default:
