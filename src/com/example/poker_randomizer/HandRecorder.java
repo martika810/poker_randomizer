@@ -23,6 +23,8 @@ public class HandRecorder {
 	private int number_pair;
 	private int number_high_card;
 	private boolean player1_won=false;
+	private int number_guesses;
+	private int number_rigth_guesses;
 	
 	
 
@@ -248,6 +250,22 @@ public class HandRecorder {
 
 	public void setMapCardValue(Map<String, Integer> mapCardValue) {
 		this.mapCardValue = mapCardValue;
+	}
+
+	public int getNumber_guesses() {
+		return number_guesses;
+	}
+
+	public void setNumber_guesses(int number_guesses) {
+		this.number_guesses = number_guesses;
+	}
+
+	public int getNumber_rigth_guesses() {
+		return number_rigth_guesses;
+	}
+
+	public void setNumber_rigth_guesses(int number_rigth_guesses) {
+		this.number_rigth_guesses = number_rigth_guesses;
 	}
 
 }

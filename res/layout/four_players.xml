@@ -19,33 +19,34 @@
         android:paddingRight="5dp"
         android:paddingTop="2dp" >
 
-       <TextView
+        <TextView
             android:id="@+id/txt_number_hands"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@android:color/white"
-            android:textSize="18dp"
+            android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:layout_alignParentLeft="true" >
+            android:textColor="@android:color/white"
+            android:textSize="18dp" >
         </TextView>
-         <ImageView
+
+        <ImageView
             android:id="@+id/btn_statistics"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" 
+            android:layout_height="match_parent"
             android:layout_gravity="right"
             android:layout_marginLeft="20dp"
             android:layout_toLeftOf="@+id/btn_players"
             android:src="@drawable/statistics_icon"
-       		android:title="@string/statistics"/>
+            android:title="@string/statistics" />
+
         <ImageView
             android:id="@+id/btn_players"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" 
-            android:layout_gravity="right"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
+            android:layout_gravity="right"
             android:src="@drawable/users_icon"
-        	android:title="@string/change_users"/>
-        
+            android:title="@string/change_users" />
     </RelativeLayout>
 
     <LinearLayout
@@ -79,7 +80,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <FrameLayout
             android:id="@+id/image_card4"
@@ -87,7 +88,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <FrameLayout
             android:id="@+id/image_card5"
@@ -95,7 +96,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -311,20 +312,32 @@
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:orientation="horizontal" >
-
-        
-
-          <TextView
+			 <TextView
+                android:id="@+id/txt_tap_favorite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+               	android:textColor="@color/white"
+                android:textSize="15sp"
+                android:text="@string/tap_favorite"
+                
+                 />
+            <TextView
                 android:id="@+id/txt_winner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:drawableLeft="@drawable/winner"
-                android:visibility="invisible" 
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="60dp"
+                android:paddingRight="20dp"
                 android:textColor="@color/white"
                 android:textSize="15sp"
-                android:paddingRight="20dp"
-                android:paddingLeft="60dp" />
+                android:visibility="invisible" />
+
+            
         </LinearLayout>
 
         <LinearLayout
@@ -336,15 +349,15 @@
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-           <TextView
+            <TextView
                 android:id="@+id/txt_next_hand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-				android:text="@string/nexthand"
-                android:textSize="26sp"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center_horizontal"
-              	android:textColor="@android:color/white"  />
+                android:text="@string/nexthand"
+                android:textColor="@android:color/white"
+                android:textSize="26sp" />
         </LinearLayout>
     </LinearLayout>
 

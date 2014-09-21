@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Poker Randomizer</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Poker Recorder</string>
     <string name="action_settings">Settings</string>
     <string name="desc">Card Back</string>
     <string name="player1">You</string>
@@ -27,9 +26,16 @@
     <string name="three_players"> 3 Players</string>
 	<string name="four_players"> 4 Players</string>
 	<string name="choose_number_player">Choose the number of players</string>
-	<string name="yourhands">Your hands</string>
+	<string name="yourhands">What are the odds you get a ...?</string>
 	<string name="highlowcards">Low and High Cards</string>
 	<string name="change_users">Number players</string>
+	<string name="title_pairs">What cards did you get so far?</string>
 	<string name="win">Win</string>
 	<string name="lose">Lose</string>
+	<string name="lh_pair">"Low &amp; High"</string>
+	<string name="ll_pair">"Low &amp; Low"</string>
+	<string name="hh_pair">"High &amp; High"</string>
+	<string name="lp_pair">"Low Pair"</string>
+	<string name="hp_pair">"High Pair"</string>
+	<string name="tap_favorite">"Tap your favorite player to win"</string>
 </resources>

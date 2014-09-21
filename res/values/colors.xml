@@ -13,7 +13,9 @@
  <color name="lime">#00FF00</color>
  <color name="teal">#008080</color>
  <color name="green">#00FF00</color>
+ <color name="dark_green">#009933</color>
  <color name="blue">#0000FF</color>
  <color name="navy">#000080</color>
  <color name="black">#000000</color>
+ <color name="dark_yellow">#E8BF19</color>
 </resources>

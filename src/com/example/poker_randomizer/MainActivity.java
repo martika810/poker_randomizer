@@ -1,52 +1,26 @@
 package com.example.poker_randomizer;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import android.app.Fragment;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.webkit.WebView.FindListener;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 public class MainActivity extends PokerActivity implements
 		FragmentManager.OnBackStackChangedListener {
+	AlertDialog alertDialog;
 	
 
 
@@ -147,14 +121,14 @@ public class MainActivity extends PokerActivity implements
 			@Override
 			public void onClick(View v) {
 				// Store the type of hand(player1)
-				List<Card> handPlayer1 = hand_resulter.getCards_player1();
-				hand_recorder.addHand(handPlayer1);
-				try {
-					writeHandRecorderToFile(hand_recorder);
-				} catch (FileNotFoundException e) {
-
-					e.printStackTrace();
-				}
+//				List<Card> handPlayer1 = hand_resulter.getCards_player1();
+//				hand_recorder.addHand(handPlayer1);
+//				try {
+//					writeHandRecorderToFile(hand_recorder);
+//				} catch (FileNotFoundException e) {
+//
+//					e.printStackTrace();
+//				}
 				startActivity(new Intent(MainActivity.this, MainActivity.class));
 
 			}
@@ -170,6 +144,8 @@ public class MainActivity extends PokerActivity implements
 					radioPlayer2.setChecked(false);
 				} else {
 					radioPlayer2.setChecked(true);
+					setCurrent_player_predictions("2");
+					
 				}
 
 			}
@@ -187,6 +163,7 @@ public class MainActivity extends PokerActivity implements
 
 				} else {
 					radioPlayer1.setChecked(true);
+					setCurrent_player_predictions("1");
 				}
 
 			}
@@ -289,13 +266,22 @@ public class MainActivity extends PokerActivity implements
 			}
 
 		}
-
+		//Hide the tap favorite textview and display the winner textview
+		
 		TextView winnerBtn=(TextView)findViewById(R.id.txt_winner);
 		winnerBtn.setText(strWhoWon);
 	   	winnerBtn.setVisibility(View.VISIBLE);
 		
+	   	//Save the player 1's hand type, whether (s)he won and the winning hand
 		hand_recorder.saveResult(resultplayer1.getTypeHand());
+		List<Card> handPlayer1 = hand_resulter.getCards_player1();
+		hand_recorder.addHand(handPlayer1);
+		try {
+			writeHandRecorderToFile(hand_recorder);
+		} catch (FileNotFoundException e) {
 
+			e.printStackTrace();
+		}
 		
 		
 	}

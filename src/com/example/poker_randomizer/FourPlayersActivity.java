@@ -152,15 +152,7 @@ public class FourPlayersActivity extends PokerActivity {
 
 			@Override
 			public void onClick(View v) {
-				// Store the type of hand(player1)
-				List<Card> handPlayer1 = hand_resulter.getCards_player1();
-				hand_recorder.addHand(handPlayer1);
-				try {
-					writeHandRecorderToFile(hand_recorder);
-				} catch (FileNotFoundException e) {
-
-					e.printStackTrace();
-				}
+				
 				startActivity(new Intent(FourPlayersActivity.this,
 						FourPlayersActivity.class));
 
@@ -300,7 +292,17 @@ public class FourPlayersActivity extends PokerActivity {
 		default:
 			throw new Exception("Error Unknown player");
 			
+			
 	}
+		// Store the type of hand(player1)
+		List<Card> handPlayer1 = hand_resulter.getCards_player1();
+		hand_recorder.addHand(handPlayer1);
+		try {
+			writeHandRecorderToFile(hand_recorder);
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		}
 		//
 
 	}

@@ -57,6 +57,7 @@ public class StatisticResultActivity extends ActionBarActivity {
 		TextView triple_txt = (TextView) findViewById(R.id.total_triple_txt);
 		TextView straight_txt = (TextView) findViewById(R.id.total_straight_txt);
 		TextView full_txt = (TextView) findViewById(R.id.total_full_txt);
+		TextView flush_txt = (TextView) findViewById(R.id.total_flush_txt);
 		TextView poker_txt = (TextView) findViewById(R.id.total_poker_txt);
 
 		populateStatisticTable();
@@ -122,6 +123,11 @@ public class StatisticResultActivity extends ActionBarActivity {
 				+ hand_recorder.getNumber_hands());
 		colorStatisticNumbers(full_txt, hand_recorder.getNumber_full(),
 				hand_recorder.getNumber_hands());
+		
+		flush_txt.setText("" + hand_recorder.getNumber_flush()+ "/"
+				+ hand_recorder.getNumber_hands());
+		colorStatisticNumbers(flush_txt, hand_recorder.getNumber_flush(),
+				hand_recorder.getNumber_hands());
 		poker_txt.setText("" + hand_recorder.getNumber_poker() + "/"
 				+ hand_recorder.getNumber_hands());
 		colorStatisticNumbers(poker_txt, hand_recorder.getNumber_poker(),
@@ -186,15 +192,15 @@ public class StatisticResultActivity extends ActionBarActivity {
 	private void colorStatisticNumbers(TextView txt, int number,int totalHands) {
 		if (number > 0) {
 			if ((float)number / totalHands >= 0.3) {
-				txt.setBackgroundColor(Color.GREEN);
+				txt.setTextColor(getResources().getColor(R.color.dark_green));
 			} else if (((float)number / totalHands < 0.3)
 					&& ((float)number / totalHands >= 0.2)) {
-				txt.setBackgroundColor(Color.YELLOW);
+				txt.setTextColor(getResources().getColor(R.color.dark_green));
 			} else {
-				txt.setBackgroundColor(Color.RED);
+				txt.setTextColor(Color.RED);
 			}
 		} else {
-			txt.setBackgroundColor(Color.RED);
+			txt.setTextColor(Color.RED);
 		}
 
 	}

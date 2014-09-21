@@ -37,8 +37,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public abstract class PokerActivity extends ActionBarActivity implements
-FragmentManager.OnBackStackChangedListener{
-	
+		FragmentManager.OnBackStackChangedListener {
+
 	String[] typeCard = { "s", "h", "d", "c" };
 	private static final String[] typeNumbers = { "2", "3", "4", "5", "6", "7",
 			"8", "9", "x", "j", "q", "k", "a" };
@@ -58,13 +58,14 @@ FragmentManager.OnBackStackChangedListener{
 	boolean flop_displayed = false;
 	boolean turn_displayed = false;
 	boolean river_displayed = false;
-	
+	private String current_player_predictions;
+
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.image_card1, new CardBackFragment()).commit();
@@ -87,7 +88,7 @@ FragmentManager.OnBackStackChangedListener{
 
 		populateCards();
 	}
-	
+
 	protected void populateCards() {
 		for (String type : typeCard) {
 			for (String num : typeNumbers) {
@@ -96,9 +97,9 @@ FragmentManager.OnBackStackChangedListener{
 			}
 		}
 	}
-	
+
 	public void addButtonListener() {
-		
+
 		FrameLayout first_card = (FrameLayout) findViewById(R.id.image_card1);
 		first_card.setOnTouchListener(new OnTouchListener() {
 
@@ -106,13 +107,16 @@ FragmentManager.OnBackStackChangedListener{
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 					if (!flop_displayed) {
-//						int[] idCardLayouts = { R.id.image_card1,
-//								R.id.image_card2, R.id.image_card3 };
+						// int[] idCardLayouts = { R.id.image_card1,
+						// R.id.image_card2, R.id.image_card3 };
 						flipCard1(pickCard());
 						flipCard2(pickCard());
 						flipCard3(pickCard());
 						flop_displayed = true;
 					}
+					// remove the Tap favorite instructions
+					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
+					tap_favorite.setVisibility(View.GONE);
 				}
 				return true;
 
@@ -133,6 +137,9 @@ FragmentManager.OnBackStackChangedListener{
 						flipCard3(pickCard());
 						flop_displayed = true;
 					}
+					// remove the Tap favorite instructions
+					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
+					tap_favorite.setVisibility(View.GONE);
 				}
 				return true;
 
@@ -146,16 +153,19 @@ FragmentManager.OnBackStackChangedListener{
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 					if (!flop_displayed) {
-//						int[] idCardLayouts = { R.id.image_card1,
-//								R.id.image_card2, R.id.image_card3 };
-						
+						// int[] idCardLayouts = { R.id.image_card1,
+						// R.id.image_card2, R.id.image_card3 };
+
 						flipCard1(pickCard());
 						flipCard2(pickCard());
 						flipCard3(pickCard());
 						flop_displayed = true;
-						mShowingBack4=false;
-						mShowingBack5=false;
+						mShowingBack4 = false;
+						mShowingBack5 = false;
 					}
+					// remove the Tap favorite instructions
+					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
+					tap_favorite.setVisibility(View.GONE);
 				}
 				return true;
 
@@ -170,7 +180,7 @@ FragmentManager.OnBackStackChangedListener{
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 					if (!turn_displayed && flop_displayed) {
-						//int[] idCardLayouts = { R.id.image_card4 };
+						// int[] idCardLayouts = { R.id.image_card4 };
 						flipCard4(pickCard());
 						turn_displayed = true;
 					}
@@ -188,18 +198,20 @@ FragmentManager.OnBackStackChangedListener{
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 					if (!river_displayed && flop_displayed && turn_displayed) {
-						//int[] idCardLayouts = { R.id.image_card5 };
-						//Turn last card and result
+						// int[] idCardLayouts = { R.id.image_card5 };
+						// Turn last card and result
 						flipCard5(pickCard());
 						river_displayed = true;
-						
+
 						highlighWinnerPanel("");
 						try {
 							resulting();
 						} catch (Exception e) {
-							// TODO Add something to handle the exception properly
-							Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-							
+							// TODO Add something to handle the exception
+							// properly
+							Toast.makeText(getApplicationContext(),
+									e.getMessage(), Toast.LENGTH_SHORT).show();
+
 						}
 					}
 				}
@@ -210,18 +222,18 @@ FragmentManager.OnBackStackChangedListener{
 		});
 
 	}
-	
-	protected void highlighWinnerPanel(String whoWon){
-		TextView winnerBtn=(TextView)findViewById(R.id.txt_winner);
+
+	protected void highlighWinnerPanel(String whoWon) {
+		TextView winnerBtn = (TextView) findViewById(R.id.txt_winner);
 		winnerBtn.setEnabled(false);
-//
-//
-//		winnerBtn.setCompoundDrawablesWithIntrinsicBounds(
-//				R.drawable.winner, 0, 0, 0);
-//		winnerBtn.setPadding(60, 0, 20, 0);
-		
-		
+		//
+		//
+		// winnerBtn.setCompoundDrawablesWithIntrinsicBounds(
+		// R.drawable.winner, 0, 0, 0);
+		// winnerBtn.setPadding(60, 0, 20, 0);
+
 	}
+
 	public int pickCard() {
 		Random r = new Random();
 
@@ -237,6 +249,7 @@ FragmentManager.OnBackStackChangedListener{
 		// }
 
 	}
+
 	// parameter: the drawable id of the card that will be displayed
 	public void flipCard1(int idCardDrawable) {
 		if (mShowingBack1) {
@@ -342,12 +355,12 @@ FragmentManager.OnBackStackChangedListener{
 				.addToBackStack(null).commit();
 
 	}
-	
+
 	@Override
 	public void onBackStackChanged() {
 		invalidateOptionsMenu();
 	}
-	
+
 	public static class CardFrontFragment extends Fragment {
 		private int idDrawable;
 
@@ -365,7 +378,7 @@ FragmentManager.OnBackStackChangedListener{
 			return img;
 		}
 	}
-	
+
 	public class CardBackFragment extends Fragment {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -374,7 +387,8 @@ FragmentManager.OnBackStackChangedListener{
 					false);
 		}
 	}
-	//Returns the number of the hand winner
+
+	// Returns the number of the hand winner
 	public int getAndHighLightWinner(List<Integer> playerLayoutsIds,
 			List<Integer> totalScores, List<ResultHand> resultHands,
 			int resulting_stage) {
@@ -382,7 +396,7 @@ FragmentManager.OnBackStackChangedListener{
 		int maxTotalScore = Util.getMax(totalScores);
 		int currentPos = 0;
 		String strWhoWon = "";
-		int winner =-1;
+		int winner = -1;
 		List<Integer> lwinners = new ArrayList<Integer>();
 		// int times = Collections.frequency(totalScores, maxTotalScore);
 		// if (times>1) return 0;
@@ -401,7 +415,7 @@ FragmentManager.OnBackStackChangedListener{
 				hand_recorder.setPlayer1_won(true);
 			} else
 				hand_recorder.setPlayer1_won(false);
-			
+
 			return winner;
 		} else {
 			switch (resulting_stage) {
@@ -418,22 +432,23 @@ FragmentManager.OnBackStackChangedListener{
 				}
 				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
 						playerLayoutsIds);
-				winner=getAndHighLightWinner(playerLayoutsIds, totalScores,
+				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
 						resultHands, HandResulter.SECOND_STAGE);
 				break;
 			case HandResulter.SECOND_STAGE:
 				resultHands = Util.getSubVectorResultFromPositions(lwinners,
 						resultHands);
 				totalScores = new ArrayList<Integer>();
-				int pos=1;
+				int pos = 1;
 				for (ResultHand result : resultHands) {
 					totalScores.add(Card.valuesCards.get(hand_resulter
-							.maxCard_from_playerHand(String.valueOf(pos)).getCardNumber()));
+							.maxCard_from_playerHand(String.valueOf(pos))
+							.getCardNumber()));
 					pos++;
 				}
 				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
 						playerLayoutsIds);
-				winner=getAndHighLightWinner(playerLayoutsIds, totalScores,
+				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
 						resultHands, HandResulter.THIRD_STAGE);
 				break;
 			case HandResulter.THIRD_STAGE:
@@ -446,7 +461,7 @@ FragmentManager.OnBackStackChangedListener{
 		return winner;
 
 	}
-	
+
 	private void highlighWinner(int playerLayoutId, int strPlayerId,
 			ResultHand result) {
 		String strWhoWon;
@@ -459,7 +474,7 @@ FragmentManager.OnBackStackChangedListener{
 		txt_winner.setText(strWhoWon);
 		txt_winner.setVisibility(View.VISIBLE);
 	}
-	
+
 	public HandRecorder readHandRecorderFromFile() throws IOException {
 
 		FileInputStream fis = openFileInput(data_file);
@@ -471,16 +486,16 @@ FragmentManager.OnBackStackChangedListener{
 		br.close();
 		return handRecorder;
 	}
-	
+
 	private HandRecorder loadJsonToHandRecorder(String strJson) {
 
 		HandRecorder handRecorder = gson.fromJson(strJson, HandRecorder.class);
 		return handRecorder;
 
 	}
-	
-	public abstract  void resulting() throws Exception;
-	
+
+	public abstract void resulting() throws Exception;
+
 	public void writeHandRecorderToFile(HandRecorder handRecorder)
 			throws FileNotFoundException {
 		File file = new File(data_file);
@@ -492,7 +507,42 @@ FragmentManager.OnBackStackChangedListener{
 		pw.close();
 
 	}
-	
+
+	public void resultGuess(String winner_player) {
+		if (isValidGuess(winner_player)) {
+			int current_number_guesses = hand_recorder.getNumber_guesses();
+			int current_number_right_guesses = hand_recorder
+					.getNumber_rigth_guesses();
+			if (winner_player.equals(current_player_predictions)) {
+				hand_recorder
+						.setNumber_rigth_guesses(++current_number_right_guesses);
+			}
+			hand_recorder.setNumber_guesses(++current_number_guesses);
+		}
+	}
+
+	private boolean isValidGuess(String winner_player_guess) {
+		try {
+			if (!current_player_predictions.equals("")
+					&& (Integer.parseInt(current_player_predictions) > 0)) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			Toast.makeText(getApplicationContext(), "The winner player guess string was invalid", Toast.LENGTH_LONG);
+			return false;
+		}
+	}
+
+	public String getCurrent_player_predictions() {
+		return current_player_predictions;
+	}
+
+	public void setCurrent_player_predictions(String current_player_predictions) {
+		this.current_player_predictions = current_player_predictions;
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -501,9 +551,5 @@ FragmentManager.OnBackStackChangedListener{
 		menuInflater.inflate(R.menu.main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
-
-	
-	
 
 }
