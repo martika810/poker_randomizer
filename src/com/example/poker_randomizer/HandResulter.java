@@ -1,6 +1,5 @@
 package com.example.poker_randomizer;
 
-import java.io.Flushable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,22 +61,6 @@ public class HandResulter {
 
 	}
 
-	// public void addCardPlayer1(String strCard){
-	// cards_player1.add(new Card(strCard));
-	//
-	// }
-	// public void addCardplayer2(String strCard){
-	// cards_player2.add(new Card(strCard));
-	//
-	// }
-	// public void addCardplayer3(String strCard){
-	// cards_player3.add(new Card(strCard));
-	//
-	// }
-	// public void addCardplayer4(String strCard){
-	// cards_player4.add(new Card(strCard));
-	//
-	// }
 	public void addCardPlayer(int player, String strCard) {
 		switch (player) {
 		case 1:
@@ -134,11 +117,13 @@ public class HandResulter {
 				allCards = allCards + c.toString();
 				listallCards.add(c);
 			}
+
 		} else if ((player == "2")) {
 			for (Card c : cards_player2) {
 				allCards = allCards + c.toString();
 				listallCards.add(c);
 			}
+			
 
 		} else if ((player == "3")) {
 			for (Card c : cards_player3) {
@@ -146,11 +131,13 @@ public class HandResulter {
 				listallCards.add(c);
 			}
 
+
 		} else {
 			for (Card c : cards_player4) {
 				allCards = allCards + c.toString();
 				listallCards.add(c);
 			}
+
 
 		}
 		// counting the ocurrencies for each card number type
@@ -177,21 +164,21 @@ public class HandResulter {
 				mapFlush.put(5, suit);
 			}
 		}
-
-		// count the colors in some way to after work out if it s a flush ir not
 		result = new ResultHand(context);
-		if ((result = isPoker(mapCounting)) == null) {
-			if ((result = isFull(mapCounting)) == null) {
-				if ((result = isFlush(mapFlush)) == null) {
-					if ((result = isStraight(listallCards)) == null) {
-						if ((result = isTriple(mapCounting)) == null) {
-							if ((result = isDoublePair(mapCounting)) == null) {
-								if ((result = isPair(mapCounting)) == null) {
-
+		// count the colors in some way to after work out if it s a flush ir not
+		int player_num=Integer.parseInt(player);
+		if ((result = isPoker(mapCounting,player_num)) == null) {
+			if ((result = isFull(mapCounting,player_num)) == null) {
+				if ((result = isFlush(mapFlush,player_num)) == null) {
+					if ((result = isStraight(listallCards,player_num)) == null) {
+						if ((result = isTriple(mapCounting,player_num)) == null) {
+							if ((result = isDoublePair(mapCounting,player_num)) == null) {
+								if ((result = isPair(mapCounting,player_num)) == null) {
 									result = new ResultHand(context);
 									result.setTypeHand(HIGH_CARD);
 									int valueHand = mapCounting.get(1).get(0);
 									result.setValue(valueHand);
+									result.setCardValuesFromCards(getPlayerHand(player_num));
 
 								}
 							}
@@ -205,30 +192,32 @@ public class HandResulter {
 
 	}
 
-	private ResultHand isPoker(Map<Integer, List<Integer>> mapCounting) {
+	private ResultHand isPoker(Map<Integer, List<Integer>> mapCounting,int player_num) {
 		ResultHand result = new ResultHand(context);
 		if (mapCounting.containsKey(4)) {
 			List<Integer> valuesCards = mapCounting.get(4);
 			Collections.sort(valuesCards);
 			result.setTypeHand(POKER);
 			result.setValue(valuesCards.get(valuesCards.size() - 1));
+			result.setCardValuesFromCards(getPlayerHand(player_num));
 			return result;
 		} else {
 			return null;
 		}
 	}
 
-	private ResultHand isFlush(Map<Integer, String> mapFlush) {
+	private ResultHand isFlush(Map<Integer, String> mapFlush,int player_num) {
 		ResultHand result = new ResultHand(context);
 		if (mapFlush.containsKey(5)) {
 			result.setTypeHand(FLUSH);
+			result.setCardValuesFromCards(getPlayerHand(player_num));
 			return result;
 		} else {
 			return null;
 		}
 	}
 
-	private ResultHand isDoublePair(Map<Integer, List<Integer>> mapCounting) {
+	private ResultHand isDoublePair(Map<Integer, List<Integer>> mapCounting,int player_num) {
 		ResultHand result = new ResultHand(context);
 		if (mapCounting.containsKey(2) && (mapCounting.get(2).size() >= 2)) {
 
@@ -237,6 +226,7 @@ public class HandResulter {
 			result.setTypeHand(DOUBLE_PAIR);
 			result.setValue(valuesCards.get(valuesCards.size() - 1));
 			result.setValue(valuesCards.get(valuesCards.size() - 2));
+			result.setCardValuesFromCards(getPlayerHand(player_num));
 			return result;
 
 		} else {
@@ -313,7 +303,7 @@ public class HandResulter {
 	}
 
 
-	private ResultHand isPair(Map<Integer, List<Integer>> mapCounting) {
+	private ResultHand isPair(Map<Integer, List<Integer>> mapCounting,int player_num) {
 		ResultHand result = new ResultHand(context);
 		if (mapCounting.containsKey(2)) {
 
@@ -321,6 +311,7 @@ public class HandResulter {
 			Collections.sort(valuesCards);
 			result.setTypeHand(PAIR);
 			result.setValue(valuesCards.get(valuesCards.size() - 1));
+			result.setCardValuesFromCards(getPlayerHand(player_num));
 			return result;
 
 		} else {
@@ -328,7 +319,7 @@ public class HandResulter {
 		}
 	}
 
-	private ResultHand isTriple(Map<Integer, List<Integer>> mapCounting) {
+	private ResultHand isTriple(Map<Integer, List<Integer>> mapCounting,int player_num) {
 		ResultHand result = new ResultHand(context);
 		if (mapCounting.containsKey(3)) {
 			List<Integer> valuesCards = mapCounting.get(3);
@@ -336,13 +327,14 @@ public class HandResulter {
 			result.setTypeHand(TRIPLE);
 			int valueHand = valuesCards.get(valuesCards.size() - 1);
 			result.setValue(valueHand);
+			result.setCardValuesFromCards(getPlayerHand(player_num));
 			return result;
 		} else {
 			return null;
 		}
 	}
 
-	private ResultHand isStraight(List<Card> cards) {
+	private ResultHand isStraight(List<Card> cards,int player_num) {
 		ResultHand result = new ResultHand(context);
 		Collections.sort(cards);
 		int count = 0, i = 0;
@@ -353,6 +345,8 @@ public class HandResulter {
 					result.setTypeHand(STRAIGHT);
 					result.setValue(Card.valuesCards.get(cards.get(i + 1)
 							.getCardNumber()));
+					result.setCardValuesFromCards(getPlayerHand(player_num));
+					
 				}
 			} else {
 				count = 0;
@@ -365,7 +359,7 @@ public class HandResulter {
 		return result;
 	}
 
-	private ResultHand isFull(Map<Integer, List<Integer>> mapCounting) {
+	private ResultHand isFull(Map<Integer, List<Integer>> mapCounting,int player_num) {
 		ResultHand result = new ResultHand(context);
 		if (mapCounting.containsKey(3) && mapCounting.containsKey(2)) {
 			List<Integer> valuesCards = mapCounting.get(3);
@@ -375,10 +369,33 @@ public class HandResulter {
 			valuesCards = mapCounting.get(2);
 			Collections.sort(valuesCards);
 			result.setValue(valuesCards.get(valuesCards.size() - 1));
+			result.setCardValuesFromCards(getPlayerHand(player_num));
 			return result;
 		} else {
 			return null;
 		}
 	}
+	
+	public List<Card> getPlayerHand(int player_number){
+		List<Card> returnList=null;
+		switch(player_number){
+		case 1:
+			returnList=cards_player1;
+			break;
+			
+		case 2:
+			returnList=cards_player2;
+			break;
+		case 3:
+			returnList=cards_player3;
+			break;
+		case 4:
+			returnList=cards_player4;
+			break;
+		
+		}
+		return returnList;	
+	}
+	
 
 }

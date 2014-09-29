@@ -1,11 +1,10 @@
 package com.example.poker_randomizer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-class Util {
+public class Util {
 	
 	public static int getMax(List<Integer> nums){
 		List<Integer> clonedList=clone(nums);

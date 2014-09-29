@@ -13,7 +13,7 @@
         android:id="@+id/centralpanel"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.4"
         android:paddingBottom="2dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
@@ -28,6 +28,7 @@
             android:textColor="@android:color/white"
             android:textSize="18dp" >
         </TextView>
+
 
         <ImageView
             android:id="@+id/btn_statistics"
@@ -48,7 +49,16 @@
             android:src="@drawable/users_icon"
             android:title="@string/change_users" />
     </RelativeLayout>
-
+	 <TextView
+            android:id="@+id/number_guess_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:textSize="18dp" >
+        </TextView>
     <LinearLayout
         android:id="@+id/board3_centralpanel"
         android:layout_width="fill_parent"

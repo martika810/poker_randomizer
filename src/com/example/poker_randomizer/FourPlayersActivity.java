@@ -1,48 +1,32 @@
 package com.example.poker_randomizer;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class FourPlayersActivity extends PokerActivity {
 
 	static String ACTION_NEW_HAND = "android.intent.action.MAIN3";
-	
+
 	protected void onCreate(Bundle savedInstanceState) {
 		String card_picked;
 		data_file = "four_hands_results.txt";
 		super.onCreate(savedInstanceState);
-		
+
 		hand_resulter = new HandResulter(getApplicationContext());
 		// check if the file exist, if so load the json data in HandRecorder
 		// if create and initialize the HandRecorder
@@ -68,7 +52,10 @@ public class FourPlayersActivity extends PokerActivity {
 		TextView number_handTxt = (TextView) findViewById(R.id.txt_number_hands);
 		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
 
-		
+		TextView number_guessTxt = (TextView) findViewById(R.id.number_guess_txt);
+		number_guessTxt.setText("Guesses: "
+				+ hand_recorder.getNumber_rigth_guesses() + "/"
+				+ hand_recorder.getNumber_guesses());
 
 		int position_card_pick = r.nextInt(cards.size());
 		// String strImage="R.drawable"+cards.get(number_card_pick);
@@ -141,9 +128,6 @@ public class FourPlayersActivity extends PokerActivity {
 
 	}
 
-	
-
-	
 	public void addButtonListener() {
 		super.addButtonListener();
 
@@ -152,7 +136,7 @@ public class FourPlayersActivity extends PokerActivity {
 
 			@Override
 			public void onClick(View v) {
-				
+
 				startActivity(new Intent(FourPlayersActivity.this,
 						FourPlayersActivity.class));
 
@@ -165,7 +149,12 @@ public class FourPlayersActivity extends PokerActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				cleanRadioSelection();
-				buttonView.setChecked(isChecked);
+				if (!flop_displayed) {
+					
+					buttonView.setChecked(isChecked);
+					if (isChecked)
+						setCurrent_player_predictions("1");
+				}
 			}
 		});
 		RadioButton radioPlayer2 = (RadioButton) findViewById(R.id.board3_radio_player2);
@@ -175,7 +164,12 @@ public class FourPlayersActivity extends PokerActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				cleanRadioSelection();
-				buttonView.setChecked(isChecked);
+				if (!flop_displayed) {
+					
+					buttonView.setChecked(isChecked);
+					if (isChecked)
+						setCurrent_player_predictions("2");
+				}
 			}
 		});
 
@@ -186,7 +180,12 @@ public class FourPlayersActivity extends PokerActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				cleanRadioSelection();
-				buttonView.setChecked(isChecked);
+				if (!flop_displayed) {
+					
+					buttonView.setChecked(isChecked);
+					if (isChecked)
+						setCurrent_player_predictions("3");
+				}
 			}
 		});
 
@@ -197,42 +196,48 @@ public class FourPlayersActivity extends PokerActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				cleanRadioSelection();
-				buttonView.setChecked(isChecked);
+				if (!flop_displayed) {
+					
+					buttonView.setChecked(isChecked);
+					if (isChecked)
+						setCurrent_player_predictions("4");
 
+				}
 			}
 		});
-		
-		ImageView btn_statistics=(ImageView)findViewById(R.id.btn_statistics);
+
+		ImageView btn_statistics = (ImageView) findViewById(R.id.btn_statistics);
 		btn_statistics.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// start statistics activity
 				Intent statisticsIntent = new Intent();
-				statisticsIntent.putExtra("ParentClassName", "FourPlayersActivity");
-				startActivity(statisticsIntent.setClass(FourPlayersActivity.this,
-						StatisticResultActivity.class));
-				
-				
+				statisticsIntent.putExtra("ParentClassName",
+						"FourPlayersActivity");
+				startActivity(statisticsIntent
+						.setClass(FourPlayersActivity.this,
+								StatisticResultActivity.class));
+
 			}
 		});
-		
-		ImageView btn_players=(ImageView)findViewById(R.id.btn_players);
+
+		ImageView btn_players = (ImageView) findViewById(R.id.btn_players);
 		btn_players.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// start statistics activity
 				startActivity(new Intent(FourPlayersActivity.this,
 						NumberPlayerActivity.class));
-				
-				
+
 			}
 		});
 
 	}
+
 	public void resulting() throws Exception {
-		
+
 		// ((Button) v).setCompoundDrawablesWithIntrinsicBounds(
 		// R.drawable.winner, 0, 0, 0);
 		// ((Button) v).setPadding(60, 0, 20, 0);
@@ -266,17 +271,16 @@ public class FourPlayersActivity extends PokerActivity {
 		//
 		// // save the totalScore in a vector to check
 		lTotalScore = Util.buildIntegerArrays(totalScore1, totalScore2,
-				totalScore3,totalScore4);
+				totalScore3, totalScore4);
 		lResultHand = Util.buildIntegerArrays(resultplayer1, resultplayer2,
-				resultplayer3,resultplayer4);
+				resultplayer3, resultplayer4);
 		// Once u know the highest hand, check who it belongs to
-		int winner=getAndHighLightWinner(playerLayouts, lTotalScore, lResultHand,
-				HandResulter.FIRST_STAGE);
-		//
-		//
-		//
+		int winner = getAndHighLightWinner(playerLayouts, lTotalScore,
+				lResultHand, HandResulter.FIRST_STAGE);
+		
+		resultGuess(String.valueOf(winner));
 		// // Save save player1's hand for the statistic
-		switch(winner){
+		switch (winner) {
 		case 0:
 			hand_recorder.saveResult(resultplayer1.getTypeHand());
 			break;
@@ -291,9 +295,8 @@ public class FourPlayersActivity extends PokerActivity {
 			break;
 		default:
 			throw new Exception("Error Unknown player");
-			
-			
-	}
+
+		}
 		// Store the type of hand(player1)
 		List<Card> handPlayer1 = hand_resulter.getCards_player1();
 		hand_recorder.addHand(handPlayer1);
@@ -306,6 +309,7 @@ public class FourPlayersActivity extends PokerActivity {
 		//
 
 	}
+
 	private void cleanRadioSelection() {
 		RadioButton radioPlayer1 = (RadioButton) findViewById(R.id.board3_radio_player1);
 		RadioButton radioPlayer2 = (RadioButton) findViewById(R.id.board3_radio_player2);

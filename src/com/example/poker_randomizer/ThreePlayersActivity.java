@@ -13,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -52,6 +51,11 @@ public class ThreePlayersActivity extends PokerActivity {
 		setContentView(R.layout.three_players);
 		TextView number_handTxt = (TextView) findViewById(R.id.txt_number_hands);
 		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
+
+		TextView number_guessTxt = (TextView) findViewById(R.id.number_guess_txt);
+		number_guessTxt.setText("Guesses: "
+				+ hand_recorder.getNumber_rigth_guesses() + "/"
+				+ hand_recorder.getNumber_guesses());
 
 		// pick card 1
 
@@ -112,14 +116,14 @@ public class ThreePlayersActivity extends PokerActivity {
 
 	public void addButtonListener() {
 		super.addButtonListener();
-	
+
 		TextView btnNextHand = (TextView) findViewById(R.id.txt_next_hand);
 		btnNextHand.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// Store the type of hand(player1)
-				
+
 				startActivity(new Intent(ThreePlayersActivity.this,
 						ThreePlayersActivity.class));
 
@@ -132,7 +136,12 @@ public class ThreePlayersActivity extends PokerActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				cleanRadioSelection();
-				buttonView.setChecked(isChecked);
+				if (!flop_displayed) {
+					
+					buttonView.setChecked(isChecked);
+					if (isChecked)
+						setCurrent_player_predictions("1");
+				}
 
 			}
 		});
@@ -143,8 +152,12 @@ public class ThreePlayersActivity extends PokerActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				cleanRadioSelection();
-				buttonView.setChecked(isChecked);
-
+				if (!flop_displayed) {
+					
+					buttonView.setChecked(isChecked);
+					if (isChecked)
+						setCurrent_player_predictions("2");
+				}
 			}
 		});
 
@@ -155,36 +168,41 @@ public class ThreePlayersActivity extends PokerActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				cleanRadioSelection();
-				buttonView.setChecked(isChecked);
+				if (!flop_displayed) {
+					
+					buttonView.setChecked(isChecked);
+					if (isChecked)
+						setCurrent_player_predictions("3");
 
+				}
 			}
 		});
-		
-		ImageView btn_statistics=(ImageView)findViewById(R.id.btn_statistics);
+
+		ImageView btn_statistics = (ImageView) findViewById(R.id.btn_statistics);
 		btn_statistics.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// start statistics activity
 				Intent statisticsIntent = new Intent();
-				statisticsIntent.putExtra("ParentClassName", "ThreePlayersActivity");
-				startActivity(statisticsIntent.setClass(ThreePlayersActivity.this,
+				statisticsIntent.putExtra("ParentClassName",
+						"ThreePlayersActivity");
+				startActivity(statisticsIntent.setClass(
+						ThreePlayersActivity.this,
 						StatisticResultActivity.class));
-				
-				
+
 			}
 		});
-		
-		ImageView btn_players=(ImageView)findViewById(R.id.btn_players);
+
+		ImageView btn_players = (ImageView) findViewById(R.id.btn_players);
 		btn_players.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// start statistics activity
 				startActivity(new Intent(ThreePlayersActivity.this,
 						NumberPlayerActivity.class));
-				
-				
+
 			}
 		});
 
@@ -192,10 +210,6 @@ public class ThreePlayersActivity extends PokerActivity {
 
 	// when just one player has winner hand
 	// Return 0 if two or more players have the same hand
-	
-
-
-	
 
 	private void cleanRadioSelection() {
 		RadioButton radioPlayer1 = (RadioButton) findViewById(R.id.board3_radio_player1);
@@ -233,7 +247,7 @@ public class ThreePlayersActivity extends PokerActivity {
 	}
 
 	public void resulting() throws Exception {
-	
+
 		// ((Button) v).setCompoundDrawablesWithIntrinsicBounds(
 		// R.drawable.winner, 0, 0, 0);
 		// ((Button) v).setPadding(60, 0, 20, 0);
@@ -241,7 +255,7 @@ public class ThreePlayersActivity extends PokerActivity {
 		ResultHand resultplayer1 = hand_resulter.getResult("1");
 		ResultHand resultplayer2 = hand_resulter.getResult("2");
 		ResultHand resultplayer3 = hand_resulter.getResult("3");
-	
+
 		int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
 		int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
 		int totalScore3 = Integer.valueOf(resultplayer3.getTypeHand());
@@ -266,26 +280,28 @@ public class ThreePlayersActivity extends PokerActivity {
 		lResultHand = Util.buildIntegerArrays(resultplayer1, resultplayer2,
 				resultplayer3);
 		// Once u know the highest hand, check who it belongs to
-		int winner=getAndHighLightWinner(playerLayouts, lTotalScore, lResultHand,
-				HandResulter.FIRST_STAGE);
-		if (winner==-1){
+		int winner = getAndHighLightWinner(playerLayouts, lTotalScore,
+				lResultHand, HandResulter.FIRST_STAGE);
+		
+		resultGuess(String.valueOf(winner));
+		if (winner == -1) {
 			throw new Exception("Error calculating the winner:winner is -1");
 		}
-		
+
 		// // Save save player1's hand for the statistic
-		switch(winner){
-			case 0:
-				hand_recorder.saveResult(resultplayer1.getTypeHand());
-				break;
-			case 1:
-				hand_recorder.saveResult(resultplayer2.getTypeHand());
-				break;
-			case 2:
-				hand_recorder.saveResult(resultplayer3.getTypeHand());
-				break;
-			default:
-				throw new Exception("Error Unknown player");
-				
+		switch (winner) {
+		case 0:
+			hand_recorder.saveResult(resultplayer1.getTypeHand());
+			break;
+		case 1:
+			hand_recorder.saveResult(resultplayer2.getTypeHand());
+			break;
+		case 2:
+			hand_recorder.saveResult(resultplayer3.getTypeHand());
+			break;
+		default:
+			throw new Exception("Error Unknown player");
+
 		}
 		List<Card> handPlayer1 = hand_resulter.getCards_player1();
 		hand_recorder.addHand(handPlayer1);
@@ -298,8 +314,6 @@ public class ThreePlayersActivity extends PokerActivity {
 		//
 
 	}
-
-	
 
 	/**
 	 * A placeholder fragment containing a simple view.

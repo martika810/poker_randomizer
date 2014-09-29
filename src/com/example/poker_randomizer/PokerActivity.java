@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -26,15 +23,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public abstract class PokerActivity extends ActionBarActivity implements
 		FragmentManager.OnBackStackChangedListener {
@@ -392,11 +392,15 @@ public abstract class PokerActivity extends ActionBarActivity implements
 	public int getAndHighLightWinner(List<Integer> playerLayoutsIds,
 			List<Integer> totalScores, List<ResultHand> resultHands,
 			int resulting_stage) {
+		
+		//
+		int[] vPlayerStrings={R.string.player1,R.string.player2,R.string.player3,R.string.player4};
 		// Return the player number of the player who won the hand
 		int maxTotalScore = Util.getMax(totalScores);
 		int currentPos = 0;
 		String strWhoWon = "";
 		int winner = -1;
+		int pos;
 		List<Integer> lwinners = new ArrayList<Integer>();
 		// int times = Collections.frequency(totalScores, maxTotalScore);
 		// if (times>1) return 0;
@@ -409,13 +413,13 @@ public abstract class PokerActivity extends ActionBarActivity implements
 		}
 		if (lwinners.size() == 1) {
 			winner = lwinners.get(0);
-			highlighWinner(playerLayoutsIds.get(winner), R.string.player1,
-					resultHands.get(winner));
+			
+			
 			if (winner == 0) {
 				hand_recorder.setPlayer1_won(true);
 			} else
 				hand_recorder.setPlayer1_won(false);
-
+			
 			return winner;
 		} else {
 			switch (resulting_stage) {
@@ -434,12 +438,13 @@ public abstract class PokerActivity extends ActionBarActivity implements
 						playerLayoutsIds);
 				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
 						resultHands, HandResulter.SECOND_STAGE);
+				
 				break;
 			case HandResulter.SECOND_STAGE:
 				resultHands = Util.getSubVectorResultFromPositions(lwinners,
 						resultHands);
 				totalScores = new ArrayList<Integer>();
-				int pos = 1;
+				pos = 1;
 				for (ResultHand result : resultHands) {
 					totalScores.add(Card.valuesCards.get(hand_resulter
 							.maxCard_from_playerHand(String.valueOf(pos))
@@ -450,19 +455,33 @@ public abstract class PokerActivity extends ActionBarActivity implements
 						playerLayoutsIds);
 				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
 						resultHands, HandResulter.THIRD_STAGE);
+
 				break;
 			case HandResulter.THIRD_STAGE:
-
+				resultHands = Util.getSubVectorResultFromPositions(lwinners,
+						resultHands);
+				totalScores = new ArrayList<Integer>();
+				pos = 1;
+				for (ResultHand result : resultHands) {
+					totalScores.add(result.getSumAllValues());
+					pos++;
+				}
+				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
+						playerLayoutsIds);
+				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
+						resultHands, HandResulter.FOURTH_STAGE);
+				
 				break;
 			case HandResulter.FOURTH_STAGE:
 				break;
 			}
 		}
+		
 		return winner;
 
 	}
 
-	private void highlighWinner(int playerLayoutId, int strPlayerId,
+	protected void highlighWinner(int playerLayoutId, int strPlayerId,
 			ResultHand result) {
 		String strWhoWon;
 		LinearLayout panelPlayer = (LinearLayout) findViewById(playerLayoutId);
@@ -509,11 +528,13 @@ public abstract class PokerActivity extends ActionBarActivity implements
 	}
 
 	public void resultGuess(String winner_player) {
-		if (isValidGuess(winner_player)) {
+		//subtract one to the winner so it s based on 0 instead of 1
+		String winner=String.valueOf((Integer.parseInt(winner_player))+1);
+		if (isValidGuess(winner)) {
 			int current_number_guesses = hand_recorder.getNumber_guesses();
 			int current_number_right_guesses = hand_recorder
 					.getNumber_rigth_guesses();
-			if (winner_player.equals(current_player_predictions)) {
+			if (winner.equals(current_player_predictions)) {
 				hand_recorder
 						.setNumber_rigth_guesses(++current_number_right_guesses);
 			}
@@ -541,6 +562,21 @@ public abstract class PokerActivity extends ActionBarActivity implements
 
 	public void setCurrent_player_predictions(String current_player_predictions) {
 		this.current_player_predictions = current_player_predictions;
+	}
+	
+	public boolean isThereAGuess(){
+		if (Integer.valueOf(current_player_predictions)>0){
+			return true;
+		}
+		return false;
+	}
+
+	public HandResulter getHand_resulter() {
+		return hand_resulter;
+	}
+
+	public void setHand_resulter(HandResulter hand_resulter) {
+		this.hand_resulter = hand_resulter;
 	}
 
 	@Override
