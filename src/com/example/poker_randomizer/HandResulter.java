@@ -170,7 +170,7 @@ public class HandResulter {
 		if ((result = isPoker(mapCounting,player_num)) == null) {
 			if ((result = isFull(mapCounting,player_num)) == null) {
 				if ((result = isFlush(mapFlush,player_num)) == null) {
-					if ((result = isStraight(listallCards,player_num)) == null) {
+					if ((result = isStraight(listallCards,mapCounting,player_num)) == null) {
 						if ((result = isTriple(mapCounting,player_num)) == null) {
 							if ((result = isDoublePair(mapCounting,player_num)) == null) {
 								if ((result = isPair(mapCounting,player_num)) == null) {
@@ -334,12 +334,22 @@ public class HandResulter {
 		}
 	}
 
-	private ResultHand isStraight(List<Card> cards,int player_num) {
+	private ResultHand isStraight(List<Card> cards,Map<Integer, List<Integer>> mapCounting,int player_num) {
 		ResultHand result = new ResultHand(context);
 		Collections.sort(cards);
-		int count = 0, i = 0;
-		while (i < cards.size() - 1) {
-			if (cards.get(i).diff(cards.get(i + 1)) == 1) {
+		int count = 0, i = cards.size() - 1;
+		while (i > 0) {
+			//chek if the first card is and ACE, in that case check if its a low straight[A,2,3,4,5]
+			if(cards.get(i).getCardNumber().equals("a")){
+				if(mapCounting.get(1).contains(2) && mapCounting.get(1).contains(3) && mapCounting.get(1).contains(4)&& mapCounting.get(1).contains(5)){
+					result.setTypeHand(STRAIGHT);
+					result.setValue(Card.valuesCards.get(cards.get(i)
+							.getCardNumber()));
+					result.setCardValuesFromCards(getPlayerHand(player_num));
+					return result;
+				}
+			}
+			if (cards.get(i).diff(cards.get(i - 1)) == 1) {
 				count++;
 				if (count == 4) {
 					result.setTypeHand(STRAIGHT);
@@ -351,7 +361,7 @@ public class HandResulter {
 			} else {
 				count = 0;
 			}
-			i++;
+			i--;
 		}
 		if (count != 4) {
 			result = null;
