@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,20 +38,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public abstract class PokerActivity extends ActionBarActivity implements
+public abstract class PokerActivity extends FragmentActivity implements
 		FragmentManager.OnBackStackChangedListener {
 
-	String[] typeCard = { "s", "h", "d", "c" };
-	private static final String[] typeNumbers = { "2", "3", "4", "5", "6", "7",
-			"8", "9", "x", "j", "q", "k", "a" };
-	List<String> cards = new ArrayList<String>();
-	Random r = new Random();
-	static String ACTION_NEW_HAND = "android.intent.action.MAIN2";
-	private static final String STATISTICACTIVITYNAME = "StatisticResultActivity";
-	static String data_file;
-	HandRecorder hand_recorder;
-	HandResulter hand_resulter;
-	Gson gson = new GsonBuilder().create();
+	
 	boolean mShowingBack1 = false;
 	boolean mShowingBack2 = false;
 	boolean mShowingBack3 = false;
@@ -58,6 +50,17 @@ public abstract class PokerActivity extends ActionBarActivity implements
 	boolean flop_displayed = false;
 	boolean turn_displayed = false;
 	boolean river_displayed = false;
+	
+	
+	List<String> cards = new ArrayList<String>();
+	Random r = new Random();
+	static String ACTION_NEW_HAND = "android.intent.action.MAIN2";
+	private static final String STATISTICACTIVITYNAME = "StatisticResultActivity";
+	static String data_file;
+	HandRecorder hand_recorder;
+	HandResulter hand_resulter;
+	Gson gson = new GsonBuilder().create();
+
 	private String current_player_predictions;
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,327 +69,299 @@ public abstract class PokerActivity extends ActionBarActivity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.image_card1, new CardBackFragment()).commit();
-			getFragmentManager().beginTransaction()
-					.add(R.id.image_card2, new CardBackFragment()).commit();
-			getFragmentManager().beginTransaction()
-					.add(R.id.image_card3, new CardBackFragment()).commit();
-			getFragmentManager().beginTransaction()
-					.add(R.id.image_card4, new CardBackFragment()).commit();
-			getFragmentManager().beginTransaction()
-					.add(R.id.image_card5, new CardBackFragment()).commit();
-		} else {
-			mShowingBack1 = (getFragmentManager().getBackStackEntryCount() > 0);
-			mShowingBack2 = (getFragmentManager().getBackStackEntryCount() > 0);
-			mShowingBack3 = (getFragmentManager().getBackStackEntryCount() > 0);
-			mShowingBack4 = (getFragmentManager().getBackStackEntryCount() > 0);
-			mShowingBack5 = (getFragmentManager().getBackStackEntryCount() > 0);
-		}
-		getFragmentManager().addOnBackStackChangedListener(this);
+		
 
-		populateCards();
-	}
-
-	protected void populateCards() {
-		for (String type : typeCard) {
-			for (String num : typeNumbers) {
-				cards.add(type + num);
-
-			}
-		}
-	}
-
-	public void addButtonListener() {
-
-		FrameLayout first_card = (FrameLayout) findViewById(R.id.image_card1);
-		first_card.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-					if (!flop_displayed) {
-						// int[] idCardLayouts = { R.id.image_card1,
-						// R.id.image_card2, R.id.image_card3 };
-						flipCard1(pickCard());
-						flipCard2(pickCard());
-						flipCard3(pickCard());
-						flop_displayed = true;
-					}
-					// remove the Tap favorite instructions
-					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
-					tap_favorite.setVisibility(View.GONE);
-				}
-				return true;
-
-			}
-
-		});
-		FrameLayout second_card = (FrameLayout) findViewById(R.id.image_card2);
-		second_card.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-					if (!flop_displayed) {
-						int[] idCardLayouts = { R.id.image_card1,
-								R.id.image_card2, R.id.image_card3 };
-						flipCard1(pickCard());
-						flipCard2(pickCard());
-						flipCard3(pickCard());
-						flop_displayed = true;
-					}
-					// remove the Tap favorite instructions
-					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
-					tap_favorite.setVisibility(View.GONE);
-				}
-				return true;
-
-			}
-
-		});
-		FrameLayout third_card = (FrameLayout) findViewById(R.id.image_card3);
-		third_card.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-					if (!flop_displayed) {
-						// int[] idCardLayouts = { R.id.image_card1,
-						// R.id.image_card2, R.id.image_card3 };
-
-						flipCard1(pickCard());
-						flipCard2(pickCard());
-						flipCard3(pickCard());
-						flop_displayed = true;
-						mShowingBack4 = false;
-						mShowingBack5 = false;
-					}
-					// remove the Tap favorite instructions
-					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
-					tap_favorite.setVisibility(View.GONE);
-				}
-				return true;
-
-			}
-
-		});
-
-		FrameLayout fourth_card = (FrameLayout) findViewById(R.id.image_card4);
-		fourth_card.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-					if (!turn_displayed && flop_displayed) {
-						// int[] idCardLayouts = { R.id.image_card4 };
-						flipCard4(pickCard());
-						turn_displayed = true;
-					}
-				}
-				return true;
-
-			}
-
-		});
-
-		FrameLayout fifth_card = (FrameLayout) findViewById(R.id.image_card5);
-		fifth_card.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-					if (!river_displayed && flop_displayed && turn_displayed) {
-						// int[] idCardLayouts = { R.id.image_card5 };
-						// Turn last card and result
-						flipCard5(pickCard());
-						river_displayed = true;
-
-						highlighWinnerPanel("");
-						try {
-							resulting();
-						} catch (Exception e) {
-							// TODO Add something to handle the exception
-							// properly
-							Toast.makeText(getApplicationContext(),
-									e.getMessage(), Toast.LENGTH_SHORT).show();
-
-						}
-					}
-				}
-				return true;
-
-			}
-
-		});
 
 	}
+
+	
+
+//	public void initTopFiveCards(Bundle savedInstanceState){
+//		if (savedInstanceState == null) {
+//			getFragmentManager().beginTransaction()
+//					.add(R.id.image_card1, new CardBackFragment()).commit();
+//			getFragmentManager().beginTransaction()
+//					.add(R.id.image_card2, new CardBackFragment()).commit();
+//			getFragmentManager().beginTransaction()
+//					.add(R.id.image_card3, new CardBackFragment()).commit();
+//			getFragmentManager().beginTransaction()
+//					.add(R.id.image_card4, new CardBackFragment()).commit();
+//			getFragmentManager().beginTransaction()
+//					.add(R.id.image_card5, new CardBackFragment()).commit();
+//		} else {
+//			mShowingBack1 = (getFragmentManager().getBackStackEntryCount() > 0);
+//			mShowingBack2 = (getFragmentManager().getBackStackEntryCount() > 0);
+//			mShowingBack3 = (getFragmentManager().getBackStackEntryCount() > 0);
+//			mShowingBack4 = (getFragmentManager().getBackStackEntryCount() > 0);
+//			mShowingBack5 = (getFragmentManager().getBackStackEntryCount() > 0);
+//		}
+//		getFragmentManager().addOnBackStackChangedListener(this);
+//		
+//		
+//	}
+//	public void addButtonListener() {
+//		FrameLayout first_card = (FrameLayout) findViewById(R.id.image_card1);
+//		first_card.setOnTouchListener(new OnTouchListener() {
+//
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+//					if (!flop_displayed) {
+//						// int[] idCardLayouts = { R.id.image_card1,
+//						// R.id.image_card2, R.id.image_card3 };
+//						flipCard1(pickCard());
+//						flipCard2(pickCard());
+//						flipCard3(pickCard());
+//						flop_displayed = true;
+//					}
+//					// remove the Tap favorite instructions
+//					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
+//					tap_favorite.setVisibility(View.GONE);
+//				}
+//				return true;
+//
+//			}
+//
+//		});
+//		FrameLayout second_card = (FrameLayout) findViewById(R.id.image_card2);
+//		second_card.setOnTouchListener(new OnTouchListener() {
+//
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+//					if (!flop_displayed) {
+//						int[] idCardLayouts = { R.id.image_card1,
+//								R.id.image_card2, R.id.image_card3 };
+//						flipCard1(pickCard());
+//						flipCard2(pickCard());
+//						flipCard3(pickCard());
+//						flop_displayed = true;
+//					}
+//					// remove the Tap favorite instructions
+//					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
+//					tap_favorite.setVisibility(View.GONE);
+//				}
+//				return true;
+//
+//			}
+//
+//		});
+//		FrameLayout third_card = (FrameLayout) findViewById(R.id.image_card3);
+//		third_card.setOnTouchListener(new OnTouchListener() {
+//
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+//					if (!flop_displayed) {
+//						// int[] idCardLayouts = { R.id.image_card1,
+//						// R.id.image_card2, R.id.image_card3 };
+//
+//						flipCard1(pickCard());
+//						flipCard2(pickCard());
+//						flipCard3(pickCard());
+//						flop_displayed = true;
+//						mShowingBack4 = false;
+//						mShowingBack5 = false;
+//					}
+//					// remove the Tap favorite instructions
+//					TextView tap_favorite = (TextView) findViewById(R.id.txt_tap_favorite);
+//					tap_favorite.setVisibility(View.GONE);
+//				}
+//				return true;
+//
+//			}
+//
+//		});
+//
+//		FrameLayout fourth_card = (FrameLayout) findViewById(R.id.image_card4);
+//		fourth_card.setOnTouchListener(new OnTouchListener() {
+//
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+//					if (!turn_displayed && flop_displayed) {
+//						// int[] idCardLayouts = { R.id.image_card4 };
+//						flipCard4(pickCard());
+//						turn_displayed = true;
+//					}
+//				}
+//				return true;
+//
+//			}
+//
+//		});
+//
+//		FrameLayout fifth_card = (FrameLayout) findViewById(R.id.image_card5);
+//		fifth_card.setOnTouchListener(new OnTouchListener() {
+//
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+//					if (!river_displayed && flop_displayed && turn_displayed) {
+//						// int[] idCardLayouts = { R.id.image_card5 };
+//						// Turn last card and result
+//						flipCard5(pickCard());
+//						river_displayed = true;
+//
+//						highlighWinnerPanel("");
+//						try {
+//							resulting();
+//						} catch (Exception e) {
+//							// TODO Add something to handle the exception
+//							// properly
+//							Toast.makeText(getApplicationContext(),
+//									e.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//						}
+//					}
+//				}
+//				return true;
+//
+//			}
+//
+//		});
+//
+//		
+//		
+//	}
 
 	protected void highlighWinnerPanel(String whoWon) {
 		TextView winnerBtn = (TextView) findViewById(R.id.txt_winner);
 		winnerBtn.setEnabled(false);
-		//
-		//
-		// winnerBtn.setCompoundDrawablesWithIntrinsicBounds(
-		// R.drawable.winner, 0, 0, 0);
-		// winnerBtn.setPadding(60, 0, 20, 0);
+		
 
 	}
 
-	public int pickCard() {
-		Random r = new Random();
-
-		int position_card_pick = r.nextInt(cards.size());
-		String card_picked = cards.get(position_card_pick);
-		hand_resulter.addCardBoard(card_picked);
-		int identifier = getResources().getIdentifier(card_picked, "drawable",
-				"com.example.poker_randomizer");
-		cards.remove(position_card_pick);
-
-		return identifier;
-
-		// }
-
-	}
+//	public int pickCard() {
+//		Random r = new Random();
+//
+//		int position_card_pick = r.nextInt(cards.size());
+//		String card_picked = cards.get(position_card_pick);
+//		hand_resulter.addCardBoard(card_picked);
+//		int identifier = getResources().getIdentifier(card_picked, "drawable",
+//				"com.example.poker_randomizer");
+//		cards.remove(position_card_pick);
+//
+//		return identifier;
+//
+//		// }
+//
+//	}
 
 	// parameter: the drawable id of the card that will be displayed
-	public void flipCard1(int idCardDrawable) {
-		if (mShowingBack1) {
-			getFragmentManager().popBackStack();
-			return;
+//	public void flipCard1(int idCardDrawable) {
+//		if (mShowingBack1) {
+//			getFragmentManager().popBackStack();
+//			return;
+//
+//		}
+//		mShowingBack1 = true;
+//
+//		getFragmentManager()
+//				.beginTransaction()
+//				.setCustomAnimations(R.animator.card_flip_right_in,
+//						R.animator.card_flip_right_out,
+//						R.animator.card_flip_left_in,
+//						R.animator.card_flip_left_out)
+//
+//				.replace(R.id.image_card1,
+//						new CardFrontFragment(idCardDrawable))
+//				.addToBackStack(null).commit();
+//
+//	}
+//
+//	public void flipCard2(int idCardDrawable) {
+//		if (mShowingBack2) {
+//			getFragmentManager().popBackStack();
+//			return;
+//
+//		}
+//		mShowingBack2 = true;
+//
+//		getFragmentManager()
+//				.beginTransaction()
+//				.setCustomAnimations(R.animator.card_flip_right_in,
+//						R.animator.card_flip_right_out,
+//						R.animator.card_flip_left_in,
+//						R.animator.card_flip_left_out)
+//
+//				.replace(R.id.image_card2,
+//						new CardFrontFragment(idCardDrawable))
+//				.addToBackStack(null).commit();
+//
+//	}
+//
+//	public void flipCard3(int idCardDrawable) {
+//		if (mShowingBack3) {
+//			getFragmentManager().popBackStack();
+//			return;
+//
+//		}
+//		mShowingBack3 = true;
+//
+//		getFragmentManager()
+//				.beginTransaction()
+//				.setCustomAnimations(R.animator.card_flip_right_in,
+//						R.animator.card_flip_right_out,
+//						R.animator.card_flip_left_in,
+//						R.animator.card_flip_left_out)
+//
+//				.replace(R.id.image_card3,
+//						new CardFrontFragment(idCardDrawable))
+//				.addToBackStack(null).commit();
+//
+//	}
+//
+//	public void flipCard4(int idCardDrawable) {
+//		if (mShowingBack4) {
+//			getFragmentManager().popBackStack();
+//			return;
+//
+//		}
+//		mShowingBack4 = true;
+//
+//		getFragmentManager()
+//				.beginTransaction()
+//				.setCustomAnimations(R.animator.card_flip_right_in,
+//						R.animator.card_flip_right_out,
+//						R.animator.card_flip_left_in,
+//						R.animator.card_flip_left_out)
+//
+//				.replace(R.id.image_card4,
+//						new CardFrontFragment(idCardDrawable))
+//				.addToBackStack(null).commit();
+//
+//	}
+//
+//	public void flipCard5(int idCardDrawable) {
+//		if (mShowingBack5) {
+//			getFragmentManager().popBackStack();
+//			return;
+//
+//		}
+//		mShowingBack5 = true;
+//
+//		getFragmentManager()
+//				.beginTransaction()
+//				.setCustomAnimations(R.animator.card_flip_right_in,
+//						R.animator.card_flip_right_out,
+//						R.animator.card_flip_left_in,
+//						R.animator.card_flip_left_out)
+//
+//				.replace(R.id.image_card5,
+//						new CardFrontFragment(idCardDrawable))
+//				.addToBackStack(null).commit();
+//
+//	}
 
-		}
-		mShowingBack1 = true;
+//	@Override
+//	public void onBackStackChanged() {
+//		invalidateOptionsMenu();
+//	}
 
-		getFragmentManager()
-				.beginTransaction()
-				.setCustomAnimations(R.animator.card_flip_right_in,
-						R.animator.card_flip_right_out,
-						R.animator.card_flip_left_in,
-						R.animator.card_flip_left_out)
 
-				.replace(R.id.image_card1,
-						new CardFrontFragment(idCardDrawable))
-				.addToBackStack(null).commit();
 
-	}
 
-	public void flipCard2(int idCardDrawable) {
-		if (mShowingBack2) {
-			getFragmentManager().popBackStack();
-			return;
-
-		}
-		mShowingBack2 = true;
-
-		getFragmentManager()
-				.beginTransaction()
-				.setCustomAnimations(R.animator.card_flip_right_in,
-						R.animator.card_flip_right_out,
-						R.animator.card_flip_left_in,
-						R.animator.card_flip_left_out)
-
-				.replace(R.id.image_card2,
-						new CardFrontFragment(idCardDrawable))
-				.addToBackStack(null).commit();
-
-	}
-
-	public void flipCard3(int idCardDrawable) {
-		if (mShowingBack3) {
-			getFragmentManager().popBackStack();
-			return;
-
-		}
-		mShowingBack3 = true;
-
-		getFragmentManager()
-				.beginTransaction()
-				.setCustomAnimations(R.animator.card_flip_right_in,
-						R.animator.card_flip_right_out,
-						R.animator.card_flip_left_in,
-						R.animator.card_flip_left_out)
-
-				.replace(R.id.image_card3,
-						new CardFrontFragment(idCardDrawable))
-				.addToBackStack(null).commit();
-
-	}
-
-	public void flipCard4(int idCardDrawable) {
-		if (mShowingBack4) {
-			getFragmentManager().popBackStack();
-			return;
-
-		}
-		mShowingBack4 = true;
-
-		getFragmentManager()
-				.beginTransaction()
-				.setCustomAnimations(R.animator.card_flip_right_in,
-						R.animator.card_flip_right_out,
-						R.animator.card_flip_left_in,
-						R.animator.card_flip_left_out)
-
-				.replace(R.id.image_card4,
-						new CardFrontFragment(idCardDrawable))
-				.addToBackStack(null).commit();
-
-	}
-
-	public void flipCard5(int idCardDrawable) {
-		if (mShowingBack5) {
-			getFragmentManager().popBackStack();
-			return;
-
-		}
-		mShowingBack5 = true;
-
-		getFragmentManager()
-				.beginTransaction()
-				.setCustomAnimations(R.animator.card_flip_right_in,
-						R.animator.card_flip_right_out,
-						R.animator.card_flip_left_in,
-						R.animator.card_flip_left_out)
-
-				.replace(R.id.image_card5,
-						new CardFrontFragment(idCardDrawable))
-				.addToBackStack(null).commit();
-
-	}
-
-	@Override
-	public void onBackStackChanged() {
-		invalidateOptionsMenu();
-	}
-
-	public static class CardFrontFragment extends Fragment {
-		private int idDrawable;
-
-		public CardFrontFragment(int idCardDrawable) {
-			this.idDrawable = idCardDrawable;
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-
-			View img = inflater.inflate(R.layout.fragment_card_front,
-					container, false);
-			((ImageView) img).setImageResource(idDrawable);
-			return img;
-		}
-	}
-
-	public class CardBackFragment extends Fragment {
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			return inflater.inflate(R.layout.fragment_card_back, container,
-					false);
-		}
-	}
 
 	// Returns the number of the hand winner
 	public int getAndHighLightWinner(List<Integer> playerLayoutsIds,
@@ -578,6 +553,12 @@ public abstract class PokerActivity extends ActionBarActivity implements
 	public void setHand_resulter(HandResulter hand_resulter) {
 		this.hand_resulter = hand_resulter;
 	}
+
+	public HandRecorder getHand_recorder() {
+		return hand_recorder;
+	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

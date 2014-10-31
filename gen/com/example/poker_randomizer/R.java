@@ -15,6 +15,8 @@ public final class R {
         public static final int abc_slide_in_top=0x7f040003;
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
+        public static final int from_middle=0x7f040006;
+        public static final int to_middle=0x7f040007;
     }
     public static final class animator {
         public static final int card_flip_left_in=0x7f050000;
@@ -1228,7 +1230,7 @@ containing a value of this type.
         public static final int btn_three_players=0x7f060056;
         public static final int btn_two_players=0x7f060055;
         public static final int centralpanel=0x7f060041;
-        public static final int change_number_users=0x7f060091;
+        public static final int change_number_users=0x7f060092;
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
         public static final int container=0x7f06003c;
@@ -1314,7 +1316,7 @@ containing a value of this type.
         public static final int showHome=0x7f060004;
         public static final int showTitle=0x7f060006;
         public static final int split_action_bar=0x7f06001e;
-        public static final int statistics=0x7f060090;
+        public static final int statistics=0x7f060091;
         public static final int statistics_pairs_txt=0x7f060066;
         public static final int statistics_txt=0x7f060065;
         public static final int straight_txt=0x7f060084;
@@ -1332,6 +1334,7 @@ containing a value of this type.
         public static final int total_straight_txt=0x7f060085;
         public static final int total_triple_txt=0x7f060082;
         public static final int triple_txt=0x7f060081;
+        public static final int twoplayer_pager=0x7f060090;
         public static final int txt_hh_lose=0x7f06006f;
         public static final int txt_hh_win=0x7f06006e;
         public static final int txt_hp_lose=0x7f060075;
@@ -1412,6 +1415,7 @@ containing a value of this type.
         public static final int statistics_layout=0x7f03001f;
         public static final int support_simple_spinner_dropdown_item=0x7f030020;
         public static final int three_players=0x7f030021;
+        public static final int twoplayers_activity_screen_slide=0x7f030022;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;

@@ -115,7 +115,7 @@ public class ThreePlayersActivity extends PokerActivity {
 	}
 
 	public void addButtonListener() {
-		super.addButtonListener();
+		//super.addButtonListener();
 
 		TextView btnNextHand = (TextView) findViewById(R.id.txt_next_hand);
 		btnNextHand.setOnClickListener(new OnClickListener() {
@@ -251,6 +251,7 @@ public class ThreePlayersActivity extends PokerActivity {
 		// ((Button) v).setCompoundDrawablesWithIntrinsicBounds(
 		// R.drawable.winner, 0, 0, 0);
 		// ((Button) v).setPadding(60, 0, 20, 0);
+		int[] vPlayerStrings={R.string.player1,R.string.player2,R.string.player3,R.string.player4};
 		// // RESOLVE THE HAND
 		ResultHand resultplayer1 = hand_resulter.getResult("1");
 		ResultHand resultplayer2 = hand_resulter.getResult("2");
@@ -282,7 +283,8 @@ public class ThreePlayersActivity extends PokerActivity {
 		// Once u know the highest hand, check who it belongs to
 		int winner = getAndHighLightWinner(playerLayouts, lTotalScore,
 				lResultHand, HandResulter.FIRST_STAGE);
-		
+		highlighWinner(playerLayouts.get(winner), vPlayerStrings[winner],
+				lResultHand.get(winner));
 		resultGuess(String.valueOf(winner));
 		if (winner == -1) {
 			throw new Exception("Error calculating the winner:winner is -1");
@@ -313,6 +315,12 @@ public class ThreePlayersActivity extends PokerActivity {
 		}
 		//
 
+	}
+
+	@Override
+	public void onBackStackChanged() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**

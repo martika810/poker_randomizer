@@ -38,7 +38,7 @@ public class CardPairView extends ImageView {
 	protected void onDraw(Canvas canvas) {
 
 		super.onDraw(canvas);
-		Log.d("poker_randomizer","OnDraw was called");
+		Log.d("poker_randomizer","CardPairVire.onDraw was called");
 		//calculate the dimension of the cards
 		int heightCard=this.getHeight()-20;
 		int widthCards=(int)(heightCard*0.719);

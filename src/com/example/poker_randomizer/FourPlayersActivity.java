@@ -129,7 +129,7 @@ public class FourPlayersActivity extends PokerActivity {
 	}
 
 	public void addButtonListener() {
-		super.addButtonListener();
+		//super.addButtonListener();
 
 		TextView btnNextHand = (TextView) findViewById(R.id.txt_next_hand);
 		btnNextHand.setOnClickListener(new OnClickListener() {
@@ -241,6 +241,7 @@ public class FourPlayersActivity extends PokerActivity {
 		// ((Button) v).setCompoundDrawablesWithIntrinsicBounds(
 		// R.drawable.winner, 0, 0, 0);
 		// ((Button) v).setPadding(60, 0, 20, 0);
+		int[] vPlayerStrings={R.string.player1,R.string.player2,R.string.player3,R.string.player4};
 		// // RESOLVE THE HAND
 		ResultHand resultplayer1 = hand_resulter.getResult("1");
 		ResultHand resultplayer2 = hand_resulter.getResult("2");
@@ -278,6 +279,8 @@ public class FourPlayersActivity extends PokerActivity {
 		int winner = getAndHighLightWinner(playerLayouts, lTotalScore,
 				lResultHand, HandResulter.FIRST_STAGE);
 		
+		highlighWinner(playerLayouts.get(winner), vPlayerStrings[winner],
+				lResultHand.get(winner));
 		resultGuess(String.valueOf(winner));
 		// // Save save player1's hand for the statistic
 		switch (winner) {
@@ -353,6 +356,12 @@ public class FourPlayersActivity extends PokerActivity {
 			return super.onOptionsItemSelected(item);
 		}
 
+	}
+
+	@Override
+	public void onBackStackChanged() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

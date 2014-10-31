@@ -68,46 +68,51 @@
         android:paddingRight="5dp"
         android:paddingTop="5dp" >
 
-        <FrameLayout
+        <ImageView
             android:id="@+id/image_card1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1" >
-        </FrameLayout>
+            android:layout_weight="1" 
+            android:src="@drawable/back"/>
+        
 
-        <FrameLayout
+        <ImageView
             android:id="@+id/image_card2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:src="@drawable/back" />
 
-        <FrameLayout
+        <ImageView
             android:id="@+id/image_card3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:src="@drawable/back" />
 
-        <FrameLayout
+        <ImageView
             android:id="@+id/image_card4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1" />
+            android:layout_weight="1" 
+            android:src="@drawable/back"/>
 
-        <FrameLayout
+        <ImageView
             android:id="@+id/image_card5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:src="@drawable/back" />
     </LinearLayout>
 
     <RelativeLayout

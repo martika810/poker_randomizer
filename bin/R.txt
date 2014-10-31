@@ -4,6 +4,8 @@ int anim abc_slide_in_bottom 0x7f040002
 int anim abc_slide_in_top 0x7f040003
 int anim abc_slide_out_bottom 0x7f040004
 int anim abc_slide_out_top 0x7f040005
+int anim from_middle 0x7f040006
+int anim to_middle 0x7f040007
 int animator card_flip_left_in 0x7f050000
 int animator card_flip_left_out 0x7f050001
 int animator card_flip_right_in 0x7f050002
@@ -381,7 +383,7 @@ int id btn_statistics 0x7f06003e
 int id btn_three_players 0x7f060056
 int id btn_two_players 0x7f060055
 int id centralpanel 0x7f060041
-int id change_number_users 0x7f060091
+int id change_number_users 0x7f060092
 int id checkbox 0x7f06002d
 int id collapseActionView 0x7f06000d
 int id container 0x7f06003c
@@ -467,7 +469,7 @@ int id showCustom 0x7f060007
 int id showHome 0x7f060004
 int id showTitle 0x7f060006
 int id split_action_bar 0x7f06001e
-int id statistics 0x7f060090
+int id statistics 0x7f060091
 int id statistics_pairs_txt 0x7f060066
 int id statistics_txt 0x7f060065
 int id straight_txt 0x7f060084
@@ -485,6 +487,7 @@ int id total_poker_txt 0x7f06008e
 int id total_straight_txt 0x7f060085
 int id total_triple_txt 0x7f060082
 int id triple_txt 0x7f060081
+int id twoplayer_pager 0x7f060090
 int id txt_hh_lose 0x7f06006f
 int id txt_hh_win 0x7f06006e
 int id txt_hp_lose 0x7f060075
@@ -539,6 +542,7 @@ int layout number_players_dialog 0x7f03001e
 int layout statistics_layout 0x7f03001f
 int layout support_simple_spinner_dropdown_item 0x7f030020
 int layout three_players 0x7f030021
+int layout twoplayers_activity_screen_slide 0x7f030022
 int menu main 0x7f0d0000
 int string abc_action_bar_home_description 0x7f0b0001
 int string abc_action_bar_up_description 0x7f0b0002
