@@ -19,6 +19,7 @@ public class ResultHand {
 	private String typeHand;
 	private List<Integer> value;
 	private List<Integer> card_values;
+	private int num_player;
 	private Context context;
 
 	public ResultHand(String typeHand, Context context) {
@@ -121,5 +122,13 @@ public class ResultHand {
 		for (Card card : cards) {
 			card_values.add(Card.valuesCards.get(card.getCardNumber()));
 		}
+	}
+
+	public int getNum_player() {
+		return num_player;
+	}
+
+	public void setNum_player(int num_player) {
+		this.num_player = num_player;
 	}
 }

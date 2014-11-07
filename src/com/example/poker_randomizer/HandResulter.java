@@ -1,5 +1,6 @@
 package com.example.poker_randomizer;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -187,7 +188,7 @@ public class HandResulter {
 				}
 			}
 		}
-
+		result.setNum_player(Integer.parseInt(player));//that can be deleted
 		return result;
 
 	}
@@ -200,6 +201,7 @@ public class HandResulter {
 			result.setTypeHand(POKER);
 			result.setValue(valuesCards.get(valuesCards.size() - 1));
 			result.setCardValuesFromCards(getPlayerHand(player_num));
+			result.setNum_player(player_num);
 			return result;
 		} else {
 			return null;
@@ -211,6 +213,7 @@ public class HandResulter {
 		if (mapFlush.containsKey(5)) {
 			result.setTypeHand(FLUSH);
 			result.setCardValuesFromCards(getPlayerHand(player_num));
+			result.setNum_player(player_num);
 			return result;
 		} else {
 			return null;
@@ -227,6 +230,7 @@ public class HandResulter {
 			result.setValue(valuesCards.get(valuesCards.size() - 1));
 			result.setValue(valuesCards.get(valuesCards.size() - 2));
 			result.setCardValuesFromCards(getPlayerHand(player_num));
+			result.setNum_player(player_num);
 			return result;
 
 		} else {
@@ -312,6 +316,7 @@ public class HandResulter {
 			result.setTypeHand(PAIR);
 			result.setValue(valuesCards.get(valuesCards.size() - 1));
 			result.setCardValuesFromCards(getPlayerHand(player_num));
+			result.setNum_player(player_num);
 			return result;
 
 		} else {
@@ -380,6 +385,7 @@ public class HandResulter {
 			Collections.sort(valuesCards);
 			result.setValue(valuesCards.get(valuesCards.size() - 1));
 			result.setCardValuesFromCards(getPlayerHand(player_num));
+			result.setNum_player(player_num);
 			return result;
 		} else {
 			return null;
@@ -406,6 +412,163 @@ public class HandResulter {
 		}
 		return returnList;	
 	}
+	
+	public ResultHand resultingTwoPlayers() throws Exception {
+
+		// get total for player1 and player2
+
+		ResultHand resultplayer1 = getResult("1");
+		ResultHand resultplayer2 =getResult("2");
+
+		int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
+		int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
+
+		List<Integer> playerLayouts = new ArrayList<Integer>();
+		playerLayouts.add(R.id.inner_player_panel1);
+		playerLayouts.add(R.id.inner_player_panel2);
+
+		int[] vPlayerStrings = { R.string.player1, R.string.player2,
+				R.string.player3, R.string.player4 };
+
+		List<Integer> lTotalScore;
+		List<ResultHand> lResultHand;
+		List<Integer> winner_player_num;
+
+		boolean player1_won;
+		String strWhoWon = "";
+		// Check if player1 has won, to store the result in the
+		// hand_recorder
+		//
+		// // save the totalScore in a vector to check
+		lTotalScore = Util.buildIntegerArrays(totalScore1, totalScore2);
+		lResultHand = Util.buildIntegerArrays(resultplayer1, resultplayer2);
+		// Once u know the highest hand, check who it belongs to
+		ResultHand winner = getAndHighLightWinner(playerLayouts, lTotalScore,
+				lResultHand, HandResulter.FIRST_STAGE);
+//		highlighWinner(playerLayouts.get(winner), vPlayerStrings[winner],
+//				lResultHand.get(winner));
+//		resultGuess(String.valueOf(winner));
+		if (winner.getNum_player() == -1) {
+			throw new Exception("Error calculating the winner:winner is -1");
+		}
+
+		// // Save save player1's hand for the statistic
+		
+//		switch (winner) {
+//		case 0:
+//			hand_recorder.saveResult(resultplayer1.getTypeHand());
+//			break;
+//		case 1:
+//			hand_recorder.saveResult(resultplayer2.getTypeHand());
+//			break;
+//		default:
+//			throw new Exception("Error Unknown player");
+//
+//		}
+//		List<Card> handPlayer1 = hand_resulter.getCards_player1();
+//		hand_recorder.addHand(handPlayer1);
+//		try {
+//			writeHandRecorderToFile(hand_recorder);
+//		} catch (FileNotFoundException e) {
+//
+//			e.printStackTrace();
+//		}
+//		//
+		return winner;
+
+	}
+	
+	// Returns the number of the hand winner
+		public ResultHand getAndHighLightWinner(List<Integer> playerLayoutsIds,
+				List<Integer> totalScores, List<ResultHand> resultHands,
+				int resulting_stage) {
+			
+			//
+			int[] vPlayerStrings={R.string.player1,R.string.player2,R.string.player3,R.string.player4};
+			// Return the player number of the player who won the hand
+			int maxTotalScore = Util.getMax(totalScores);
+			int currentPos = 0;
+			String strWhoWon = "";
+			ResultHand winner = null;
+			int pos;
+			List<Integer> lwinners = new ArrayList<Integer>();
+			// int times = Collections.frequency(totalScores, maxTotalScore);
+			// if (times>1) return 0;
+			// Once u know the highest hand, check who it belongs to
+			for (int score : totalScores) {
+				if (maxTotalScore == score) {
+					lwinners.add(currentPos);
+				}
+				currentPos++;
+			}
+			if (lwinners.size() == 1) {
+				winner = resultHands.get(lwinners.get(0));
+				
+//				
+//				if (winner == 0) {
+//					hand_recorder.setPlayer1_won(true);
+//				} else
+//					hand_recorder.setPlayer1_won(false);
+				
+				return winner;
+			} else {
+				switch (resulting_stage) {
+				case HandResulter.FIRST_STAGE:
+					// Recreate the totalScore for the winners, as there is several
+					// player with the same hand,
+					// the value of the hand has to count as well
+					resultHands = Util.getSubVectorResultFromPositions(lwinners,
+							resultHands);
+					totalScores = new ArrayList<Integer>();
+					for (ResultHand result : resultHands) {
+						totalScores.add(Integer.valueOf(result.getTypeHand())
+								+ result.getSumValues());
+					}
+					playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
+							playerLayoutsIds);
+					winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
+							resultHands, HandResulter.SECOND_STAGE);
+					
+					break;
+				case HandResulter.SECOND_STAGE:
+					resultHands = Util.getSubVectorResultFromPositions(lwinners,
+							resultHands);
+					totalScores = new ArrayList<Integer>();
+					pos = 1;
+					for (ResultHand result : resultHands) {
+						totalScores.add(Card.valuesCards.get(maxCard_from_playerHand(String.valueOf(pos))
+								.getCardNumber()));
+						pos++;
+					}
+					playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
+							playerLayoutsIds);
+					winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
+							resultHands, HandResulter.THIRD_STAGE);
+
+					break;
+				case HandResulter.THIRD_STAGE:
+					resultHands = Util.getSubVectorResultFromPositions(lwinners,
+							resultHands);
+					totalScores = new ArrayList<Integer>();
+					pos = 1;
+					for (ResultHand result : resultHands) {
+						totalScores.add(result.getSumAllValues());
+						pos++;
+					}
+					playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
+							playerLayoutsIds);
+					winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
+							resultHands, HandResulter.FOURTH_STAGE);
+					
+					break;
+				case HandResulter.FOURTH_STAGE:
+					break;
+				}
+			}
+			
+			return winner;
+
+		}
 	
 
 }

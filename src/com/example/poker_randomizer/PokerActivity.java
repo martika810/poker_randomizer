@@ -58,10 +58,10 @@ public abstract class PokerActivity extends FragmentActivity implements
 	private static final String STATISTICACTIVITYNAME = "StatisticResultActivity";
 	static String data_file;
 	HandRecorder hand_recorder;
-	HandResulter hand_resulter;
-	Gson gson = new GsonBuilder().create();
+//	HandResulter hand_resulter;
+//	Gson gson = new GsonBuilder().create();
 
-	private String current_player_predictions;
+//	private String current_player_predictions;
 
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -363,196 +363,196 @@ public abstract class PokerActivity extends FragmentActivity implements
 
 
 
-	// Returns the number of the hand winner
-	public int getAndHighLightWinner(List<Integer> playerLayoutsIds,
-			List<Integer> totalScores, List<ResultHand> resultHands,
-			int resulting_stage) {
-		
-		//
-		int[] vPlayerStrings={R.string.player1,R.string.player2,R.string.player3,R.string.player4};
-		// Return the player number of the player who won the hand
-		int maxTotalScore = Util.getMax(totalScores);
-		int currentPos = 0;
-		String strWhoWon = "";
-		int winner = -1;
-		int pos;
-		List<Integer> lwinners = new ArrayList<Integer>();
-		// int times = Collections.frequency(totalScores, maxTotalScore);
-		// if (times>1) return 0;
-		// Once u know the highest hand, check who it belongs to
-		for (int score : totalScores) {
-			if (maxTotalScore == score) {
-				lwinners.add(currentPos);
-			}
-			currentPos++;
-		}
-		if (lwinners.size() == 1) {
-			winner = lwinners.get(0);
-			
-			
-			if (winner == 0) {
-				hand_recorder.setPlayer1_won(true);
-			} else
-				hand_recorder.setPlayer1_won(false);
-			
-			return winner;
-		} else {
-			switch (resulting_stage) {
-			case HandResulter.FIRST_STAGE:
-				// Recreate the totalScore for the winners, as there is several
-				// player with the same hand,
-				// the value of the hand has to count as well
-				resultHands = Util.getSubVectorResultFromPositions(lwinners,
-						resultHands);
-				totalScores = new ArrayList<Integer>();
-				for (ResultHand result : resultHands) {
-					totalScores.add(Integer.valueOf(result.getTypeHand())
-							+ result.getSumValues());
-				}
-				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
-						playerLayoutsIds);
-				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
-						resultHands, HandResulter.SECOND_STAGE);
-				
-				break;
-			case HandResulter.SECOND_STAGE:
-				resultHands = Util.getSubVectorResultFromPositions(lwinners,
-						resultHands);
-				totalScores = new ArrayList<Integer>();
-				pos = 1;
-				for (ResultHand result : resultHands) {
-					totalScores.add(Card.valuesCards.get(hand_resulter
-							.maxCard_from_playerHand(String.valueOf(pos))
-							.getCardNumber()));
-					pos++;
-				}
-				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
-						playerLayoutsIds);
-				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
-						resultHands, HandResulter.THIRD_STAGE);
+//	// Returns the number of the hand winner
+//	public int getAndHighLightWinner(List<Integer> playerLayoutsIds,
+//			List<Integer> totalScores, List<ResultHand> resultHands,
+//			int resulting_stage) {
+//		
+//		//
+//		int[] vPlayerStrings={R.string.player1,R.string.player2,R.string.player3,R.string.player4};
+//		// Return the player number of the player who won the hand
+//		int maxTotalScore = Util.getMax(totalScores);
+//		int currentPos = 0;
+//		String strWhoWon = "";
+//		int winner = -1;
+//		int pos;
+//		List<Integer> lwinners = new ArrayList<Integer>();
+//		// int times = Collections.frequency(totalScores, maxTotalScore);
+//		// if (times>1) return 0;
+//		// Once u know the highest hand, check who it belongs to
+//		for (int score : totalScores) {
+//			if (maxTotalScore == score) {
+//				lwinners.add(currentPos);
+//			}
+//			currentPos++;
+//		}
+//		if (lwinners.size() == 1) {
+//			winner = lwinners.get(0);
+//			
+//			
+//			if (winner == 0) {
+//				hand_recorder.setPlayer1_won(true);
+//			} else
+//				hand_recorder.setPlayer1_won(false);
+//			
+//			return winner;
+//		} else {
+//			switch (resulting_stage) {
+//			case HandResulter.FIRST_STAGE:
+//				// Recreate the totalScore for the winners, as there is several
+//				// player with the same hand,
+//				// the value of the hand has to count as well
+//				resultHands = Util.getSubVectorResultFromPositions(lwinners,
+//						resultHands);
+//				totalScores = new ArrayList<Integer>();
+//				for (ResultHand result : resultHands) {
+//					totalScores.add(Integer.valueOf(result.getTypeHand())
+//							+ result.getSumValues());
+//				}
+//				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
+//						playerLayoutsIds);
+//				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
+//						resultHands, HandResulter.SECOND_STAGE);
+//				
+//				break;
+//			case HandResulter.SECOND_STAGE:
+//				resultHands = Util.getSubVectorResultFromPositions(lwinners,
+//						resultHands);
+//				totalScores = new ArrayList<Integer>();
+//				pos = 1;
+//				for (ResultHand result : resultHands) {
+//					totalScores.add(Card.valuesCards.get(hand_resulter
+//							.maxCard_from_playerHand(String.valueOf(pos))
+//							.getCardNumber()));
+//					pos++;
+//				}
+//				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
+//						playerLayoutsIds);
+//				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
+//						resultHands, HandResulter.THIRD_STAGE);
+//
+//				break;
+//			case HandResulter.THIRD_STAGE:
+//				resultHands = Util.getSubVectorResultFromPositions(lwinners,
+//						resultHands);
+//				totalScores = new ArrayList<Integer>();
+//				pos = 1;
+//				for (ResultHand result : resultHands) {
+//					totalScores.add(result.getSumAllValues());
+//					pos++;
+//				}
+//				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
+//						playerLayoutsIds);
+//				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
+//						resultHands, HandResulter.FOURTH_STAGE);
+//				
+//				break;
+//			case HandResulter.FOURTH_STAGE:
+//				break;
+//			}
+//		}
+//		
+//		return winner;
+//
+//	}
 
-				break;
-			case HandResulter.THIRD_STAGE:
-				resultHands = Util.getSubVectorResultFromPositions(lwinners,
-						resultHands);
-				totalScores = new ArrayList<Integer>();
-				pos = 1;
-				for (ResultHand result : resultHands) {
-					totalScores.add(result.getSumAllValues());
-					pos++;
-				}
-				playerLayoutsIds = Util.getSubVectorFromPositions(lwinners,
-						playerLayoutsIds);
-				winner = getAndHighLightWinner(playerLayoutsIds, totalScores,
-						resultHands, HandResulter.FOURTH_STAGE);
-				
-				break;
-			case HandResulter.FOURTH_STAGE:
-				break;
-			}
-		}
-		
-		return winner;
+//	protected void highlighWinner(int playerLayoutId, int strPlayerId,
+//			ResultHand result) {
+//		String strWhoWon;
+//		LinearLayout panelPlayer = (LinearLayout) findViewById(playerLayoutId);
+//		panelPlayer.setBackgroundResource(R.drawable.button_winner);
+//
+//		TextView txt_winner = (TextView) findViewById(R.id.txt_winner);
+//		strWhoWon = getString(strPlayerId) + " won with "
+//				+ result.getNameResult();
+//		txt_winner.setText(strWhoWon);
+//		txt_winner.setVisibility(View.VISIBLE);
+//	}
 
-	}
+//	public HandRecorder readHandRecorderFromFile() throws IOException {
+//
+//		FileInputStream fis = openFileInput(data_file);
+//		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+//		String strJson = br.readLine();
+//
+//		HandRecorder handRecorder = loadJsonToHandRecorder(strJson);
+//
+//		br.close();
+//		return handRecorder;
+//	}
 
-	protected void highlighWinner(int playerLayoutId, int strPlayerId,
-			ResultHand result) {
-		String strWhoWon;
-		LinearLayout panelPlayer = (LinearLayout) findViewById(playerLayoutId);
-		panelPlayer.setBackgroundResource(R.drawable.button_winner);
+//	private HandRecorder loadJsonToHandRecorder(String strJson) {
+//
+//		HandRecorder handRecorder = gson.fromJson(strJson, HandRecorder.class);
+//		return handRecorder;
+//
+//	}
 
-		TextView txt_winner = (TextView) findViewById(R.id.txt_winner);
-		strWhoWon = getString(strPlayerId) + " won with "
-				+ result.getNameResult();
-		txt_winner.setText(strWhoWon);
-		txt_winner.setVisibility(View.VISIBLE);
-	}
+	//public abstract void resulting() throws Exception;
 
-	public HandRecorder readHandRecorderFromFile() throws IOException {
+//	public void writeHandRecorderToFile(HandRecorder handRecorder)
+//			throws FileNotFoundException {
+//		File file = new File(data_file);
+//		FileOutputStream fos = openFileOutput(data_file, MODE_PRIVATE);
+//		PrintWriter pw = new PrintWriter(new BufferedWriter(
+//				new OutputStreamWriter(fos)));
+//		String strDataHandRecorder = gson.toJson(handRecorder);
+//		pw.print(strDataHandRecorder);
+//		pw.close();
+//
+//	}
 
-		FileInputStream fis = openFileInput(data_file);
-		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-		String strJson = br.readLine();
+//	public void resultGuess(String winner_player) {
+//		//subtract one to the winner so it s based on 0 instead of 1
+//		String winner=String.valueOf((Integer.parseInt(winner_player))+1);
+//		if (isValidGuess(winner)) {
+//			int current_number_guesses = hand_recorder.getNumber_guesses();
+//			int current_number_right_guesses = hand_recorder
+//					.getNumber_rigth_guesses();
+//			if (winner.equals(current_player_predictions)) {
+//				hand_recorder
+//						.setNumber_rigth_guesses(++current_number_right_guesses);
+//			}
+//			hand_recorder.setNumber_guesses(++current_number_guesses);
+//		}
+//	}
 
-		HandRecorder handRecorder = loadJsonToHandRecorder(strJson);
+//	private boolean isValidGuess(String winner_player_guess) {
+//		try {
+//			if (!current_player_predictions.equals("")
+//					&& (Integer.parseInt(current_player_predictions) > 0)) {
+//				return true;
+//			} else {
+//				return false;
+//			}
+//		} catch (Exception e) {
+//			Toast.makeText(getApplicationContext(), "The winner player guess string was invalid", Toast.LENGTH_LONG);
+//			return false;
+//		}
+//	}
 
-		br.close();
-		return handRecorder;
-	}
+//	public String getCurrent_player_predictions() {
+//		return current_player_predictions;
+//	}
+//
+//	public void setCurrent_player_predictions(String current_player_predictions) {
+//		this.current_player_predictions = current_player_predictions;
+//	}
+//	
+//	public boolean isThereAGuess(){
+//		if (Integer.valueOf(current_player_predictions)>0){
+//			return true;
+//		}
+//		return false;
+//	}
 
-	private HandRecorder loadJsonToHandRecorder(String strJson) {
-
-		HandRecorder handRecorder = gson.fromJson(strJson, HandRecorder.class);
-		return handRecorder;
-
-	}
-
-	public abstract void resulting() throws Exception;
-
-	public void writeHandRecorderToFile(HandRecorder handRecorder)
-			throws FileNotFoundException {
-		File file = new File(data_file);
-		FileOutputStream fos = openFileOutput(data_file, MODE_PRIVATE);
-		PrintWriter pw = new PrintWriter(new BufferedWriter(
-				new OutputStreamWriter(fos)));
-		String strDataHandRecorder = gson.toJson(handRecorder);
-		pw.print(strDataHandRecorder);
-		pw.close();
-
-	}
-
-	public void resultGuess(String winner_player) {
-		//subtract one to the winner so it s based on 0 instead of 1
-		String winner=String.valueOf((Integer.parseInt(winner_player))+1);
-		if (isValidGuess(winner)) {
-			int current_number_guesses = hand_recorder.getNumber_guesses();
-			int current_number_right_guesses = hand_recorder
-					.getNumber_rigth_guesses();
-			if (winner.equals(current_player_predictions)) {
-				hand_recorder
-						.setNumber_rigth_guesses(++current_number_right_guesses);
-			}
-			hand_recorder.setNumber_guesses(++current_number_guesses);
-		}
-	}
-
-	private boolean isValidGuess(String winner_player_guess) {
-		try {
-			if (!current_player_predictions.equals("")
-					&& (Integer.parseInt(current_player_predictions) > 0)) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			Toast.makeText(getApplicationContext(), "The winner player guess string was invalid", Toast.LENGTH_LONG);
-			return false;
-		}
-	}
-
-	public String getCurrent_player_predictions() {
-		return current_player_predictions;
-	}
-
-	public void setCurrent_player_predictions(String current_player_predictions) {
-		this.current_player_predictions = current_player_predictions;
-	}
-	
-	public boolean isThereAGuess(){
-		if (Integer.valueOf(current_player_predictions)>0){
-			return true;
-		}
-		return false;
-	}
-
-	public HandResulter getHand_resulter() {
-		return hand_resulter;
-	}
-
-	public void setHand_resulter(HandResulter hand_resulter) {
-		this.hand_resulter = hand_resulter;
-	}
+//	public HandResulter getHand_resulter() {
+//		return hand_resulter;
+//	}
+//
+//	public void setHand_resulter(HandResulter hand_resulter) {
+//		this.hand_resulter = hand_resulter;
+//	}
 
 	public HandRecorder getHand_recorder() {
 		return hand_recorder;
