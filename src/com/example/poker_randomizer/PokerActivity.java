@@ -76,28 +76,7 @@ public abstract class PokerActivity extends FragmentActivity implements
 
 	
 
-//	public void initTopFiveCards(Bundle savedInstanceState){
-//		if (savedInstanceState == null) {
-//			getFragmentManager().beginTransaction()
-//					.add(R.id.image_card1, new CardBackFragment()).commit();
-//			getFragmentManager().beginTransaction()
-//					.add(R.id.image_card2, new CardBackFragment()).commit();
-//			getFragmentManager().beginTransaction()
-//					.add(R.id.image_card3, new CardBackFragment()).commit();
-//			getFragmentManager().beginTransaction()
-//					.add(R.id.image_card4, new CardBackFragment()).commit();
-//			getFragmentManager().beginTransaction()
-//					.add(R.id.image_card5, new CardBackFragment()).commit();
-//		} else {
-//			mShowingBack1 = (getFragmentManager().getBackStackEntryCount() > 0);
-//			mShowingBack2 = (getFragmentManager().getBackStackEntryCount() > 0);
-//			mShowingBack3 = (getFragmentManager().getBackStackEntryCount() > 0);
-//			mShowingBack4 = (getFragmentManager().getBackStackEntryCount() > 0);
-//			mShowingBack5 = (getFragmentManager().getBackStackEntryCount() > 0);
-//		}
-//		getFragmentManager().addOnBackStackChangedListener(this);
-//		
-//		
+	
 //	}
 //	public void addButtonListener() {
 //		FrameLayout first_card = (FrameLayout) findViewById(R.id.image_card1);
@@ -232,21 +211,7 @@ public abstract class PokerActivity extends FragmentActivity implements
 
 	}
 
-//	public int pickCard() {
-//		Random r = new Random();
-//
-//		int position_card_pick = r.nextInt(cards.size());
-//		String card_picked = cards.get(position_card_pick);
-//		hand_resulter.addCardBoard(card_picked);
-//		int identifier = getResources().getIdentifier(card_picked, "drawable",
-//				"com.example.poker_randomizer");
-//		cards.remove(position_card_pick);
-//
-//		return identifier;
-//
-//		// }
-//
-//	}
+
 
 	// parameter: the drawable id of the card that will be displayed
 //	public void flipCard1(int idCardDrawable) {

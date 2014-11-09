@@ -8,6 +8,7 @@ public class Card implements Comparable<Card>{
 	private String suit;
 	private String cardNumber;
 	protected static Map<String,Integer> valuesCards;
+	protected static Map<Integer,String> valuesToCards;
 	protected static Map<String,Integer> numberValuesCards;
 	
 	private static final String CLUB="c";
@@ -34,6 +35,24 @@ public class Card implements Comparable<Card>{
 		values.put("k",13);
 		values.put("a",14);
 		valuesCards=Collections.unmodifiableMap(values);		
+	}
+	
+	static{
+		Map<Integer,String> values=new HashMap<Integer,String>();
+		values.put(2,"2");
+		values.put(3,"3");
+		values.put(4,"4");
+		values.put(5,"5");
+		values.put(6,"6");
+		values.put(7,"7");
+		values.put(8,"8");
+		values.put(9,"9");
+		values.put(10,"x");
+		values.put(11,"j");
+		values.put(12,"q");
+		values.put(13,"k");
+		values.put(14,"a");
+		valuesToCards=Collections.unmodifiableMap(values);		
 	}
 	
 	static{

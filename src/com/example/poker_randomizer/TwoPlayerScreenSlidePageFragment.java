@@ -30,7 +30,7 @@ import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class TwoPlayerScreenSlidePageFragment extends Fragment implements
-		OnBackStackChangedListener, AnimationListener {
+		OnBackStackChangedListener, AnimationListener,ResulterFragment {
 
 	int mPageNumber;
 
@@ -45,15 +45,12 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 	private int pos;
 	private Dealer dealer;
 	HandResulter hand_resulter;
-	// List<String> cards = new ArrayList<String>();
+
 	private Animation animation1;
 	private Animation animation2;
 	private String current_player_predictions;
 
-	// String[] typeCard = { "s", "h", "d", "c" };
-	// private static final String[] typeNumbers = { "2", "3", "4", "5", "6",
-	// "7",
-	// "8", "9", "x", "j", "q", "k", "a" };
+
 
 	public static final TwoPlayerScreenSlidePageFragment newInstance(int pos) {
 		TwoPlayerScreenSlidePageFragment fragment = new TwoPlayerScreenSlidePageFragment(
@@ -96,8 +93,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 		try {
 			final ViewPager pager = ((MainActivity) this.getActivity())
 					.getmPager();
-			// initTopFiveCards(savedInstanceState);
-			//((MainActivity) this.getActivity()).getHand_resulter().refresh();
+			
 			dealer = Dealer.getInstance();
 			dealer.dealAllCards(this, 2);
 
@@ -134,23 +130,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 				+ hand_recorder.getNumber_rigth_guesses() + "/"
 				+ hand_recorder.getNumber_guesses());
 
-		// pick card 1
-		// int position_card_pick = r.nextInt(cards.size());
-		// card_picked = cards.get(position_card_pick);
-		// hand_resulter.addCardPlayer(1, card_picked);
-		// cards.remove(position_card_pick);
-		//
-		// // pick card 2
-		// position_card_pick = r.nextInt(cards.size());
-		// String card_picked2 = cards.get(position_card_pick);
-		// hand_resulter.addCardPlayer(1, card_picked2);
-		// cards.remove(position_card_pick);
-		//
-		// // Load the cards in the view
-		// CardPairView cardpair = (CardPairView) getView().findViewById(
-		// R.id.pair_player1);
-		// cardpair.init(card_picked, card_picked2);
-		// cardpair.invalidate();
+
 		 CardPairView cardPairPlayerOne = (CardPairView) getView().findViewById(R.id.pair_player1);
 		 
 		dealer.placeCardsToPlayer(getResources(), hand_resulter,cardPairPlayerOne,
@@ -413,45 +393,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 		hasOptionsMenu();
 	}
 
-//	public void initTopFiveCards(Bundle savedInstanceState) {
-//
-//		if (savedInstanceState == null) {
-//
-//			CardBackFragment firstTopCard = new CardBackFragment();
-//			CardBackFragment secondTopCard = new CardBackFragment();
-//			CardBackFragment thirdTopCard = new CardBackFragment();
-//			CardBackFragment fourthTopCard = new CardBackFragment();
-//			CardBackFragment fifthTopCard = new CardBackFragment();
-//
-//			// Grab the ids
-//			// int
-//			// getActivity().getFragmentManager().beginTransaction()
-//			getChildFragmentManager().beginTransaction()
-//					.add(R.id.image_card1, firstTopCard).addToBackStack(null)
-//					.commit();
-//			getChildFragmentManager().beginTransaction()
-//					.add(R.id.image_card2, secondTopCard).addToBackStack(null)
-//					.commit();
-//			getChildFragmentManager().beginTransaction()
-//					.add(R.id.image_card3, thirdTopCard).addToBackStack(null)
-//					.commit();
-//			getChildFragmentManager().beginTransaction()
-//					.add(R.id.image_card4, fourthTopCard).addToBackStack(null)
-//					.commit();
-//			getChildFragmentManager().beginTransaction()
-//					.add(R.id.image_card5, fifthTopCard).addToBackStack(null)
-//					.commit();
-//		} else {
-//			mShowingBack1 = (getChildFragmentManager().getBackStackEntryCount() > 0);
-//			mShowingBack2 = (getChildFragmentManager().getBackStackEntryCount() > 0);
-//			mShowingBack3 = (getChildFragmentManager().getBackStackEntryCount() > 0);
-//			mShowingBack4 = (getChildFragmentManager().getBackStackEntryCount() > 0);
-//			mShowingBack5 = (getChildFragmentManager().getBackStackEntryCount() > 0);
-//
-//		}
-//		getChildFragmentManager().addOnBackStackChangedListener(this);
-//
-//	}
+
 
 	private void resetTopFiveCards() {
 
@@ -460,52 +402,9 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 		mShowingBack3 = false;
 		mShowingBack4 = false;
 		mShowingBack5 = false;
-		// Fragment
-		// firstTopCard=getFragmentManager().findFragmentById(R.id.image_card1);
-		// Fragment
-		// secondTopCard=getFragmentManager().findFragmentById(R.id.image_card2);
-		// Fragment
-		// thirdTopCard=getFragmentManager().findFragmentById(R.id.image_card3);
-		// Fragment
-		// fourthTopCard=getFragmentManager().findFragmentById(R.id.image_card4);
-		// Fragment
-		// fifthTopCard=getFragmentManager().findFragmentById(R.id.image_card5);
-		// getFragmentManager().beginTransaction()
-		// .remove(firstTopCard).commit();
-		// getFragmentManager().beginTransaction()
-		// .remove(secondTopCard).commit();
-		// getFragmentManager().beginTransaction()
-		// .remove(thirdTopCard).commit();
-		// getFragmentManager().beginTransaction()
-		// .remove(fourthTopCard).commit();
-		// getFragmentManager().beginTransaction()
-		// .remove(fifthTopCard).commit();
+
 	}
 
-	// protected void populateCards() {
-	// for (String type : typeCard) {
-	// for (String num : typeNumbers) {
-	// cards.add(type + num);
-	//
-	// }
-	// }
-	// }
-
-	// public String pickCard() {
-	// Random r = new Random();
-	//
-	// int position_card_pick = r.nextInt(cards.size());
-	// String card_picked = cards.get(position_card_pick);
-	// //((MainActivity) getActivity()).getHand_resulter().addCardBoard(
-	// // card_picked);
-	//
-	// cards.remove(position_card_pick);
-	// return card_picked;
-	// //return identifier;
-	//
-	// // }
-	//
-	// }
 
 	public void flipCard1() {
 		if (mShowingBack1) {
@@ -670,7 +569,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 	
 	public void resultGuess(String winner_player) {
 		//subtract one to the winner so it s based on 0 instead of 1
-		HandRecorder handRecorder=((MainActivity)getActivity()).getHand_recorder();
+		HandRecorder handRecorder=((PokerActivity)getActivity()).getHand_recorder();
 		String winner=String.valueOf((Integer.parseInt(winner_player))+1);
 		if (isValidGuess(winner)) {
 			int current_number_guesses =handRecorder.getNumber_guesses();

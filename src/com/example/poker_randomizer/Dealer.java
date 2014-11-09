@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import android.content.res.Resources;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ImageView;
 
@@ -53,10 +54,10 @@ public class Dealer {
 		return card_picked;
 
 	}
-	public void dealAllCards(TwoPlayerScreenSlidePageFragment parentFragment,int num_players){
+	public void dealAllCards(Fragment parentFragment,int num_players){
 		
 		flushCards();
-		HandResulter handResulter=parentFragment.getHand_resulter();
+		HandResulter handResulter=((ResulterFragment)parentFragment).getHand_resulter();
 		handResulter.refresh();
 		//pick five board cards
 		for(int it1=1;it1<6;it1++){

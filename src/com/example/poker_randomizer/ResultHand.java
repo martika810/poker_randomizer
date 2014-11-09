@@ -131,4 +131,14 @@ public class ResultHand {
 	public void setNum_player(int num_player) {
 		this.num_player = num_player;
 	}
+	
+	public String handValueToString(){
+		String strToReturn="";
+		for (Integer value:card_values){
+			strToReturn=Card.valuesToCards.get(value)+",";
+			
+		}
+		strToReturn=strToReturn.substring(0, strToReturn.length()-1);
+	    return "("+strToReturn+")";
+	}
 }

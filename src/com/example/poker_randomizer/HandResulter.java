@@ -445,35 +445,12 @@ public class HandResulter {
 		// Once u know the highest hand, check who it belongs to
 		ResultHand winner = getAndHighLightWinner(playerLayouts, lTotalScore,
 				lResultHand, HandResulter.FIRST_STAGE);
-//		highlighWinner(playerLayouts.get(winner), vPlayerStrings[winner],
-//				lResultHand.get(winner));
-//		resultGuess(String.valueOf(winner));
+
 		if (winner.getNum_player() == -1) {
 			throw new Exception("Error calculating the winner:winner is -1");
 		}
 
-		// // Save save player1's hand for the statistic
-		
-//		switch (winner) {
-//		case 0:
-//			hand_recorder.saveResult(resultplayer1.getTypeHand());
-//			break;
-//		case 1:
-//			hand_recorder.saveResult(resultplayer2.getTypeHand());
-//			break;
-//		default:
-//			throw new Exception("Error Unknown player");
-//
-//		}
-//		List<Card> handPlayer1 = hand_resulter.getCards_player1();
-//		hand_recorder.addHand(handPlayer1);
-//		try {
-//			writeHandRecorderToFile(hand_recorder);
-//		} catch (FileNotFoundException e) {
-//
-//			e.printStackTrace();
-//		}
-//		//
+
 		return winner;
 
 	}
@@ -566,6 +543,107 @@ public class HandResulter {
 				}
 			}
 			
+			return winner;
+
+		}
+		
+		public ResultHand resultingFourPlayers() throws Exception {
+			
+			// ((Button) v).setCompoundDrawablesWithIntrinsicBounds(
+			// R.drawable.winner, 0, 0, 0);
+			// ((Button) v).setPadding(60, 0, 20, 0);
+			int[] vPlayerStrings={R.string.player1,R.string.player2,R.string.player3,R.string.player4};
+			// // RESOLVE THE HAND
+			ResultHand resultplayer1 = getResult("1");
+			ResultHand resultplayer2 = getResult("2");
+			ResultHand resultplayer3 = getResult("3");
+			ResultHand resultplayer4 = getResult("4");
+	
+			int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
+			int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
+			int totalScore3 = Integer.valueOf(resultplayer3.getTypeHand());
+			int totalScore4 = Integer.valueOf(resultplayer4.getTypeHand());
+	
+			List<Integer> playerLayouts = new ArrayList<Integer>();
+			playerLayouts.add(R.id.inner_player_panel1);
+			playerLayouts.add(R.id.inner_player_panel2);
+			playerLayouts.add(R.id.inner_player_panel3);
+			playerLayouts.add(R.id.inner_player_panel4);
+	
+			List<Integer> lTotalScore;
+			List<ResultHand> lResultHand;
+			List<Integer> winner_player_num;
+	
+			boolean player1_won;
+			String strWhoWon = "";
+			// Check if player1 has won, to store the result in the
+			// hand_recorder
+			//
+			// // save the totalScore in a vector to check
+			lTotalScore = Util.buildIntegerArrays(totalScore1, totalScore2,
+					totalScore3);
+			lResultHand = Util.buildIntegerArrays(resultplayer1, resultplayer2,
+					resultplayer3);
+			// Once u know the highest hand, check who it belongs to
+			ResultHand winner = getAndHighLightWinner(playerLayouts, lTotalScore,
+					lResultHand, HandResulter.FIRST_STAGE);
+//			highlighWinner(playerLayouts.get(winner), vPlayerStrings[winner],
+//					lResultHand.get(winner));
+			//resultGuess(String.valueOf(winner));
+			if (winner.getNum_player() == -1) {
+				throw new Exception("Error calculating the winner:winner is -1");
+			}
+	
+			// // Save save player1's hand for the statistic
+			return winner;
+
+		}
+		
+		public ResultHand resultingThreePlayers() throws Exception {
+			
+			// ((Button) v).setCompoundDrawablesWithIntrinsicBounds(
+			// R.drawable.winner, 0, 0, 0);
+			// ((Button) v).setPadding(60, 0, 20, 0);
+			int[] vPlayerStrings={R.string.player1,R.string.player2,R.string.player3,R.string.player4};
+			// // RESOLVE THE HAND
+			ResultHand resultplayer1 = getResult("1");
+			ResultHand resultplayer2 = getResult("2");
+			ResultHand resultplayer3 = getResult("3");
+	
+			int totalScore1 = Integer.valueOf(resultplayer1.getTypeHand());
+			int totalScore2 = Integer.valueOf(resultplayer2.getTypeHand());
+			int totalScore3 = Integer.valueOf(resultplayer3.getTypeHand());
+	
+			List<Integer> playerLayouts = new ArrayList<Integer>();
+			playerLayouts.add(R.id.inner_player_panel1);
+			playerLayouts.add(R.id.inner_player_panel2);
+			playerLayouts.add(R.id.inner_player_panel3);
+	
+			List<Integer> lTotalScore;
+			List<ResultHand> lResultHand;
+			List<Integer> winner_player_num;
+	
+			boolean player1_won;
+			String strWhoWon = "";
+			// Check if player1 has won, to store the result in the
+			// hand_recorder
+			//
+			// // save the totalScore in a vector to check
+			lTotalScore = Util.buildIntegerArrays(totalScore1, totalScore2,
+					totalScore3);
+			lResultHand = Util.buildIntegerArrays(resultplayer1, resultplayer2,
+					resultplayer3);
+			// Once u know the highest hand, check who it belongs to
+			ResultHand winner = getAndHighLightWinner(playerLayouts, lTotalScore,
+					lResultHand, HandResulter.FIRST_STAGE);
+//			highlighWinner(playerLayouts.get(winner), vPlayerStrings[winner],
+//					lResultHand.get(winner));
+			//resultGuess(String.valueOf(winner));
+			if (winner.getNum_player() == -1) {
+				throw new Exception("Error calculating the winner:winner is -1");
+			}
+	
+			// // Save save player1's hand for the statistic
 			return winner;
 
 		}

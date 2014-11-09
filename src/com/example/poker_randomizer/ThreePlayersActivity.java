@@ -7,6 +7,8 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,15 +19,22 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class ThreePlayersActivity extends PokerActivity {
+	
+	// handle the animation and allow swiping horizontally
+		private ViewPager mPager;
 
-	static String ACTION_NEW_HAND = "android.intent.action.MAIN3";
+		// Provide pages for to the viewPager
+		private PagerAdapter mPagerAdapter;
+
+	//static String ACTION_NEW_HAND = "android.intent.action.MAIN3";
 
 	protected void onCreate(Bundle savedInstanceState) {
-		String card_picked;
+		
 		ACTION_NEW_HAND = "android.intent.action.MAIN3";
-		data_file = "three_hands_results.txt";
+		
 		super.onCreate(savedInstanceState);
 
+		hand_recorder=HandRecorder.createInstance(this, HandRecorder.DATA_FILE_THREE_PLAYERS);
 //		hand_resulter = new HandResulter(getApplicationContext());
 //		// check if the file exist, if so load the json data in HandRecorder
 //		// if create and initialize the HandRecorder
@@ -48,8 +57,13 @@ public class ThreePlayersActivity extends PokerActivity {
 //			e.printStackTrace();
 //		}
 //
-//		setContentView(R.layout.three_players);
-		TextView number_handTxt = (TextView) findViewById(R.id.txt_number_hands);
+		setContentView(R.layout.threeplayers_activity_screen_slide);
+		
+		mPager=(ViewPager)findViewById(R.id.threeplayer_pager);
+		mPagerAdapter=new ThreePlayerScreenSlidePagerAdapter(getSupportFragmentManager());
+		mPager.setAdapter(mPagerAdapter);
+/*		TextView number_handTxt = (TextView) findViewById(R.id.
+				txt_number_hands);
 		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
 
 		TextView number_guessTxt = (TextView) findViewById(R.id.number_guess_txt);
@@ -111,10 +125,19 @@ public class ThreePlayersActivity extends PokerActivity {
 		cardPairPlayer3.invalidate();
 
 		addButtonListener();
-
+*/
 	}
 
-	public void addButtonListener() {
+	public ViewPager getmPager(){
+		if(mPager==null){
+			mPager=(ViewPager)findViewById(R.id.threeplayer_pager);
+		}
+		return mPager;
+		
+	}
+	
+
+/*	public void addButtonListener() {
 		//super.addButtonListener();
 
 		TextView btnNextHand = (TextView) findViewById(R.id.txt_next_hand);
@@ -208,12 +231,12 @@ public class ThreePlayersActivity extends PokerActivity {
 			}
 		});
 
-	}
+	}*/
 
 	// when just one player has winner hand
 	// Return 0 if two or more players have the same hand
 
-	private void cleanRadioSelection() {
+	/*private void cleanRadioSelection() {
 		RadioButton radioPlayer1 = (RadioButton) findViewById(R.id.board3_radio_player1);
 		RadioButton radioPlayer2 = (RadioButton) findViewById(R.id.board3_radio_player2);
 		RadioButton radioPlayer3 = (RadioButton) findViewById(R.id.board3_radio_player3);
@@ -221,9 +244,9 @@ public class ThreePlayersActivity extends PokerActivity {
 		radioPlayer2.setChecked(false);
 		radioPlayer3.setChecked(false);
 
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -246,9 +269,9 @@ public class ThreePlayersActivity extends PokerActivity {
 			return super.onOptionsItemSelected(item);
 		}
 
-	}
+	}*/
 
-	public void resulting() throws Exception {
+/*	public void resulting() throws Exception {
 
 //		// ((Button) v).setCompoundDrawablesWithIntrinsicBounds(
 //		// R.drawable.winner, 0, 0, 0);
@@ -317,7 +340,7 @@ public class ThreePlayersActivity extends PokerActivity {
 //		}
 //		//
 
-	}
+	}*/
 
 	@Override
 	public void onBackStackChanged() {
