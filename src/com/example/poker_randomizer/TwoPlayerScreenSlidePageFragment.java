@@ -30,9 +30,11 @@ import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class TwoPlayerScreenSlidePageFragment extends Fragment implements
-		OnBackStackChangedListener, AnimationListener,ResulterFragment {
+		OnBackStackChangedListener, AnimationListener, ResulterFragment {
 
 	int mPageNumber;
+
+
 
 	boolean mShowingBack1 = true;
 	boolean mShowingBack2 = true;
@@ -50,12 +52,10 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 	private Animation animation2;
 	private String current_player_predictions;
 
-
-
 	public static final TwoPlayerScreenSlidePageFragment newInstance(int pos) {
 		TwoPlayerScreenSlidePageFragment fragment = new TwoPlayerScreenSlidePageFragment(
 				pos);
-	
+
 		return fragment;
 
 	}
@@ -83,7 +83,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 			Bundle savedInstanceState) {
 		ViewGroup rootView = (ViewGroup) inflater.inflate(
 				R.layout.activity_main2, container, false);
-		
+
 		return rootView;
 	}
 
@@ -93,7 +93,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 		try {
 			final ViewPager pager = ((MainActivity) this.getActivity())
 					.getmPager();
-			
+
 			dealer = Dealer.getInstance();
 			dealer.dealAllCards(this, 2);
 
@@ -113,15 +113,13 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 
 	public void initLayout() throws Exception {
 
-		//((MainActivity) getActivity()).getHand_resulter().refresh();
-	
+		// ((MainActivity) getActivity()).getHand_resulter().refresh();
+
 		HandRecorder hand_recorder = ((MainActivity) getActivity())
 				.getHand_recorder();
 
-	
-		
 		TextView number_handTxt = (TextView) getView().findViewById(
-				R.id.number_hands_txt);
+				R.id.txt_number_hands);
 
 		TextView number_guessTxt = (TextView) getView().findViewById(
 				R.id.number_guess_txt);
@@ -130,18 +128,20 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 				+ hand_recorder.getNumber_rigth_guesses() + "/"
 				+ hand_recorder.getNumber_guesses());
 
+		CardPairView cardPairPlayerOne = (CardPairView) getView().findViewById(
+				R.id.pair_player1);
 
-		 CardPairView cardPairPlayerOne = (CardPairView) getView().findViewById(R.id.pair_player1);
-		 
-		dealer.placeCardsToPlayer(getResources(), hand_resulter,cardPairPlayerOne,
-				Dealer.PLAYER_ONE);
-		
-		 CardPairView cardPairPlayerTwo = (CardPairView) getView().findViewById(R.id.pair_player2);
-		dealer.placeCardsToPlayer(getResources(), hand_resulter,cardPairPlayerTwo,
-				Dealer.PLAYER_TWO);
+		dealer.placeCardsToPlayer(getResources(), hand_resulter,
+				cardPairPlayerOne, Dealer.PLAYER_ONE);
+
+		CardPairView cardPairPlayerTwo = (CardPairView) getView().findViewById(
+				R.id.pair_player2);
+		dealer.placeCardsToPlayer(getResources(), hand_resulter,
+				cardPairPlayerTwo, Dealer.PLAYER_TWO);
 
 	}
-    //add Listener to the board cards to flip over
+
+	// add Listener to the board cards to flip over
 	public void addInitialListener() {
 		ImageView first_card = (ImageView) getView().findViewById(
 				R.id.image_card1);
@@ -149,7 +149,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				
+
 				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 					if (!flop_displayed) {
 						// int[] idCardLayouts = { R.id.image_card1,
@@ -163,6 +163,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 					TextView tap_favorite = (TextView) getView().findViewById(
 							R.id.txt_tap_favorite);
 					tap_favorite.setVisibility(View.GONE);
+					disablePlayerRadioButtons();
 				}
 				return true;
 
@@ -175,7 +176,7 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				
+
 				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 					if (!flop_displayed) {
 						int[] idCardLayouts = { R.id.image_card1,
@@ -257,34 +258,44 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 						// int[] idCardLayouts = { R.id.image_card5 };
 						// Turn last card and result
 						List<Integer> playerLayouts = new ArrayList<Integer>();
-//						playerLayouts.add(getView().findViewById(R.id.inner_player_panel1).getId());
-//						playerLayouts.add(getView().findViewById(R.id.inner_player_panel2).getId());
+
 						playerLayouts.add(R.id.inner_player_panel1);
 						playerLayouts.add(R.id.inner_player_panel2);
 
-						int[] vPlayerStrings = { R.string.player1, R.string.player2,
-								R.string.player3, R.string.player4 };
+						int[] vPlayerStrings = { R.string.player1,
+								R.string.player2, R.string.player3,
+								R.string.player4 };
 
 						flipCard5();
 
 						((MainActivity) getActivity()).highlighWinnerPanel("");
-						
+
 						try {
-							ResultHand winnerResult=hand_resulter.resultingTwoPlayers();
-							
-							highlighWinner(playerLayouts.get(winnerResult.getNum_player()-1), vPlayerStrings[winnerResult.getNum_player()-1],
+							ResultHand winnerResult = hand_resulter
+									.resultingTwoPlayers();
+
+							highlighWinner(
+									playerLayouts.get(winnerResult
+											.getNum_player() - 1),
+									vPlayerStrings[winnerResult.getNum_player() - 1],
 									winnerResult);
-							resultGuess(String.valueOf(winnerResult.getNum_player()));
-							((MainActivity) getActivity()).getHand_recorder().saveWinnerHand(winnerResult);
-							List<Card> handPlayer1=hand_resulter.getCards_player1();
-							((MainActivity) getActivity()).getHand_recorder().addHand(handPlayer1);
-							((MainActivity) getActivity()).getHand_recorder().saveToFile(getActivity(),HandRecorder.DATA_FILE_TWO_PLAYERS);
+
+							resultGuess(String.valueOf(winnerResult
+									.getNum_player()));
 							
+							((MainActivity) getActivity()).getHand_recorder()
+									.saveWinnerHand(winnerResult);
+							List<Card> handPlayer1 = hand_resulter
+									.getCards_player1();
+							((MainActivity) getActivity()).getHand_recorder()
+									.addHand(handPlayer1);
+							((MainActivity) getActivity()).getHand_recorder()
+									.saveToFile(getActivity(),
+											HandRecorder.DATA_FILE_TWO_PLAYERS);
+
 						} catch (Exception e) {
 
-							Toast.makeText(
-									getActivity().getApplicationContext(),
-									e.getMessage(), Toast.LENGTH_SHORT).show();
+							e.printStackTrace();
 
 						}
 					}
@@ -296,7 +307,9 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 		});
 
 	}
-//add listener to next hand button and radio buttons, and the statistic and player button
+
+	// add listener to next hand button and radio buttons, and the statistic and
+	// player button
 	public void addButtonListener() {
 
 		TextView txtNextHand = (TextView) getView().findViewById(
@@ -323,12 +336,16 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 				if (!flop_displayed) {
 					RadioButton radioPlayer2 = (RadioButton) getView()
 							.findViewById(R.id.radio_player2);
+					RadioButton radioPlayer1 = (RadioButton) getView()
+							.findViewById(R.id.radio_player1);
 					if (isChecked) {
 						radioPlayer2.setChecked(false);
 					} else {
 						radioPlayer2.setChecked(true);
-						setCurrent_player_predictions("2");
 
+					}
+					if (radioPlayer1.isChecked()) {
+						setCurrent_player_predictions("1");
 					}
 				}
 
@@ -344,13 +361,18 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 				if (!flop_displayed) {
 					RadioButton radioPlayer1 = (RadioButton) getView()
 							.findViewById(R.id.radio_player1);
+					RadioButton radioPlayer2 = (RadioButton) getView()
+							.findViewById(R.id.radio_player2);
 					if (isChecked) {
 
 						radioPlayer1.setChecked(false);
 
 					} else {
 						radioPlayer1.setChecked(true);
-						setCurrent_player_predictions("1");
+
+					}
+					if (radioPlayer2.isChecked()) {
+						setCurrent_player_predictions("2");
 					}
 
 				}
@@ -392,8 +414,8 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 	public void onBackStackChanged() {
 		hasOptionsMenu();
 	}
-
-
+	
+	
 
 	private void resetTopFiveCards() {
 
@@ -404,7 +426,6 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 		mShowingBack5 = false;
 
 	}
-
 
 	public void flipCard1() {
 		if (mShowingBack1) {
@@ -497,8 +518,13 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 	public void onResume() {
 
 		super.onResume();
+		
+	
+	
 
 	}
+	
+
 
 	@Override
 	public void onAnimationStart(Animation animation) {
@@ -506,16 +532,45 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 
 	}
 
+	private void updateCounters(){
+		HandRecorder hand_recorder = ((PokerActivity)getActivity())
+				.getHand_recorder();
+		TextView number_handTxt = (TextView)getView().findViewById(
+				R.id.txt_number_hands);
+
+		TextView number_guessTxt = (TextView)getView().findViewById(
+				R.id.number_guess_txt);
+		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
+		number_guessTxt.setText("Guesses: "
+				+ hand_recorder.getNumber_rigth_guesses() + "/"
+				+ hand_recorder.getNumber_guesses());
+	}
+	
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		
+		super.setUserVisibleHint(isVisibleToUser);
+		if(isVisibleToUser && getView()!=null){
+			updateCounters();
+					}
+	}
+
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		
+
 		if (!flop_displayed) {
-			ImageView boardCardOne=(ImageView) getView().findViewById(R.id.image_card1);
-			dealer.placeBoardCard(getResources(), hand_resulter,boardCardOne, 1);
-			ImageView boardCardTwo=(ImageView) getView().findViewById(R.id.image_card2);
-			dealer.placeBoardCard(getResources(), hand_resulter,boardCardTwo, 2);
-			ImageView boardCardThree=(ImageView) getView().findViewById(R.id.image_card3);
-			dealer.placeBoardCard(getResources(), hand_resulter,boardCardThree, 3);
+			ImageView boardCardOne = (ImageView) getView().findViewById(
+					R.id.image_card1);
+			dealer.placeBoardCard(getResources(), hand_resulter, boardCardOne,
+					1);
+			ImageView boardCardTwo = (ImageView) getView().findViewById(
+					R.id.image_card2);
+			dealer.placeBoardCard(getResources(), hand_resulter, boardCardTwo,
+					2);
+			ImageView boardCardThree = (ImageView) getView().findViewById(
+					R.id.image_card3);
+			dealer.placeBoardCard(getResources(), hand_resulter,
+					boardCardThree, 3);
 
 			flop_displayed = true;
 			((ImageView) getView().findViewById(R.id.image_card1))
@@ -525,14 +580,18 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 			((ImageView) getView().findViewById(R.id.image_card3))
 					.clearAnimation();
 		} else if (!turn_displayed) {
-			ImageView boardCardFour=(ImageView) getView().findViewById(R.id.image_card4);
-			dealer.placeBoardCard(getResources(), hand_resulter,boardCardFour, 4);
+			ImageView boardCardFour = (ImageView) getView().findViewById(
+					R.id.image_card4);
+			dealer.placeBoardCard(getResources(), hand_resulter, boardCardFour,
+					4);
 			turn_displayed = true;
 			((ImageView) getView().findViewById(R.id.image_card4))
 					.clearAnimation();
 		} else if (!river_displayed) {
-			ImageView boardCardFive=(ImageView) getView().findViewById(R.id.image_card5);
-			dealer.placeBoardCard(getResources(), hand_resulter, boardCardFive,5);
+			ImageView boardCardFive = (ImageView) getView().findViewById(
+					R.id.image_card5);
+			dealer.placeBoardCard(getResources(), hand_resulter, boardCardFive,
+					5);
 			river_displayed = true;
 			((ImageView) getView().findViewById(R.id.image_card5))
 					.clearAnimation();
@@ -540,25 +599,29 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 
 	}
 	
+	
+
 	protected void highlighWinner(int playerLayoutId, int strPlayerId,
 			ResultHand result) {
 		String strWhoWon;
-		LinearLayout panelPlayer = (LinearLayout) getView().findViewById(playerLayoutId);
+		LinearLayout panelPlayer = (LinearLayout) getView().findViewById(
+				playerLayoutId);
 		panelPlayer.setBackgroundResource(R.drawable.button_winner);
 
-		TextView txt_winner = (TextView) getView().findViewById(R.id.txt_winner);
+		TextView txt_winner = (TextView) getView()
+				.findViewById(R.id.txt_winner);
 		strWhoWon = getString(strPlayerId) + " won with "
-				+ result.getNameResult();
+				+ result.getNameResult() + result.handValueToString();
+		;
 		txt_winner.setText(strWhoWon);
 		txt_winner.setVisibility(View.VISIBLE);
 	}
 
 	@Override
 	public void onAnimationRepeat(Animation animation) {
-		
 
 	}
-	
+
 	public HandResulter getHand_resulter() {
 		return hand_resulter;
 	}
@@ -566,37 +629,52 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 	public void setHand_resulter(HandResulter hand_resulter) {
 		this.hand_resulter = hand_resulter;
 	}
-	
+
+	public void disablePlayerRadioButtons() {
+		((RadioButton) getView().findViewById(R.id.radio_player1))
+				.setEnabled(false);
+		((RadioButton) getView().findViewById(R.id.radio_player2))
+				.setEnabled(false);
+
+	}
+
 	public void resultGuess(String winner_player) {
-		//subtract one to the winner so it s based on 0 instead of 1
-		HandRecorder handRecorder=((PokerActivity)getActivity()).getHand_recorder();
-		String winner=String.valueOf((Integer.parseInt(winner_player))+1);
+		// subtract one to the winner so it s based on 0 instead of 1
+		HandRecorder handRecorder = ((PokerActivity) getActivity())
+				.getHand_recorder();
+		String winner = String.valueOf((Integer.parseInt(winner_player)));
 		if (isValidGuess(winner)) {
-			int current_number_guesses =handRecorder.getNumber_guesses();
+			int current_number_guesses = handRecorder.getNumber_guesses();
 			int current_number_right_guesses = handRecorder
 					.getNumber_rigth_guesses();
 			if (winner.equals(current_player_predictions)) {
+				current_number_right_guesses++;
 				handRecorder
-						.setNumber_rigth_guesses(++current_number_right_guesses);
+						.setNumber_rigth_guesses(current_number_right_guesses);
 			}
-			handRecorder.setNumber_guesses(++current_number_guesses);
+			current_number_guesses++;
+			handRecorder.setNumber_guesses(current_number_guesses);
 		}
 	}
-	
+
 	private boolean isValidGuess(String winner_player_guess) {
 		try {
-			if (current_player_predictions !=null && !current_player_predictions.equals("")
+			if (current_player_predictions != null
+					&& !current_player_predictions.equals("")
 					&& (Integer.parseInt(current_player_predictions) > 0)) {
 				return true;
-			} else {
-				return false;
 			}
+
 		} catch (Exception e) {
-			Toast.makeText(getActivity().getApplicationContext(), "The winner player guess string was invalid", Toast.LENGTH_LONG);
-			return false;
+			System.out.println(e.getStackTrace());
+			Toast.makeText(getActivity().getApplicationContext(),
+					"The winner player guess string was invalid",
+					Toast.LENGTH_LONG);
+			// return false;
 		}
+		return false;
 	}
-	
+
 	public String getCurrent_player_predictions() {
 		return current_player_predictions;
 	}
@@ -604,13 +682,14 @@ public class TwoPlayerScreenSlidePageFragment extends Fragment implements
 	public void setCurrent_player_predictions(String current_player_predictions) {
 		this.current_player_predictions = current_player_predictions;
 	}
-	
-	public boolean isThereAGuess(){
-		if (Integer.valueOf(current_player_predictions)>0){
+
+	public boolean isThereAGuess() {
+		if (Integer.valueOf(current_player_predictions) > 0) {
 			return true;
 		}
 		return false;
 	}
-
+	
+	
 
 }

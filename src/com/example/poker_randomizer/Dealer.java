@@ -37,6 +37,7 @@ public class Dealer {
 	}
 
 	public void flushCards() {
+		cards.clear();
 		for (String type : typeCard) {
 			for (String num : typeNumbers) {
 				cards.add(type + num);

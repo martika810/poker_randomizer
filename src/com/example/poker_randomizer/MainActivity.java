@@ -7,11 +7,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 public class MainActivity extends PokerActivity {
 
 	// handle the animation and allow swiping horizontally
-	private ViewPager mPager;
+	private PokerHandViewPager mPager;
 
 	// Provide pages for to the viewPager
 	private PagerAdapter mPagerAdapter;
@@ -29,21 +30,25 @@ public class MainActivity extends PokerActivity {
 		setContentView(R.layout.twoplayers_activity_screen_slide);
 
 		// instance the viewPager and pager adapter
-		mPager = (ViewPager) findViewById(R.id.twoplayer_pager);
+		mPager = (PokerHandViewPager) findViewById(R.id.twoplayer_pager);
+	
 
 		mPagerAdapter = new TwoPlayerScreenSlidePagerAdapter(
 				getSupportFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
-
+		
+		
 	}
 
 	public ViewPager getmPager() {
 		if (mPager == null) {
-			mPager = (ViewPager) findViewById(R.id.twoplayer_pager);
+			mPager = (PokerHandViewPager) findViewById(R.id.twoplayer_pager);
 		}
 
 		return mPager;
 	}
+	
+	
 
 	
 

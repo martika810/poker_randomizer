@@ -7,11 +7,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class PokerHandViewPager extends ViewPager implements OnPageChangeListener{
 	
 
-	int selectedPage;
 	public PokerHandViewPager(Context context) {
 		super(context);
 	}
@@ -22,23 +23,45 @@ public class PokerHandViewPager extends ViewPager implements OnPageChangeListene
 
 
 	@Override
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
+	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+		super.onPageScrolled(position, positionOffset, positionOffsetPixels);
 		
-		super.onPageScrolled(arg0, arg1, arg2);
+		
+
+	}
+	
+	@Override
+	public void onPageScrollStateChanged(int position) {
+
+
 		
 	}
 
 	@Override
-	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
+	public void setCurrentItem(int item) {
 		
+		super.setCurrentItem(item);
+
 	}
 
 	@Override
-	public void onPageSelected(int arg0) {
-		// TODO Auto-generated method stub
+	public void onPageSelected(int position) {
 		
+//		HandRecorder hand_recorder = ((PokerActivity) getContext())
+//				.getHand_recorder();
+//		
+//		
+//		TextView number_handTxt = (TextView) getChildAt(position).findViewById(R.id.txt_number_hands);
+//
+//		TextView number_guessTxt = (TextView) getChildAt(position).findViewById(R.id.number_guess_txt);
+//		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
+//		number_guessTxt.setText("Guesses: "
+//				+ hand_recorder.getNumber_rigth_guesses() + "/"
+//				+ hand_recorder.getNumber_guesses());
+
 	}
+
+	
 
 
 

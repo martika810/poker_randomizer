@@ -164,6 +164,7 @@ public class FourPlayerScreenSlidePageFragment extends Fragment implements
 					TextView tap_favorite = (TextView) getView().findViewById(
 							R.id.txt_tap_favorite);
 					tap_favorite.setVisibility(View.GONE);
+					disablePlayerRadioButtons();
 				}
 				return true;
 
@@ -437,6 +438,14 @@ public class FourPlayerScreenSlidePageFragment extends Fragment implements
 		radioPlayer4.setChecked(false);
 
 	}
+	
+	public void disablePlayerRadioButtons() {
+		((RadioButton)getView().findViewById(R.id.board3_radio_player1)).setEnabled(false);
+		((RadioButton)getView().findViewById(R.id.board3_radio_player2)).setEnabled(false);
+		((RadioButton)getView().findViewById(R.id.board3_radio_player3)).setEnabled(false);
+		((RadioButton)getView().findViewById(R.id.board3_radio_player4)).setEnabled(false);
+		
+	}
 
 	public int getPageNumber() {
 		return mPageNumber;
@@ -596,6 +605,29 @@ public class FourPlayerScreenSlidePageFragment extends Fragment implements
 	public void onAnimationRepeat(Animation animation) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private void updateCounters(){
+		HandRecorder hand_recorder = ((PokerActivity)getActivity())
+				.getHand_recorder();
+		TextView number_handTxt = (TextView)getView().findViewById(
+				R.id.txt_number_hands);
+
+		TextView number_guessTxt = (TextView)getView().findViewById(
+				R.id.number_guess_txt);
+		number_handTxt.setText("Hands: " + hand_recorder.getNumber_hands());
+		number_guessTxt.setText("Guesses: "
+				+ hand_recorder.getNumber_rigth_guesses() + "/"
+				+ hand_recorder.getNumber_guesses());
+	}
+	
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		
+		super.setUserVisibleHint(isVisibleToUser);
+		if(isVisibleToUser && getView()!=null){
+			updateCounters();
+					}
 	}
 
 	protected void highlighWinner(int playerLayoutId, int strPlayerId,

@@ -47,11 +47,11 @@ public class Card implements Comparable<Card>{
 		values.put(7,"7");
 		values.put(8,"8");
 		values.put(9,"9");
-		values.put(10,"x");
-		values.put(11,"j");
-		values.put(12,"q");
-		values.put(13,"k");
-		values.put(14,"a");
+		values.put(10,"10");
+		values.put(11,"J");
+		values.put(12,"Q");
+		values.put(13,"K");
+		values.put(14,"A");
 		valuesToCards=Collections.unmodifiableMap(values);		
 	}
 	

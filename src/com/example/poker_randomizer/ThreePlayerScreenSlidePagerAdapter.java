@@ -8,9 +8,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
  * sequence.
  */
-public class ThreePlayerScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-
-	
+public class ThreePlayerScreenSlidePagerAdapter extends
+		FragmentStatePagerAdapter {
 
 	public ThreePlayerScreenSlidePagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -28,5 +27,9 @@ public class ThreePlayerScreenSlidePagerAdapter extends FragmentStatePagerAdapte
 		return Integer.MAX_VALUE;
 	}
 
-	
+	@Override
+	public int getItemPosition(Object object) {
+		return POSITION_NONE;
+	}
+
 }

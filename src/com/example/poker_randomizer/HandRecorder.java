@@ -122,6 +122,7 @@ public class HandRecorder {
 
 			}
 		}
+		if (typecard.equals("hl")){typecard="lh";}
 		return typecard;
 	}
 
