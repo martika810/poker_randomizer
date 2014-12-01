@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.poker_randomizer"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    package="com.martocio.poker_randomizer"
+    android:versionCode="2"
+    android:versionName="1.1" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -11,7 +11,7 @@
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:label="poker_randomizer tests"
-        android:targetPackage="com.example.poker_randomizer" />
+        android:targetPackage="com.martocio.poker_randomizer" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +21,7 @@
         <uses-library android:name="android.test.runner" />
 
         <activity
-            android:name="com.example.poker_randomizer.NumberPlayerActivity"
+            android:name="com.martocio.poker_randomizer.NumberPlayerActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.poker_randomizer.MainActivity"
+            android:name="com.martocio.poker_randomizer.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.poker_randomizer.ThreePlayersActivity"
+            android:name="com.martocio.poker_randomizer.ThreePlayersActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -51,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.poker_randomizer.FourPlayersActivity"
+            android:name="com.martocio.poker_randomizer.FourPlayersActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.poker_randomizer.StatisticResultActivity"
+            android:name="com.martocio.poker_randomizer.StatisticResultActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>

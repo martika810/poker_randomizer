@@ -26,7 +26,7 @@
     <string name="three_players"> 3 Players</string>
 	<string name="four_players"> 4 Players</string>
 	<string name="choose_number_player">Choose the number of players</string>
-	<string name="yourhands">What are the odds you get a ...?</string>
+	<string name="yourhands">What are the odds to get a ...?</string>
 	<string name="highlowcards">Low and High Cards</string>
 	<string name="change_users">Number players</string>
 	<string name="title_pairs">What cards did you get so far?</string>
